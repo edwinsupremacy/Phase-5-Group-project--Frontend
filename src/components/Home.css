@@ -1,0 +1,16 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.2em;
+}
