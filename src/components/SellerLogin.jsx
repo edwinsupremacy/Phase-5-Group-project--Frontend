@@ -1,6 +1,4 @@
-// SellerLogin.jsx
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';import { useNavigate } from 'react-router-dom';
 import './SellerLogin.css';
 
 function SellerLogin() {
