@@ -1,7 +1,8 @@
-import React, { useState } from 'react';import { useNavigate } from 'react-router-dom';
-import './SellerLogin.css';
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import './AdminLogin.css';
 
-function SellerLogin() {
+function AdminLogin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -16,7 +17,7 @@ function SellerLogin() {
         setError('');
 
         try {
-            const response = await fetch('/login/seller', {
+            const response = await fetch('/login/admin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -27,17 +28,17 @@ function SellerLogin() {
             if (!response.ok) {
                 throw new Error('Login failed.');
             }
-            navigate('/seller-dashboard');
+            navigate('/admin-dashboard');
         } catch (error) {
             setError('Login failed.');
         }
     };
 
     return (
-        <div className="seller-login-container">
-            <form onSubmit={handleLoginSubmit} className="seller-login-form">
-                <h1>Seller Login</h1>
-                <span>Enter your email and password to access your dashboard</span>
+        <div className="admin-login-container">
+            <form onSubmit={handleLoginSubmit} className="admin-login-form">
+                <h1>Admin Login</h1>
+                <span>Enter your email and password to access the admin dashboard</span>
                 <input
                     type="email"
                     placeholder="Email"
@@ -57,4 +58,4 @@ function SellerLogin() {
     );
 }
 
-export default SellerLogin;
+export default AdminLogin;

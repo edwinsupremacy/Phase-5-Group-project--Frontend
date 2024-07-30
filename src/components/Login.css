@@ -42,7 +42,6 @@ body {
 
 .container a {
     color: #A0937D;
-    /* Dark beige text color */
     font-size: 13px;
     text-decoration: none;
     margin: 15px 0 10px;
@@ -50,7 +49,6 @@ body {
 
 .container button {
     background-color: #A0937D;
-    /* Dark beige button background */
     color: #fff;
     font-size: 12px;
     padding: 10px 45px;
