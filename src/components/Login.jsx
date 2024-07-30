@@ -1,6 +1,4 @@
-// Login.jsx
 import React, { useState } from 'react';
-import 'react-router-dom';
 import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
 
@@ -11,8 +9,6 @@ function Login() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [username, setUsername] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -87,7 +83,6 @@ function Login() {
             placeholder="Username"
             onChange={(e) => setUsername(e.target.value)}
           />
-
           <input
             type="email"
             placeholder="Email"
@@ -131,8 +126,14 @@ function Login() {
           <button type="submit">Log In</button>
           {error && <p className="error">{error}</p>}
           <p className="register-link">
-            Don't have an account? <Link to="#" onClick={handleSignUpClick}></Link>
+            Don't have an account? <Link to="#" onClick={handleSignUpClick}>Sign Up</Link>
           </p>
+          <div className="role-links">
+            <p>Sign in as:</p>
+            <Link to="/login/admin">Admin</Link>
+            <Link to="/login/seller">Seller</Link>
+            <Link to="/login/buyer">Buyer</Link>
+          </div>
         </form>
       </div>
       <div className="toggle-container">

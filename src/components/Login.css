@@ -21,12 +21,15 @@ body {
     background-color: #F6E6CB;
     /* Very light cream background */
     border-radius: 30px;
+    /* Default border radius */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     position: relative;
     overflow: hidden;
     width: 768px;
     max-width: 100%;
     min-height: 480px;
+    transition: width 0.6s ease-in-out, border-radius 0.6s ease-in-out;
+    /* Smooth transition for width and border-radius */
 }
 
 .container p,
@@ -256,4 +259,34 @@ body {
 
 #dashboard {
     margin-left: 120px;
+}
+
+.container.active {
+    width: 900px;
+    border-radius: 50px;
+}
+
+.role-links {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.role-links p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #A0937D;
+    /* Match with other text colors */
+}
+
+.role-links a {
+    display: block;
+    font-size: 14px;
+    color: #A0937D;
+    /* Match with other link colors */
+    text-decoration: none;
+    margin: 5px 0;
+}
+
+.role-links a:hover {
+    text-decoration: underline;
 }
