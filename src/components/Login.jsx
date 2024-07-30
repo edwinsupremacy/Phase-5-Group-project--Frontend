@@ -1,7 +1,6 @@
-// Login.jsx
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import './Login.css'; // Import your CSS file
+import './Login.css';
 
 function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -10,8 +9,6 @@ function Login() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [username, setUsername] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -30,7 +27,7 @@ function Login() {
       return;
     }
     setError('');
-    
+
     try {
       const response = await fetch('/login', {
         method: 'POST',
@@ -39,7 +36,7 @@ function Login() {
         },
         body: JSON.stringify({ email, password }),
       });
-      
+
       if (!response.ok) {
         throw new Error('Login failed.');
       }
@@ -56,7 +53,7 @@ function Login() {
       return;
     }
     setError('');
-    
+
     try {
       const response = await fetch('/register', {
         method: 'POST',
@@ -65,7 +62,7 @@ function Login() {
         },
         body: JSON.stringify({ username, email, phoneNumber, password }),
       });
-      
+
       if (!response.ok) {
         throw new Error('Registration failed.');
       }
@@ -81,31 +78,30 @@ function Login() {
         <form onSubmit={handleSignUpSubmit}>
           <h1>Create Account</h1>
           <span>Please fill in the fields to create an account</span>
-          <input 
-            type="text" 
-            placeholder="Username" 
-            onChange={(e) => setUsername(e.target.value)} 
+          <input
+            type="text"
+            placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
           />
-    
-          <input 
-            type="email" 
-            placeholder="Email" 
-            onChange={(e) => setEmail(e.target.value)} 
+          <input
+            type="email"
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <input 
-            type="tel" 
-            placeholder="Phone Number" 
-            onChange={(e) => setPhoneNumber(e.target.value)} 
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            onChange={(e) => setPhoneNumber(e.target.value)}
           />
-          <input 
-            type="password" 
-            placeholder="Password" 
-            onChange={(e) => setPassword(e.target.value)} 
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
           />
-          <input 
-            type="password" 
-            placeholder="Confirm Password" 
-            onChange={(e) => setConfirmPassword(e.target.value)} 
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <button type="submit">Sign Up</button>
           {error && <p className="error">{error}</p>}
@@ -115,23 +111,28 @@ function Login() {
         <form onSubmit={handleLoginSubmit}>
           <h1>Log In</h1>
           <span>or use your email and password</span>
-          <input 
-            type="email" 
-            placeholder="Email" 
+          <input
+            type="email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <input 
-            type="password" 
-            placeholder="Password" 
+          <input
+            type="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <button type="submit">Log In</button>
           {error && <p className="error">{error}</p>}
           <p className="register-link">
-            Don't have an account? <Link to="#" onClick={handleSignUpClick}></Link>
+            Don't have an account? <Link to="#" onClick={handleSignUpClick}>Sign Up</Link>
           </p>
+          <div className="role-links">
+            <p>Sign in as:</p>
+            <Link to="/login/admin">Admin</Link>
+            <Link to="/login/seller">Seller</Link>
+          </div>
         </form>
       </div>
       <div className="toggle-container">
