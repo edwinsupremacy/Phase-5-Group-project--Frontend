@@ -1,7 +1,6 @@
-// AdminLogin.jsx
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import './AdminLogin.css'; 
+import './AdminLogin.css';
 
 function AdminLogin() {
   const [email, setEmail] = useState('');
