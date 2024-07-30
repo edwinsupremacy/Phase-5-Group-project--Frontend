@@ -29,6 +29,7 @@ body {
     max-width: 768px;
     width: 100%;
     margin: 20px;
+    cursor: default;
 }
 
 h2 {
@@ -40,3 +41,4 @@ p {
     font-size: 1.2em;
     color: #A0937D;
 }
+

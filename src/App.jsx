@@ -5,11 +5,13 @@ import Login from './components/Login';
 import AdminLogin from './components/AdminLogin'
 import SellerLogin from './components/SellerLogin';
 import About from './components/About';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <Router>
       <div className="App">
+      <Navbar />
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

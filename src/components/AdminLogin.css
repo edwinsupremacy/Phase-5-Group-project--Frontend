@@ -11,29 +11,31 @@
     background-color: #F6E6CB; /* Very light cream background */
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-    padding: 20px 40px;
-    max-width: 400px;
+    padding: 40px 60px; /* Increased padding for larger form */
+    max-width: 500px; /* Increased max width */
     width: 100%;
 }
 
 .admin-login-form h1 {
-    font-size: 24px;
+    font-size: 28px; /* Larger font size */
     color: #A0937D; /* Dark beige color */
+    margin-bottom: 20px; /* Increased margin */
 }
 
 .admin-login-form span {
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 20px; /* Increased margin */
     color: #000000; /* Dark text color */
+    font-size: 16px; /* Larger font size */
 }
 
 .admin-login-form input {
     background-color: #EEE; /* Light grey input background */
     color: #333; /* Dark text color */
     border: none;
-    margin: 8px 0;
-    padding: 10px 15px;
-    font-size: 13px;
+    margin: 12px 0; /* Increased margin */
+    padding: 15px 20px; /* Larger padding */
+    font-size: 16px; /* Larger font size */
     border-radius: 8px;
     width: 100%;
     outline: none;
@@ -42,14 +44,14 @@
 .admin-login-form button {
     background-color: #A0937D; /* Dark beige button background */
     color: #fff;
-    font-size: 12px;
-    padding: 10px 20px;
+    font-size: 16px; /* Larger font size */
+    padding: 15px 30px; /* Larger padding */
     border: 1px solid transparent;
     border-radius: 8px;
     font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    margin-top: 10px;
+    margin-top: 15px; /* Increased margin */
     cursor: pointer;
 }
 
@@ -59,6 +61,6 @@
 
 .error {
     color: red;
-    font-size: 12px;
-    margin-top: 10px;
+    font-size: 14px; /* Larger font size */
+    margin-top: 15px; /* Increased margin */
 }
