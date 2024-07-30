@@ -1,0 +1,116 @@
+/* Ensure the page content takes at least full height of the viewport */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    flex: 1;
+}
+
+.footer {
+    background-color: #F5F5F5;
+    color: #333333;
+    padding: 1rem 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    /* Stick to the bottom */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    /* Ensure padding is included in the width calculation */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    box-sizing: border-box;
+    /* Ensure padding is included in width calculation */
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid #555;
+    width: 100%;
+    box-sizing: border-box;
+    /* Ensure padding is included in width calculation */
+}
+
+.footer-section {
+    flex: 1;
+    margin-bottom: 0;
+    min-width: 200px;
+}
+
+.footer-section h3 {
+    color: #2b0692;
+    margin-bottom: 1rem;
+}
+
+.footer-section.brand p {
+    margin-top: 0.5rem;
+}
+
+.footer-section.links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section.links li {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.footer-section.links a {
+    color: #002f6c;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section.links a:hover {
+    color: #0d0c66;
+}
+
+.footer-section.contact p {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section.contact i,
+.footer-section.contact .fa {
+    margin-right: 0.5rem;
+    color: #160f83;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .footer-section {
+        margin-bottom: 1.5rem;
+    }
+}
