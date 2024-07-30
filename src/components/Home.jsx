@@ -1,11 +1,13 @@
 import React from 'react';
 import './Home.css';
+import Navbar from './Navbar';
 
 const Home = () => {
   return (
     <div className="home-container">
-      <h2>Welcome to the Home Page</h2>
-      <p>This is the home page of your application.</p>
+       <Navbar />
+      <h2>Welcome to vintage auction house</h2>
+
     </div>
   );
 };
