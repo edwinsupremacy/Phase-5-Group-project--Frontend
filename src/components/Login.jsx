@@ -1,4 +1,3 @@
-// Login.jsx
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
@@ -129,9 +128,11 @@ function Login() {
           <p className="register-link">
             Don't have an account? <Link to="#" onClick={handleSignUpClick}>Sign Up</Link>
           </p>
-          <p className="admin-login-link">
-            <button onClick={() => navigate('/admin/login')}>Log In as Admin</button>
-          </p>
+          <div className="role-links">
+            <p>Sign in as:</p>
+            <Link to="/login/admin">Admin</Link>
+            <Link to="/login/seller">Seller</Link>
+          </div>
         </form>
       </div>
       <div className="toggle-container">
