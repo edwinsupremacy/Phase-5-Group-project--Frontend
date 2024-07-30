@@ -1,93 +1,64 @@
 /* AdminLogin.css */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-}
-
-body {
-    background-color: #E7D4B5;
-    /* Light beige background */
+.admin-login-container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-color: #E7D4B5; /* Light beige background */
 }
 
-.admin-login-container {
-    background-color: #F6E6CB;
-    /* Very light cream background */
+.admin-login-form {
+    background-color: #F6E6CB; /* Very light cream background */
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-    width: 500px; /* Increased width */
-    max-width: 90%;
-    padding: 40px; /* Increased padding */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    padding: 20px 40px;
+    max-width: 400px;
+    width: 100%;
 }
 
-h1 {
-    margin-bottom: 15px; /* Increased margin */
-    font-size: 28px; /* Increased font size */
-    color: #A0937D;
+.admin-login-form h1 {
+    font-size: 24px;
+    color: #A0937D; /* Dark beige color */
 }
 
-span {
+.admin-login-form span {
     display: block;
-    margin-bottom: 20px;
-    color: #A0937D;
+    margin-bottom: 15px;
+    color: #000000; /* Dark text color */
 }
 
-input {
-    background-color: #EEE;
+.admin-login-form input {
+    background-color: #EEE; /* Light grey input background */
+    color: #333; /* Dark text color */
     border: none;
-    margin: 12px 0; /* Increased margin */
-    padding: 12px 15px; /* Increased padding */
-    font-size: 16px; /* Increased font size */
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
     border-radius: 8px;
     width: 100%;
     outline: none;
 }
 
-button {
-    background-color: #A0937D;
+.admin-login-form button {
+    background-color: #A0937D; /* Dark beige button background */
     color: #fff;
-    font-size: 14px; /* Increased font size */
-    padding: 12px 20px; /* Adjusted padding */
-    border: none;
+    font-size: 12px;
+    padding: 10px 20px;
+    border: 1px solid transparent;
     border-radius: 8px;
     font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    margin-top: 20px; /* Increased margin-top */
+    margin-top: 10px;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #8a7e6f;
+.admin-login-form button:hover {
+    background-color: #8c7b5a; /* Slightly darker on hover */
 }
 
 .error {
-    color: #e74c3c;
-    font-size: 14px;
-    margin-top: 15px; /* Increased margin */
-}
-
-.register-link {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.register-link a {
-    color: #A0937D;
-    text-decoration: none;
-}
-
-.register-link a:hover {
-    text-decoration: underline;
+    color: red;
+    font-size: 12px;
+    margin-top: 10px;
 }
