@@ -2,16 +2,23 @@ import React, { useEffect, useState } from 'react';
 import './Home.css';
 
 const testimonialsData = [
-  "I had a great experience selling my items! - Emmanuel Waseth",
+  "Great experience selling my items! - Emmanuel Waseth",
   "I found exactly what I was looking for! - Mary Stella",
-  "The bidding process is so smooth and user-friendly! - Vaida Mawia ",
-  "I love the variety of items available! - Collins Njuguna",
+  "The bidding process is user-friendly! - Vaida Mawia ",
+  "Loved the variety of items available! - Collins Njuguna",
   "The customer support is fantastic! - Edwin Mwangi",
-  "It's easy to navigate and find great deals! - Steve Otieno",
-  "I made some amazing sales through this platform! - Lionel Messi",
-  "The auction process is transparent and fair! - Kylian Mbappe",
-  "I appreciate the secure payment options! - Jude Bellingham",
-  "This platform has become my go-to for auctions! - Lamine Yamal"
+  "Easy to navigate and find great deals! - Steve Otieno",
+  "Made amazing sales through this platform! - Leo Messi",
+  "The auction process is transparent! - Kylian Mbappe",
+  "I loved the secure payment options! - Jude Bellingham",
+  "I am glad I found this platform! - Brent Faiyaz",
+  "I am thrilled with the results! - Elon Musk",
+  "Impressed with the auction process! - Cristiano Ronaldo",
+  "I am grateful for this platform! - Diego Maradona",
+  "I am impressed with the auction process! - Kobbie Mainoo",
+  "I am thrilled with the results! - Neymar Jr.",
+  "I am glad I found this platform! - Xavi Hernandez",
+
 ];
 
 const Home = () => {
