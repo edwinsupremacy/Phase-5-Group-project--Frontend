@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
+import SellerLogin from './components/SellerLogin';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
           <Route path="/" element={<Login />} />
 
           <Route path="/login" element={<Login />} />
+          <Route path="/login/seller" element={<SellerLogin />} />
         </Routes>
       </div>
     </Router>

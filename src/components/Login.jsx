@@ -132,7 +132,6 @@ function Login() {
             <p>Sign in as:</p>
             <Link to="/login/admin">Admin</Link>
             <Link to="/login/seller">Seller</Link>
-            <Link to="/login/buyer">Buyer</Link>
           </div>
         </form>
       </div>
