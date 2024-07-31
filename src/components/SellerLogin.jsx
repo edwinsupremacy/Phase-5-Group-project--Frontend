@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './SellerLogin.css';
 
-function SellerLogin() {
+function SellerLogin({ setIsAuthenticated }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState(''); // For registration
@@ -12,10 +13,21 @@ function SellerLogin() {
     const [isRegister, setIsRegister] = useState(true); // Toggle between register and login
     const navigate = useNavigate();
 
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
     const handleRegisterSubmit = async (event) => {
         event.preventDefault();
+
         if (!email || !password || !confirmPassword || !username || !phone) {
             setError('Please fill in all fields.');
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            setError('Invalid email format.');
             return;
         }
 
@@ -27,47 +39,60 @@ function SellerLogin() {
         setError('');
 
         try {
-            const response = await fetch('/register/seller', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, email, password, phone }),
+            const response = await axios.post('http://localhost:5000/register/seller', {
+                username,
+                email,
+                password,
+                phone
             });
 
-            if (!response.ok) {
+            if (response.status !== 201) {
                 throw new Error('Registration failed.');
             }
 
             setIsRegister(false); // Switch to login after successful registration
         } catch (error) {
-            setError('Registration failed.');
+            if (error.response && error.response.status === 400) {
+                setError('Email or username already exists.');
+            } else {
+                setError('Registration failed. Please try again later.');
+            }
         }
     };
 
     const handleLoginSubmit = async (event) => {
         event.preventDefault();
+
         if (!email || !password) {
             setError('Please fill in all fields.');
             return;
         }
+
+        if (!validateEmail(email)) {
+            setError('Invalid email format.');
+            return;
+        }
+
         setError('');
 
         try {
-            const response = await fetch('/login/seller', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
+            const response = await axios.post('http://localhost:5000/login/seller', {
+                email,
+                password
             });
 
-            if (!response.ok) {
+            if (response.status !== 200) {
                 throw new Error('Login failed.');
             }
-            navigate('/seller-dashboard');
+
+            setIsAuthenticated(true); // Set authentication state
+            navigate('/seller-dashboard'); // Navigate to the seller dashboard
         } catch (error) {
-            setError('Login failed.');
+            if (error.response && error.response.status === 401) {
+                setError('Invalid credentials.');
+            } else {
+                setError('Login failed. Please try again later.');
+            }
         }
     };
 
@@ -107,12 +132,6 @@ function SellerLogin() {
                             placeholder="Confirm Password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Phone Number"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
                         />
                         <button type="submit">Register</button>
                         <p>

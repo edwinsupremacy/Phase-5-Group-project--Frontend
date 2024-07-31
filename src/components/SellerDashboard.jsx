@@ -53,21 +53,21 @@ function SellerDashboard() {
                     {error && <p className="error">{error}</p>}
                 </form>
             </div>
-            <div className="items-list-section">
-                <h2>Items for Auction</h2>
-                <ul>
-                    {items.length === 0 ? (
-                        <p>No items added yet.</p>
-                    ) : (
-                        items.map((item, index) => (
+            <div className="items-section">
+                <h2>Your Items</h2>
+                {items.length > 0 ? (
+                    <ul>
+                        {items.map((item, index) => (
                             <li key={index}>
                                 <h3>{item.name}</h3>
                                 <p>{item.description}</p>
-                                <p>Price: ${item.price}</p>
+                                <p>{item.price}</p>
                             </li>
-                        ))
-                    )}
-                </ul>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No items added yet.</p>
+                )}
             </div>
         </div>
     );
