@@ -1,13 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ setIsAuthenticated }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    navigate('/login');
+  };
+
   return (
     <nav className="navbar">
       <Link to="/" className="nav-link">Home</Link>
-      <Link to="/login" className="nav-link">Login</Link>
       <Link to="/about" className="nav-link">About</Link>
+      <button onClick={handleLogout} className="nav-link logout-button">Logout</button>
     </nav>
   );
 };
