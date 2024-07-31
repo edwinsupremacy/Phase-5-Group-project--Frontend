@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Contact.css';
-import Footer from './Footer';
+// import Footer from './Footer';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -87,7 +87,9 @@ const Contact = () => {
                 <h2>Stay Connected</h2>
                 <p>Follow us on our social media channels for the latest updates.</p>
             </div>
-        </div><Footer /></>
+        </div>
+        {/* <Footer /> */}
+        </>
     );
 };
 
