@@ -9,8 +9,8 @@ function Footer() {
         <footer className="footer">
             <div className="footer-content">
                 <div className="footer-section brand">
-                    <h3>PlatePal</h3>
-                    <p>Easy restaurant reservations</p>
+                    <h3>Vintage Auction House</h3>
+                    <p>Easy auction operations</p>
                 </div>
                 <div className="footer-section links">
                     <h3>Quick Links</h3>
@@ -18,17 +18,17 @@ function Footer() {
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/about">About</Link></li>
                         <li><Link to="/contact">Contact</Link></li>
-                        <li><Link to="/restaurants">Restaurants</Link></li>
+                        <li><Link to="/restaurants">Auction Items</Link></li>
                     </ul>
                 </div>
                 <div className="footer-section contact">
                     <h3>Contact Us</h3>
-                    <p><FontAwesomeIcon icon={faEnvelope} /> info@eateryease.com</p>
+                    <p><FontAwesomeIcon icon={faEnvelope} /> info@auctionease.com</p>
                     <p><FontAwesomeIcon icon={faPhone} /> (123) 456-7890</p>
                 </div>
             </div>
             <div className="footer-bottom">
-                <p>&copy; 2024 PlatePal. All rights reserved.</p>
+                <p>&copy; 2024 Vintage Auction House. All rights reserved.</p>
             </div>
         </footer>
     );

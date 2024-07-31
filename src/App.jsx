@@ -1,11 +1,12 @@
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useState } from 'react';
 import './App.css';
 import Home from './components/Home';
 import Login from './components/Login';
 import AdminLogin from './components/AdminLogin';
 import SellerLogin from './components/SellerLogin';
 import About from './components/About';
+import Contact from './components/Contact';  // Import the Contact component
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -23,6 +24,7 @@ function App() {
             <>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} /> {/* Add the Contact route */}
             </>
           )}
           <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
