@@ -7,6 +7,7 @@ import AdminLogin from './components/AdminLogin';
 import SellerLogin from './components/SellerLogin';
 import About from './components/About';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,6 +29,7 @@ function App() {
           <Route path="/login/admin" element={<AdminLogin />} />
           <Route path="/login/seller" element={<SellerLogin />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );

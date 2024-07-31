@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Merriweather&display=swap');
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    padding-bottom: 10rem;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 4rem;
+    background-color: #F6E6CB;
+    /* Light neutral background */
+}
+
+.contact-container h1 {
+    text-align: center;
+    color: #A0937D;
+    /* Darker tone for headings */
+    margin-bottom: 2rem;
+}
+
+.contact-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.contact-form,
+.contact-info {
+    flex: 1;
+    background-color: #E7D4B5;
+    /* Softer tone for form and info background */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h2,
+.contact-info h2 {
+    color: #0f1183;
+    /* Assuming this is a custom color or you meant #091f68 */
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #A0937D;
+    /* Darker tone for labels */
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #F6E6CB;
+    /* Light neutral background for inputs */
+}
+
+.form-group textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.submit-btn1 {
+    background-color: #091f68;
+    /* Original button color */
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.submit-btn1:hover {
+    background-color: #3b46aa;
+    /* Darker hover state */
+}
+
+.contact-info p {
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.contact-headers {
+    font-size: 1.2rem;
+    color: #000000;
+    /* Assuming this is black for headers */
+}
+
+@media (max-width: 768px) {
+    .contact-content {
+        flex-direction: column;
+    }
+}

@@ -13,7 +13,7 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 100vh;
+    height: 400vh;
 }
 
 .home-container {
@@ -41,4 +41,3 @@ p {
     font-size: 1.2em;
     color: #A0937D;
 }
-
