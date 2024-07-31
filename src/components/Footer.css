@@ -121,14 +121,3 @@ body {
         margin-bottom: 1.5rem;
     }
 }
-.footer {
-    background-color: #F1E3D3;
-    color: #5A4D3A;
-    padding: 1rem 0;
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-align: center;
-    width: 100%;
-    position: relative; /* Changed from fixed to relative */
-    box-sizing: border-box;
-}

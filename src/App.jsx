@@ -6,7 +6,7 @@ import Login from './components/Login';
 import AdminLogin from './components/AdminLogin';
 import SellerLogin from './components/SellerLogin';
 import About from './components/About';
-import Contact from './components/Contact';
+import Contact from './components/Contact';  // Import the Contact component
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
