@@ -1,104 +1,145 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Merriweather&display=swap');
-
-.contact-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-    padding-bottom: 10rem;
-    font-family: 'Montserrat', sans-serif;
-    margin-bottom: 4rem;
-    background-color: #F6E6CB;
-    /* Light neutral background */
+html,
+body {
+    height: 100%;
+    margin: 0;
 }
 
-.contact-container h1 {
-    text-align: center;
-    color: #A0937D;
-    /* Darker tone for headings */
-    margin-bottom: 2rem;
+.contact-container {
+    padding: 2rem;
+    background-color: #F1E3D3;
+    /* Light cream background for vintage feel */
+    color: #5A4D3A;
+    /* Dark brown text color */
+    min-height: calc(100vh - 4rem);
+    /* Adjust to ensure it fits the viewport height with padding */
+    box-sizing: border-box;
+    border-radius: 50px;
+    /* Increased border radius for softer edges */
 }
 
 .contact-content {
     display: flex;
     justify-content: space-between;
-    gap: 2rem;
+    flex-wrap: wrap;
 }
 
 .contact-form,
 .contact-info {
     flex: 1;
-    background-color: #E7D4B5;
-    /* Softer tone for form and info background */
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 1rem;
 }
 
 .contact-form h2,
 .contact-info h2 {
-    color: #0f1183;
-    /* Assuming this is a custom color or you meant #091f68 */
-    margin-bottom: 1.5rem;
+    color: #5A4D3A;
+    /* Dark brown heading color */
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #A0937D;
-    /* Darker tone for labels */
+    color: #7C6B5F;
+    /* Soft brown label color */
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 0.75rem;
+    border: 1px solid #C3B49A;
+    /* Muted beige border color */
+    border-radius: 8px;
+    /* Softer border radius */
+    box-sizing: border-box;
+    background-color: #FFF5E1;
+    /* Dark beige background for inputs */
+    color: #5A4D3A;
+    /* Dark brown text color */
+    font-family: 'Arial', sans-serif;
+    /* Font family for inputs */
     font-size: 1rem;
-    background-color: #F6E6CB;
-    /* Light neutral background for inputs */
+    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
-.form-group textarea {
-    height: 150px;
-    resize: vertical;
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group input:active,
+.form-group textarea:active,
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    background-color: #FFF5E1;
+    /* Ensure the background color remains dark beige */
+    border-color: #A0937D;
+    /* Dark beige border color on focus */
+    outline: none;
 }
 
 .submit-btn1 {
-    background-color: #091f68;
-    /* Original button color */
+    background-color: #5A4D3A;
+    /* Dark brown button color */
     color: white;
-    border: none;
     padding: 0.75rem 1.5rem;
-    font-size: 1.5rem;
-    border-radius: 4px;
+    border: none;
+    border-radius: 8px;
+    /* Softer border radius */
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .submit-btn1:hover {
-    background-color: #3b46aa;
-    /* Darker hover state */
+    background-color: #7C6B5F;
+    /* Soft brown hover color */
 }
 
-.contact-info p {
-    margin-bottom: 1rem;
-    color: #555;
+.feedback-message {
+    color: green;
+    font-weight: bold;
+    margin-top: 1rem;
 }
 
 .contact-headers {
-    font-size: 1.2rem;
-    color: #000000;
-    /* Assuming this is black for headers */
+    font-weight: bold;
 }
 
 @media (max-width: 768px) {
     .contact-content {
         flex-direction: column;
     }
+
+    .contact-form,
+    .contact-info {
+        margin: 0;
+    }
+}
+
+.contact-section {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    color: #5A4D3A;
+    /* Dark brown text color */
+}
+
+.section1 {
+    background-color: #A0937D;
+    /* Color 1 */
+}
+
+.section2 {
+    background-color: #E7D4B5;
+    /* Color 2 */
+}
+
+.section3 {
+    background-color: #9bac8f;
+    /* Same color as section4 */
+}
+
+.section4 {
+    background-color: #9bac8f;
+    /* Color 4 */
 }
