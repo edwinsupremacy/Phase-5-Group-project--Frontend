@@ -91,6 +91,12 @@ function SellerLogin() {
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <input
+                            type="text"
+                            placeholder="Phone Number"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
+                        <input
                             type="password"
                             placeholder="Password"
                             value={password}
