@@ -5,10 +5,10 @@ import Home from './components/Home';
 import Login from './components/Login';
 import AdminLogin from './components/AdminLogin';
 import SellerLogin from './components/SellerLogin';
+import SellerDashboard from './components/SellerDashboard'; // Import SellerDashboard component
 import About from './components/About';
-import Contact from './components/Contact';  // Import the Contact component
+import Contact from './components/Contact';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="App">
-      {isAuthenticated && <Navbar setIsAuthenticated={setIsAuthenticated} />}
+      {isAuthenticated && location.pathname !== '/seller-dashboard' && <Navbar setIsAuthenticated={setIsAuthenticated} />}
       <div className="content">
         <Routes>
           {!isAuthenticated ? (
@@ -26,14 +26,14 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/seller-dashboard" element={<SellerDashboard />} /> {/* Add SellerDashboard route */}
             </>
           )}
           <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/login/admin" element={<AdminLogin />} />
-          <Route path="/login/seller" element={<SellerLogin />} />
+          <Route path="/login/seller" element={<SellerLogin setIsAuthenticated={setIsAuthenticated} />} />
         </Routes>
       </div>
-
       {/* Render Footer only if the current path is not a login page */}
       {/* {location.pathname !== '/login' && location.pathname !== '/login/admin' && location.pathname !== '/login/seller' && <Footer />} */}
     </div>
