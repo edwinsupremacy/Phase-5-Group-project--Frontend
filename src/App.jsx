@@ -30,6 +30,7 @@ function App() {
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/login/admin" element={<AdminLogin />} />
         <Route path="/login/seller" element={<SellerLogin />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       {isAuthenticated && location.pathname === '/' && <Footer />}
     </div>

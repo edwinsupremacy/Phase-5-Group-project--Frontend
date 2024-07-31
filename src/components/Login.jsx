@@ -156,7 +156,7 @@ function Login({ setIsAuthenticated }) {
           </p>
           <p className="admin-seller-link">
             Are you a seller?{' '}
-            <Link to="/login/seller">Login here</Link>
+            <Link to="/login/seller">Register & Login here</Link>
           </p>
         </form>
       </div>
