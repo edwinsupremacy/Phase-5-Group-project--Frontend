@@ -4,7 +4,7 @@ import './Home.css';
 const testimonialsData = [
   "Great experience selling my items! - Emmanuel Waseth",
   "I found exactly what I was looking for! - Mary Stella",
-  "The bidding process is user-friendly! - Vaida Mawia",
+  "The bidding process is user-friendly! - Vaida Mawia ",
   "Loved the variety of items available! - Collins Njuguna",
   "The customer support is fantastic! - Edwin Mwangi",
   "Easy to navigate and find great deals! - Steve Otieno",
@@ -18,6 +18,7 @@ const testimonialsData = [
   "I am impressed with the auction process! - Kobbie Mainoo",
   "I am thrilled with the results! - Neymar Jr.",
   "I am glad I found this platform! - Xavi Hernandez",
+
 ];
 
 const Home = () => {

@@ -1,11 +1,7 @@
 .navbar {
   position: fixed;
-  top: 20px; /* Adjust this value to move it further up */
+  top: 20px;
   right: 20px;
-  z-index: 1000; /* Ensure the navbar stays on top of other content */
-  display: flex;
-  justify-content: flex-end;
-  padding: 20px;
 }
 
 .navbar ul {
@@ -39,6 +35,13 @@
   text-decoration: none;
 }
 
+
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
 .nav-link {
   margin: 0 15px;
   text-decoration: none;
@@ -65,9 +68,4 @@
 
 .nav-link:hover::after {
   transform: scaleX(1);
-}
-
-
-.home-container {
-  margin-top: 80px; 
 }

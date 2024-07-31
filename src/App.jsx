@@ -6,7 +6,7 @@ import Login from './components/Login';
 import AdminLogin from './components/AdminLogin';
 import SellerLogin from './components/SellerLogin';
 import About from './components/About';
-import Contact from './components/Contact';
+import Contact from './components/Contact';  // Import the Contact component
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -17,24 +17,6 @@ function App() {
   return (
     <div className="App">
       {isAuthenticated && <Navbar setIsAuthenticated={setIsAuthenticated} />}
-      <div className="content">
-        <Routes>
-          {!isAuthenticated ? (
-            <Route path="*" element={<Navigate to="/login" replace />} />
-          ) : (
-            <>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-            </>
-          )}
-          <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-          <Route path="/login/admin" element={<AdminLogin />} />
-          <Route path="/login/seller" element={<SellerLogin />} />
-        </Routes>
-      </div>
-     
-      {location.pathname !== '/login' && location.pathname !== '/login/admin' && location.pathname !== '/login/seller' && <Footer />}
       <Routes>
         {!isAuthenticated ? (
           <Route path="*" element={<Navigate to="/login" replace />} />

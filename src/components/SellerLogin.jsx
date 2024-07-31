@@ -6,14 +6,15 @@ function SellerLogin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState(''); // For registration
-    const [name, setName] = useState(''); // For registration
+    const [username, setUsername] = useState(''); // For registration
+    const [phone, setPhone] = useState(''); // For registration
     const [error, setError] = useState('');
     const [isRegister, setIsRegister] = useState(true); // Toggle between register and login
     const navigate = useNavigate();
 
     const handleRegisterSubmit = async (event) => {
         event.preventDefault();
-        if (!email || !password || !confirmPassword || !name) {
+        if (!email || !password || !confirmPassword || !username || !phone) {
             setError('Please fill in all fields.');
             return;
         }
@@ -31,7 +32,7 @@ function SellerLogin() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, email, password }),
+                body: JSON.stringify({ username, email, password, phone }),
             });
 
             if (!response.ok) {
@@ -79,9 +80,9 @@ function SellerLogin() {
                         <span>Register as a seller to start listing your items</span>
                         <input
                             type="text"
-                            placeholder="Name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                         />
                         <input
                             type="email"
@@ -100,6 +101,12 @@ function SellerLogin() {
                             placeholder="Confirm Password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Phone Number"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
                         />
                         <button type="submit">Register</button>
                         <p>
