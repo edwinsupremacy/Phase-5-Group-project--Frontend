@@ -69,3 +69,16 @@
 .nav-link:hover::after {
   transform: scaleX(1);
 }
+.logout-button {
+  text-decoration: none;
+  color: #A0937D;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.logout-button:hover {
+  color: #645130;
+  background-color: transparent; 
+}
