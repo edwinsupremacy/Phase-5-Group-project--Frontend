@@ -14,6 +14,7 @@ const Navbar = ({ setIsAuthenticated }) => {
     <nav className="navbar">
       <Link to="/" className="nav-link">Home</Link>
       <Link to="/about" className="nav-link">About</Link>
+      <Link to="/contact" className="nav-link">Contact</Link>
       <button onClick={handleLogout} className="nav-link logout-button">Logout</button>
     </nav>
   );

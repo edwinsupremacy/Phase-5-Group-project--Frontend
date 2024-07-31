@@ -33,8 +33,24 @@ function App() {
           <Route path="/login/seller" element={<SellerLogin />} />
         </Routes>
       </div>
-      {/* Render Footer only if the current path is not '/login' */}
+     
       {location.pathname !== '/login' && location.pathname !== '/login/admin' && location.pathname !== '/login/seller' && <Footer />}
+      <Routes>
+        {!isAuthenticated ? (
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        ) : (
+          <>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+          </>
+        )}
+        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path="/login/admin" element={<AdminLogin />} />
+        <Route path="/login/seller" element={<SellerLogin />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+      {isAuthenticated && location.pathname === '/' && <Footer />}
     </div>
   );
 }
