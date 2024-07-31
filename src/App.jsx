@@ -35,7 +35,7 @@ function App() {
       </div>
 
       {/* Render Footer only if the current path is not a login page */}
-      {location.pathname !== '/login' && location.pathname !== '/login/admin' && location.pathname !== '/login/seller' && <Footer />}
+      {/* {location.pathname !== '/login' && location.pathname !== '/login/admin' && location.pathname !== '/login/seller' && <Footer />} */}
     </div>
   );
 }

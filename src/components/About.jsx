@@ -1,6 +1,6 @@
 import React from 'react';
 import './About.css';
-import Footer from './Footer';
+// import Footer from './Footer';
 import seamlessTransactions from '../assets/seamless-transactions.jpeg';
 import admin from '../assets/admin.jpg';
 import onlineSelling from '../assets/online-selling.avif';
@@ -34,7 +34,7 @@ const About = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
