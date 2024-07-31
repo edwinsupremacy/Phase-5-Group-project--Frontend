@@ -8,7 +8,7 @@
 }
 
 body {
-    background-color: #E7D4B5; 
+    background-color: #E7D4B5;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -276,3 +276,20 @@ body {
 .role-links a:hover {
     text-decoration: underline;
 }
+.container {
+    background-color: #F6E6CB;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    padding: 40px;
+    max-width: 100%;
+    min-height: 480px; /* Keep this for minimum height */
+    margin-bottom: 60px; /* Adjust this value to the height of your footer */
+    transition: width 0.6s ease-in-out, border-radius 0.6s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
