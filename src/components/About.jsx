@@ -1,9 +1,10 @@
 import React from 'react';
 import './About.css';
+import Footer from './Footer';
 
 const About = () => {
   return (
-    <div className="about-container">
+    <><div className="about-container">
       <h2>About Our Online Auction Platform</h2>
       <div className="cards-container">
         <div className="card">
@@ -25,7 +26,7 @@ const About = () => {
           </p>
         </div>
       </div>
-    </div>
+    </div><Footer /></>
   );
 };
 

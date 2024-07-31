@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Contact.css';
+import Footer from './Footer';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="contact-container">
+        <><div className="contact-container">
             <div className="contact-section section1">
                 <h1>Contact Us</h1>
             </div>
@@ -43,8 +44,7 @@ const Contact = () => {
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        required
-                                    />
+                                        required />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="email">Email</label>
@@ -54,8 +54,7 @@ const Contact = () => {
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        required
-                                    />
+                                        required />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="message">Message</label>
@@ -88,7 +87,7 @@ const Contact = () => {
                 <h2>Stay Connected</h2>
                 <p>Follow us on our social media channels for the latest updates.</p>
             </div>
-        </div>
+        </div><Footer /></>
     );
 };
 
