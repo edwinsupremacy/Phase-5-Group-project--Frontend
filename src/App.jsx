@@ -6,7 +6,7 @@ import Login from './components/Login';
 import AdminLogin from './components/AdminLogin';
 import SellerLogin from './components/SellerLogin';
 import About from './components/About';
-import Contact from './components/Contact';  // Import the Contact component
+import Contact from './components/Contact';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -17,21 +17,24 @@ function App() {
   return (
     <div className="App">
       {isAuthenticated && <Navbar setIsAuthenticated={setIsAuthenticated} />}
-      <Routes>
-        {!isAuthenticated ? (
-          <Route path="*" element={<Navigate to="/login" replace />} />
-        ) : (
-          <>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-          </>
-        )}
-        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-        <Route path="/login/admin" element={<AdminLogin />} />
-        <Route path="/login/seller" element={<SellerLogin />} />
-      </Routes>
-      {isAuthenticated && location.pathname === '/' && <Footer />}
+      <div className="content">
+        <Routes>
+          {!isAuthenticated ? (
+            <Route path="*" element={<Navigate to="/login" replace />} />
+          ) : (
+            <>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+            </>
+          )}
+          <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+          <Route path="/login/admin" element={<AdminLogin />} />
+          <Route path="/login/seller" element={<SellerLogin />} />
+        </Routes>
+      </div>
+      {/* Render Footer only if the current path is not '/login' */}
+      {location.pathname !== '/login' && location.pathname !== '/login/admin' && location.pathname !== '/login/seller' && <Footer />}
     </div>
   );
 }
