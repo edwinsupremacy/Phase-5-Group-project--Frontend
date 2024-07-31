@@ -14,7 +14,10 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 100vh;
+    height: 500vh;
+    /* Adjusted height */
+    margin: 0;
+    /* Ensure there's no extra margin around the body */
 }
 
 .container {
@@ -25,11 +28,16 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     position: relative;
     overflow: hidden;
+    margin-top: 100px;
     width: 768px;
+    padding: 40px;
+    /* Adjusted padding */
     max-width: 100%;
     min-height: 480px;
     transition: width 0.6s ease-in-out, border-radius 0.6s ease-in-out;
-    /* Smooth transition for width and border-radius */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .container p,
@@ -49,6 +57,7 @@ body {
 
 .container button {
     background-color: #A0937D;
+    /* Dark beige background */
     color: #fff;
     font-size: 12px;
     padding: 10px 45px;
@@ -243,7 +252,6 @@ body {
     align-items: center;
     justify-content: center;
     object-fit: contain;
-    justify-content: center;
 }
 
 .profile-info p {

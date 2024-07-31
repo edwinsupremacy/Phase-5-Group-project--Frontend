@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
 
-function Login() {
+function Login({ setIsAuthenticated }) {
   const [isSignUp, setIsSignUp] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [username, setUsername] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+    username: '',
+    phoneNumber: '',
+  });
   const [error, setError] = useState('');
+  const [serverError, setServerError] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -34,10 +36,16 @@ function Login() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, email, phone_number: phoneNumber, password, confirm_password: confirmPassword }),
         });
-        if (!response.ok) throw new Error('Registration failed.');
-        navigate('/home');
+        if (response.status === 409) {
+          setError('Username already exists.');
+        } else if (!response.ok) {
+          setError('Registration failed.');
+        } else {
+          setIsAuthenticated(true);
+          navigate('/');
+        }
       } catch (error) {
-        setError('Registration failed.');
+        setServerError('Server is currently unavailable. Please try again later.');
       }
     } else {
       if (!email || !password) {
@@ -53,12 +61,18 @@ function Login() {
           },
           body: JSON.stringify({ email, password }),
         });
-        if (!response.ok) throw new Error('Login failed.');
-        const data = await response.json();
-        localStorage.setItem('token', data.access_token);
-        navigate('/home');
+        if (response.status === 401) {
+          setError('Invalid email or password.');
+        } else if (!response.ok) {
+          setError('Login failed.');
+        } else {
+          const data = await response.json();
+          localStorage.setItem('token', data.access_token);
+          setIsAuthenticated(true);
+          navigate('/');
+        }
       } catch (error) {
-        setError('Login failed.');
+        setServerError('Server is currently unavailable. Please try again later.');
       }
     }
   };
@@ -74,38 +88,39 @@ function Login() {
             name="username"
             placeholder="Username"
             onChange={handleChange}
-            autocomplete="username"
+            autoComplete="username"
           />
           <input
             type="email"
             name="email"
             placeholder="Email"
             onChange={handleChange}
-            autocomplete="email"
+            autoComplete="email"
           />
           <input
             type="tel"
             name="phoneNumber"
             placeholder="Phone Number"
             onChange={handleChange}
-            autocomplete="tel"
+            autoComplete="tel"
           />
           <input
             type="password"
             name="password"
             placeholder="Password"
             onChange={handleChange}
-            autocomplete="new-password"
+            autoComplete="new-password"
           />
           <input
             type="password"
             name="confirmPassword"
             placeholder="Confirm Password"
             onChange={handleChange}
-            autocomplete="new-password"
+            autoComplete="new-password"
           />
           <button type="submit">Sign Up</button>
           {error && <p className="error">{error}</p>}
+          {serverError && <p className="error">{serverError}</p>}
         </form>
       </div>
       <div className="form-container sign-in">
@@ -117,25 +132,32 @@ function Login() {
             name="email"
             placeholder="Email"
             onChange={handleChange}
-            autocomplete="email"
+            autoComplete="email"
           />
           <input
             type="password"
             name="password"
             placeholder="Password"
             onChange={handleChange}
-            autocomplete="current-password"
+            autoComplete="current-password"
           />
           <button type="submit">Log In</button>
           {error && <p className="error">{error}</p>}
+          {serverError && <p className="error">{serverError}</p>}
           <p className="register-link">
-            Don't have an account? <Link to="#" onClick={handleSignUpClick}>Sign Up</Link>
+            Don't have an account?{' '}
+            <Link to="#" onClick={() => setIsSignUp(true)}>
+              Sign Up
+            </Link>
           </p>
-          <div className="role-links">
-            <p>Sign in as:</p>
-            <Link to="/login/admin">Admin</Link>
-            <Link to="/login/seller">Seller</Link>
-          </div>
+          <p className="admin-seller-link">
+            Are you an admin?{' '}
+            <Link to="/login/admin">Login here</Link>
+          </p>
+          <p className="admin-seller-link">
+            Are you a seller?{' '}
+            <Link to="/login/seller">Login here</Link>
+          </p>
         </form>
       </div>
       <div className="toggle-container">
