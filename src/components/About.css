@@ -29,6 +29,32 @@ body {
   margin-bottom: 20px;
 }
 
+/* Custom Scrollbar Styles */
+.cards-container::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+.cards-container::-webkit-scrollbar-track {
+  background: #E7D4B5; /* Track color */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+.cards-container::-webkit-scrollbar-thumb {
+  background: #A0937D; /* Scrollbar color */
+  border-radius: 10px; /* Rounded corners for the scrollbar */
+  transition: background 0.3s ease; /* Smooth transition */
+}
+
+.cards-container::-webkit-scrollbar-thumb:hover {
+  background: #7C6B5F; /* Color on hover */
+}
+
+/* For Firefox */
+.cards-container {
+  scrollbar-width: thin; /* Thin scrollbar */
+  scrollbar-color: #A0937D #E7D4B5; /* Thumb color and track color */
+}
+
 .cards-container {
   display: flex;
   flex-direction: column;
