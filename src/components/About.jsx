@@ -1,6 +1,5 @@
 import React from 'react';
 import './About.css';
-// import Footer from './Footer';
 import seamlessTransactions from '../assets/seamless-transactions.jpeg';
 import admin from '../assets/admin.jpg';
 import onlineSelling from '../assets/online-selling.avif';
@@ -34,7 +33,12 @@ const About = () => {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
+
+      <div className="cta-container">
+        <span className="cta-background">
+          Are you looking to find your next great acquisition? <a href="/auction-items" className="cta-link">Browse here</a>
+        </span>
+      </div>
     </>
   );
 };

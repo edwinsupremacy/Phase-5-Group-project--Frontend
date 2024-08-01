@@ -1,23 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+html {
+    height: 100%;
 }
 
 body {
-    background-color: #E7D4B5;
+    min-height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-    height: 3000vh;
+    background-color: #e7d4b5;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: auto;
 }
 
 .home-container {
     background-color: #F6E6CB;
+    color: #4F4F4F;
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     display: flex;
@@ -25,20 +26,181 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
+    flex: 1;
     padding: 40px;
     max-width: 768px;
     width: 100%;
-    margin: 20px;
-    cursor: default;
-    margin-top: 80px
+    margin: 20px 0;
+    margin-top: 50px;
+    margin-left: 0px;
 }
 
-h2 {
+.how-it-works {
+    background-color: #B6C7AA;
+    padding: 40px 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 2000px;
+}
+
+.how-it-works h2 {
+    color: #A0937D;
     margin-bottom: 20px;
-    color: #A0937D;
+    text-align: center;
+    width: 100%;
 }
 
-p {
-    font-size: 1.2em;
-    color: #A0937D;
+.how-it-works ol {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.how-it-works li {
+    background-color: #F6E6CB;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 23%;
+    margin-bottom: 20px;
+}
+
+.how-it-works li h3 {
+    color: #3f2e11;
+    font-size: 1.9rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.how-it-works li p {
+    font-weight: 600;
+    color: #4F4F4F;
+    font-size: 1.5rem;
+}
+
+.how-it-works li h3 svg {
+    color: #887252;
+    margin-bottom: 0.5rem;
+    font-size: 2.8rem;
+}
+
+.images-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 40px 0;
+}
+
+.images-container img {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+}
+
+.special-offer p {
+    margin-bottom: 1.5rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.trust-indicators {
+    background-color: #f8f8f8;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.trust-indicators-heading {
+    font-size: 2.8rem;
+    color: #000000;
+    margin-bottom: 3rem;
+}
+
+.awards-container {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-bottom: 3rem;
+}
+
+.award {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 300px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.award:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.award-badge {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 1.5rem;
+}
+
+.award p {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 0.75rem;
+}
+
+.award-year {
+    font-size: 1.2rem;
+    color: #000000;
+    font-weight: 600;
+}
+
+.additional-trust {
+    margin-top: 3rem;
+}
+
+.additional-trust p {
+    font-size: 1.4rem;
+    color: #003366;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.final-cta {
+    margin-top: 1.5rem;
+    background-color: rgb(190, 190, 230);
+}
+
+.special-offer {
+    background-color: rgb(190, 190, 230);
+}
+
+.trust-indicators {
+    background-color: #F4F4F4;
+}
+
+.final-cta {
+    background-color: #FFF5E6;
 }
