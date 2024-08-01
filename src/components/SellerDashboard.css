@@ -1,103 +1,151 @@
-.dashboard-container {
-    background-color: #F6E6CB;
-    /* Very light cream b
-    ackground */
-    border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-    padding: 20px 40px;
-    max-width: 800px;
-    margin: 20px auto;
+.seller-dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    height: 100vh;
+    /* Set height to viewport height for full-page view */
+    overflow: hidden;
+    /* Prevent scrollbars on the container */
 }
 
-h1 {
-    font-size: 28px;
-    color: #A0937D;
-    /* Dark beige color */
-}
-
-.add-item-section,
-.items-list-section {
-    margin-bottom: 20px;
-}
-
-.add-item-section h2,
-.items-list-section h2 {
-    font-size: 22px;
-    color: #A0937D;
-    /* Dark beige color */
-}
-
-form {
-    background-color: #F6E6CB;
-    /* Very light cream background */
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-input {
-    background-color: #EEE;
-    /* Light grey input background */
+.seller-dashboard-title {
+    text-align: center;
+    margin-bottom: 30px;
     color: #333;
-    /* Dark text color */
+    font-size: 2.5em;
+}
+
+.seller-add-item-section {
+    flex: 1;
+    margin-right: 30px;
+    overflow: auto;
+    /* Allow scrolling if content exceeds the section height */
+}
+
+.seller-add-item-title {
+    margin-bottom: 15px;
+    color: #555;
+    font-size: 1.8em;
+}
+
+.seller-add-item-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.seller-input {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1.1em;
+}
+
+.seller-submit-button {
+    padding: 15px;
+    background-color: #28a745;
+    color: white;
     border: none;
-    margin: 8px 0;
-    padding: 10px 15px;
-    font-size: 13px;
-    border-radius: 8px;
-    width: 100%;
-    outline: none;
-}
-
-button {
-    background-color: #A0937D;
-    /* Dark beige button background */
-    color: #fff;
-    font-size: 12px;
-    padding: 10px 20px;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-top: 10px;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 1.1em;
 }
 
-button:hover {
-    background-color: #8c7b5a;
-    /* Slightly darker on hover */
+.seller-submit-button:hover {
+    background-color: #218838;
 }
 
-.items-list-section ul {
-    list-style: none;
-    padding: 0;
-}
-
-.items-list-section li {
-    background-color: #F6E6CB;
-    /* Very light cream background */
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.items-list-section li h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #A0937D;
-    /* Dark beige color */
-}
-
-.items-list-section li p {
-    margin: 5px 0;
-    color: #333;
-    /* Dark text color */
-}
-
-.error {
+.seller-error {
     color: red;
-    font-size: 12px;
-    margin-top: 10px;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+
+.seller-items-section {
+    flex: 2;
+    position: relative;
+    overflow: auto;
+    /* Allow scrolling if content exceeds the section height */
+}
+
+.seller-items-title {
+    margin-bottom: 25px;
+    color: #555;
+    font-size: 1.8em;
+}
+
+.seller-items-container {
+    width: 100%;
+    max-height: 700px;
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+    background-color: #fff;
+    padding: 15px;
+    border-left: 1px solid #ddd;
+}
+
+.seller-item-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.seller-item-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.seller-item-details {
+    padding: 12px;
+}
+
+.seller-item-name {
+    margin: 10px 0;
+    font-size: 1.3em;
+}
+
+.seller-item-description {
+    font-size: 1em;
+    color: #666;
+}
+
+.seller-item-price,
+.seller-item-category {
+    font-size: 1em;
+    color: #333;
+}
+
+.seller-item-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.seller-item-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.seller-item-button:hover {
+    background-color: #0056b3;
+}
+
+.seller-no-items {
+    text-align: center;
+    color: #777;
+    font-size: 1.2em;
 }
