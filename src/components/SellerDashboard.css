@@ -1,7 +1,5 @@
 .dashboard-container {
     background-color: #F6E6CB;
-    /* Very light cream b
-    ackground */
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     padding: 20px 40px;
@@ -12,7 +10,6 @@
 h1 {
     font-size: 28px;
     color: #A0937D;
-    /* Dark beige color */
 }
 
 .add-item-section,
@@ -24,12 +21,11 @@ h1 {
 .items-list-section h2 {
     font-size: 22px;
     color: #A0937D;
-    /* Dark beige color */
+ 
 }
 
 form {
     background-color: #F6E6CB;
-    /* Very light cream background */
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -37,9 +33,7 @@ form {
 
 input {
     background-color: #EEE;
-    /* Light grey input background */
     color: #333;
-    /* Dark text color */
     border: none;
     margin: 8px 0;
     padding: 10px 15px;
@@ -51,7 +45,6 @@ input {
 
 button {
     background-color: #A0937D;
-    /* Dark beige button background */
     color: #fff;
     font-size: 12px;
     padding: 10px 20px;
@@ -66,7 +59,7 @@ button {
 
 button:hover {
     background-color: #8c7b5a;
-    /* Slightly darker on hover */
+  
 }
 
 .items-list-section ul {
@@ -76,7 +69,7 @@ button:hover {
 
 .items-list-section li {
     background-color: #F6E6CB;
-    /* Very light cream background */
+
     border-radius: 8px;
     padding: 10px;
     margin-bottom: 10px;
@@ -87,17 +80,94 @@ button:hover {
     margin: 0;
     font-size: 18px;
     color: #A0937D;
-    /* Dark beige color */
+    
 }
 
 .items-list-section li p {
     margin: 5px 0;
     color: #333;
-    /* Dark text color */
+    
 }
 
 .error {
     color: red;
     font-size: 12px;
     margin-top: 10px;
+}
+
+
+
+
+.items-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+    margin-top: 20px; 
+}
+
+.item-card {
+    background: #FFFFFF; 
+    border: 1px solid #ddd; 
+    border-radius: 15px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    width: calc(33% - 20px); 
+    padding: 15px; 
+    box-sizing: border-box; 
+}
+
+.item-card img {
+    width: 100%; 
+    height: auto; 
+    border-radius: 10px; 
+}
+
+.item-details {
+    margin-top: 10px; 
+}
+
+.item-details h3 {
+    margin: 0; 
+    font-size: 20px; 
+    color: #A0937D; 
+}
+
+.item-details p {
+    margin: 5px 0; 
+    color: #333; 
+}
+
+.item-actions {
+    margin-top: 10px; 
+}
+
+.item-actions button {
+    background-color: #A0937D; 
+    color: #fff; 
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-right: 5px; 
+    cursor: pointer;
+}
+
+.item-actions button:hover {
+    background-color: #8c7b5a;
+}
+.item-actions button:first-of-type {
+    background-color: #4CAF50; 
+}
+
+.item-actions button:first-of-type:hover {
+    background-color: #45a049; 
+}
+
+.item-actions button:last-of-type {
+    background-color: #f44336;
+}
+
+.item-actions button:last-of-type:hover {
+    background-color: #da190b; 
 }
