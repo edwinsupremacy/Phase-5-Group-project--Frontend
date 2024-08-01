@@ -1,172 +1,211 @@
 import React, { useState, useEffect } from 'react';
 import './SellerDashboard.css';
+import axiosInstance from "./utils/axiosConfig";
 
-function SellerDashboard() {
+
+const SellerDashboard = () => {
     const [items, setItems] = useState([]);
-    const [itemName, setItemName] = useState('');
-    const [itemDescription, setItemDescription] = useState('');
-    const [startingPrice, setStartingPrice] = useState('');
-    const [category, setCategory] = useState('');
-    const [imageUrl, setImageUrl] = useState('');
+    const [filteredItems, setFilteredItems] = useState([]);
+    const [formData, setFormData] = useState({
+        name: '',
+        description: '',
+        startingPrice: '',
+        category: '',
+        imageUrl: ''
+    });
     const [error, setError] = useState('');
     const [editIndex, setEditIndex] = useState(null);
+    const [shouldFetchItems, setShouldFetchItems] = useState(true); // Initially set to true
+    const [showItems, setShowItems] = useState(false);
 
     useEffect(() => {
-        fetchItems();
-    }, []);
+        if (shouldFetchItems) {
+            fetchItems();
+        }
+    }, [shouldFetchItems]);
+
+    useEffect(() => {
+        filterItems();
+    }, [items]);
 
     const fetchItems = async () => {
         try {
-            const response = await fetch('http://localhost:5000/items');
-            const data = await response.json();
-            setItems(data);
+            const response = await axiosInstance.get('http://localhost:5000/items');
+            setItems(response.data);
+            setShouldFetchItems(false);
         } catch (err) {
             console.error('Error fetching items:', err);
+            setError('Failed to fetch items');
         }
     };
 
-    const handleAddItem = async (event) => {
+    const filterItems = () => {
+        setFilteredItems(items);
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!itemName || !itemDescription || !startingPrice || !category || !imageUrl) {
+        const { name, description, startingPrice, category, imageUrl } = formData;
+
+        if (!name || !description || !startingPrice || !category || !imageUrl) {
             setError('Please fill in all fields.');
             return;
         }
         setError('');
 
         const newItem = {
-            name: itemName,
-            description: itemDescription,
+            name,
+            description,
             starting_price: parseFloat(startingPrice),
-            category: category,
+            category,
             image_url: imageUrl
         };
 
         try {
-            const response = editIndex !== null
-                ? await fetch(`http://localhost:5000/items/${items[editIndex].id}`, {
-                      method: 'PUT',
-                      headers: {
-                          'Content-Type': 'application/json',
-                      },
-                      body: JSON.stringify(newItem),
-                  })
-                : await fetch('http://localhost:5000/items', {
-                      method: 'POST',
-                      headers: {
-                          'Content-Type': 'application/json',
-                      },
-                      body: JSON.stringify(newItem),
-                  });
+            const url = editIndex !== null
+                ? `http://localhost:5000/items/${items[editIndex].id}`
+                : 'http://localhost:5000/items';
 
-            if (!response.ok) {
-                throw new Error('Failed to save item');
-            }
-            fetchItems();
-            setItemName('');
-            setItemDescription('');
-            setStartingPrice('');
-            setCategory('');
-            setImageUrl('');
+            const method = editIndex !== null ? 'PUT' : 'POST';
+            await axiosInstance.request({
+                url,
+                method,
+                data: newItem
+            });
+
+            setFormData({ name: '', description: '', startingPrice: '', category: '', imageUrl: '' });
             setEditIndex(null);
+            setShouldFetchItems(true); // Fetch items after adding/updating
         } catch (err) {
             setError('Error adding/updating item');
             console.error(err);
         }
     };
 
-    const handleDeleteItem = async (index) => {
+    const handleDelete = async (index) => {
         const itemId = items[index].id;
         try {
-            const response = await fetch(`http://localhost:5000/items/${itemId}`, {
-                method: 'DELETE',
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to delete item');
-            }
-            fetchItems();
+            await axiosInstance.delete(`http://localhost:5000/items/${itemId}`);
+            setShouldFetchItems(true); // Fetch items after deleting
         } catch (err) {
             setError('Error deleting item');
             console.error(err);
         }
     };
 
-    const handleEditItem = (index) => {
+    const handleEdit = (index) => {
         const itemToEdit = items[index];
-        setItemName(itemToEdit.name);
-        setItemDescription(itemToEdit.description);
-        setStartingPrice(itemToEdit.starting_price);
-        setCategory(itemToEdit.category);
-        setImageUrl(itemToEdit.image_url);
+        setFormData({
+            name: itemToEdit.name,
+            description: itemToEdit.description,
+            startingPrice: itemToEdit.starting_price,
+            category: itemToEdit.category,
+            imageUrl: itemToEdit.image_url
+        });
         setEditIndex(index);
     };
 
+    const toggleItemsVisibility = () => {
+        setShowItems(!showItems);
+    };
+
     return (
-        <div className="dashboard-container">
-            <h1>Seller Dashboard</h1>
-            <div className="add-item-section">
-                <h2>{editIndex !== null ? 'Update Item' : 'Add New Item'}</h2>
-                <form onSubmit={handleAddItem}>
+        <div className="seller-dashboard-container">
+            <div className="seller-add-item-section">
+                <h1 className="seller-dashboard-title">Seller Dashboard</h1>
+                <h2 className="seller-add-item-title">{editIndex !== null ? 'Update Item' : 'Add New Item'}</h2>
+                <form onSubmit={handleSubmit} className="seller-add-item-form">
                     <input
                         type="text"
+                        name="name"
                         placeholder="Item Name"
-                        value={itemName}
-                        onChange={(e) => setItemName(e.target.value)}
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="seller-input"
+                        autoComplete="off"
                     />
                     <input
                         type="text"
+                        name="description"
                         placeholder="Item Description"
-                        value={itemDescription}
-                        onChange={(e) => setItemDescription(e.target.value)}
+                        value={formData.description}
+                        onChange={handleChange}
+                        className="seller-input"
+                        autoComplete="off"
                     />
                     <input
                         type="number"
+                        name="startingPrice"
                         placeholder="Starting Price"
-                        value={startingPrice}
-                        onChange={(e) => setStartingPrice(e.target.value)}
+                        value={formData.startingPrice}
+                        onChange={handleChange}
+                        className="seller-input"
+                        autoComplete="off"
                     />
                     <input
                         type="text"
+                        name="category"
                         placeholder="Category"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
+                        value={formData.category}
+                        onChange={handleChange}
+                        className="seller-input"
+                        autoComplete="off"
                     />
                     <input
                         type="text"
+                        name="imageUrl"
                         placeholder="Image URL"
-                        value={imageUrl}
-                        onChange={(e) => setImageUrl(e.target.value)}
+                        value={formData.imageUrl}
+                        onChange={handleChange}
+                        className="seller-input"
+                        autoComplete="off"
                     />
-                    <button type="submit">{editIndex !== null ? 'Update Item' : 'Add Item'}</button>
-                    {error && <p className="error">{error}</p>}
+                    <button type="submit" className="seller-submit-button">
+                        {editIndex !== null ? 'Update Item' : 'Add Item'}
+                    </button>
+                    {error && <p className="seller-error">{error}</p>}
                 </form>
             </div>
-            <div className="items-section">
-                <h2>Your Items</h2>
-                {items.length > 0 ? (
-                    <div className="items-container">
-                        {items.map((item, index) => (
-                            <div className="item-card" key={item.id}>
-                                <img src={item.image_url} alt={item.name} className="item-image" />
-                                <div className="item-details">
-                                    <h3>{item.name}</h3>
-                                    <p>{item.description}</p>
-                                    <p>Starting Price: ${item.starting_price}</p>
-                                    <p>Category: {item.category}</p>
-                                    <div className="item-actions">
-                                        <button onClick={() => handleEditItem(index)}>Update</button>
-                                        <button onClick={() => handleDeleteItem(index)}>Delete</button>
+            <div className="seller-items-section">
+                <button onClick={toggleItemsVisibility} className="seller-list-toggle-button">
+                    {showItems ? 'Hide Items' : 'List All Your Items'}
+                </button>
+                {showItems && (
+                    <div className="seller-items-container">
+                        <h2 className="seller-items-title">Your Items</h2>
+                        {filteredItems.length > 0 ? (
+                            filteredItems.map((item, index) => (
+                                <div className="seller-item-card" key={item.id}>
+                                    <img src={item.image_url} alt={item.name} className="seller-item-image" />
+                                    <div className="seller-item-details">
+                                        <h3 className="seller-item-name">{item.name}</h3>
+                                        <p className="seller-item-description">{item.description}</p>
+                                        <p className="seller-item-price">Starting Price: <span>ksh {item.starting_price.toFixed(2)}</span></p>
+                                        <p className="seller-item-category">Category: <span>{item.category}</span></p>
+                                        <div className="seller-item-actions">
+                                            <button onClick={() => handleEdit(index)} className="seller-item-button">
+                                                Update
+                                            </button>
+                                            <button onClick={() => handleDelete(index)} className="seller-item-button">
+                                                Delete
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))
+                        ) : (
+                            <p className="seller-no-items">No items to display.</p>
+                        )}
                     </div>
-                ) : (
-                    <p>No items added yet.</p>
                 )}
             </div>
         </div>
     );
-}
+};
 
 export default SellerDashboard;
