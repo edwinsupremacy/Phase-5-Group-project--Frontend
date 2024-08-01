@@ -2,13 +2,19 @@
     padding: 2rem;
     background-color: #f9f9f9;
     color: rgb(117, 76, 21);
+    overflow-x: auto;
+    /* Enable horizontal scrolling if needed */
+    white-space: nowrap;
+    /* Prevent line breaks */
 }
 
 .items-list {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    gap: 1rem;
+    /* Add space between the items */
     color: rgb(117, 76, 21);
+    flex-wrap: nowrap;
+    /* Ensure items are in a single row */
 }
 
 .item-card {
@@ -16,9 +22,40 @@
     color: rgb(117, 76, 21);
     border: 1px solid #ddd;
     border-radius: 10px;
-    padding: 1.5rem;
-    margin: 1rem;
-    width: 250px;
+    padding: 1rem;
+    width: 150px;
+    /* Smaller width for a more compact container */
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    /* Allow horizontal arrangement */
+    white-space: normal;
+    /* Allow text to wrap inside the card */
+    transition: transform 0.2s ease-in-out;
+    /* Smooth transform effect */
+}
+
+.item-card img {
+    width: 100%;
+    /* Image fits the width of the card */
+    height: auto;
+    /* Maintain aspect ratio */
+    border-radius: 5px;
+    /* Optional: round the corners of the image */
+}
+
+.item-card h3,
+.item-card p {
+    margin: 0.5rem 0;
+    /* Add some space between elements */
+}
+
+.item-card p {
+    font-size: 0.9rem;
+    /* Slightly smaller font size for details */
+}
+
+.item-card:hover {
+    transform: scale(1.05);
+    /* Slightly enlarge on hover */
 }

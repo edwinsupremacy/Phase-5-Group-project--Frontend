@@ -1,3 +1,4 @@
+// AuctionItems.js
 import React from 'react';
 import './AuctionItems.css';
 import { useItems } from './ItemsContext';
@@ -13,10 +14,11 @@ const AuctionItems = () => {
                     <ul>
                         {items.map((item, index) => (
                             <li key={index} className="item-card">
+                                <img src={item.image_url} alt={item.name} />
                                 <h3>{item.name}</h3>
                                 <p>{item.description}</p>
-                                <p>Starting Bid: ${item.price}</p>
-                                <p>Seller: {item.seller}</p> {/* Display seller name */}
+                                <p>Starting Bid: ksh {item.starting_price}</p>
+                                <p>Category: {item.category}</p>
                                 {/* Add more details as necessary */}
                             </li>
                         ))}

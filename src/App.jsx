@@ -17,7 +17,7 @@ function App() {
   const location = useLocation();
 
   return (
-    <ItemsProvider> {/* Wrap your app with ItemsProvider */}
+    <ItemsProvider>
       <div className="App">
         {isAuthenticated && location.pathname !== '/seller-dashboard' && <Navbar setIsAuthenticated={setIsAuthenticated} />}
         <div className="content">
