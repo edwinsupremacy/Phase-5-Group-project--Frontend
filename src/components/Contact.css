@@ -1,3 +1,30 @@
+/* Custom Scrollbar Styles */
+.contact-container::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+.contact-container::-webkit-scrollbar-track {
+    background: #E7D4B5; /* Track color */
+    border-radius: 10px; /* Rounded corners for the track */
+}
+
+.contact-container::-webkit-scrollbar-thumb {
+    background: #A0937D; /* Scrollbar color */
+    border-radius: 10px; /* Rounded corners for the scrollbar */
+    transition: background 0.3s ease; /* Smooth transition */
+}
+
+.contact-container::-webkit-scrollbar-thumb:hover {
+    background: #7C6B5F; /* Color on hover */
+}
+
+/* For Firefox */
+.contact-container {
+    scrollbar-width: thin; /* Thin scrollbar */
+    scrollbar-color: #A0937D #E7D4B5; /* Thumb color and track color */
+}
+
+/* Rest of your CSS */
 html,
 body {
     height: 100%;
@@ -7,14 +34,13 @@ body {
 .contact-container {
     padding: 2rem;
     background-color: #F1E3D3;
-    /* Light cream background for vintage feel */
     color: #5A4D3A;
-    /* Dark brown text color */
     min-height: calc(100vh - 4rem);
-    /* Adjust to ensure it fits the viewport height with padding */
     box-sizing: border-box;
     border-radius: 50px;
-    /* Increased border radius for softer edges */
+    max-height: 90vh; /* Set a max height to enable scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+    margin-top: 50px;
 }
 
 .contact-content {
@@ -32,7 +58,6 @@ body {
 .contact-form h2,
 .contact-info h2 {
     color: #5A4D3A;
-    /* Dark brown heading color */
 }
 
 .form-group {
@@ -43,7 +68,6 @@ body {
     display: block;
     margin-bottom: 0.5rem;
     color: #7C6B5F;
-    /* Soft brown label color */
 }
 
 .form-group input,
@@ -51,16 +75,11 @@ body {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #C3B49A;
-    /* Muted beige border color */
     border-radius: 8px;
-    /* Softer border radius */
     box-sizing: border-box;
     background-color: #FFF5E1;
-    /* Dark beige background for inputs */
     color: #5A4D3A;
-    /* Dark brown text color */
     font-family: 'Arial', sans-serif;
-    /* Font family for inputs */
     font-size: 1rem;
     transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
@@ -72,27 +91,22 @@ body {
 .form-group input::placeholder,
 .form-group textarea::placeholder {
     background-color: #FFF5E1;
-    /* Ensure the background color remains dark beige */
     border-color: #A0937D;
-    /* Dark beige border color on focus */
     outline: none;
 }
 
 .submit-btn1 {
     background-color: #5A4D3A;
-    /* Dark brown button color */
     color: white;
     padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 8px;
-    /* Softer border radius */
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
 }
 
 .submit-btn1:hover {
     background-color: #7C6B5F;
-    /* Soft brown hover color */
 }
 
 .feedback-message {
@@ -121,25 +135,20 @@ body {
     margin-bottom: 1rem;
     border-radius: 8px;
     color: #5A4D3A;
-    /* Dark brown text color */
 }
 
 .section1 {
     background-color: #A0937D;
-    /* Color 1 */
 }
 
 .section2 {
     background-color: #E7D4B5;
-    /* Color 2 */
 }
 
 .section3 {
     background-color: #9bac8f;
-    /* Same color as section4 */
 }
 
 .section4 {
     background-color: #9bac8f;
-    /* Color 4 */
 }
