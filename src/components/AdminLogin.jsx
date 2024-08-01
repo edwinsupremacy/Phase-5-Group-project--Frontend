@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminLogin.css';
 
-function AdminLogin() {
+function AdminLogin({ setIsAuthenticated }) {  // Accept setIsAuthenticated as a prop
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -17,7 +17,7 @@ function AdminLogin() {
         setError('');
 
         try {
-            const response = await fetch('http://localhost:5000/admin/login', {  // Ensure the full URL to backend
+            const response = await fetch('http://localhost:5000/admin/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,12 +29,18 @@ function AdminLogin() {
                 const { access_token, refresh_token } = await response.json();
                 localStorage.setItem('access_token', access_token);
                 localStorage.setItem('refresh_token', refresh_token);
+                setIsAuthenticated(true);  // Set authentication state
                 navigate('/admin-dashboard');
             } else {
-                throw new Error('Login failed.');
+                // Handle response errors
+                if (response.status === 401) {
+                    setError('You are not permitted to access this page.');
+                } else {
+                    setError('Login failed. Please try again.');
+                }
             }
         } catch (error) {
-            setError('Login failed.');
+            setError('An unexpected error occurred. Please try again later.');
         }
     };
 
