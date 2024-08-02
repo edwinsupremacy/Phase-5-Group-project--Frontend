@@ -23,7 +23,8 @@ function App() {
       location.pathname.startsWith('/login') ||
       location.pathname.startsWith('/admin-dashboard') ||
       location.pathname.startsWith('/login/admin') ||
-      location.pathname.startsWith('/login/seller')
+      location.pathname.startsWith('/login/seller')||
+      location.pathname.startsWith('/seller-dashboard')
     );
   };
 
