@@ -42,7 +42,6 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/auction-items" element={<AuctionItems />} />
               <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
               <Route path="/login/admin" element={<AdminLogin setIsAuthenticated={setIsAuthenticated} />} />
               <Route path="/login/seller" element={<SellerLogin setIsAuthenticated={setIsAuthenticated} />} />
