@@ -69,6 +69,7 @@
     /* Clean white */
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
     /* Subtle inset shadow */
+    color: rgb(0, 0, 0);
 }
 
 /* Submit Button */
