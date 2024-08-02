@@ -6,15 +6,14 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-}
-
-body {
-    background-color: #E7D4B5;
+    background-color: #e7d4b5;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
     height: auto;
-    /* Set height to auto */
 }
 
 .home-container {
@@ -32,9 +31,8 @@ body {
     max-width: 768px;
     width: 100%;
     margin: 20px 0;
-    margin-top: 350px;
-    margin-left: 150px;
-    /* Reduce top margin */
+    margin-top: 50px;
+    margin-left: 0px;
 }
 
 .how-it-works {
@@ -48,13 +46,10 @@ body {
     margin-top: 20px;
     width: 100%;
     max-width: 2000px;
-    overflow-y: scroll;
-    /* Add overflow-y to the container */
 }
 
 .how-it-works h2 {
     color: #A0937D;
-    /* Light Brown */
     margin-bottom: 20px;
     text-align: center;
     width: 100%;
@@ -72,7 +67,6 @@ body {
 
 .how-it-works li {
     background-color: #F6E6CB;
-    /* Pale Yellow */
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -86,7 +80,6 @@ body {
 
 .how-it-works li h3 {
     color: #3f2e11;
-    /* Dark Brown */
     font-size: 1.9rem;
     margin-bottom: 1rem;
     font-weight: bold;
@@ -95,13 +88,11 @@ body {
 .how-it-works li p {
     font-weight: 600;
     color: #4F4F4F;
-    /* Dark Gray for text */
     font-size: 1.5rem;
 }
 
 .how-it-works li h3 svg {
     color: #887252;
-    /* Darker Brown for icons */
     margin-bottom: 0.5rem;
     font-size: 2.8rem;
 }
@@ -112,7 +103,6 @@ body {
     align-items: center;
     flex-wrap: wrap;
     margin: 40px 0;
-    /* Space around the images container */
 }
 
 .images-container img {
@@ -131,7 +121,6 @@ body {
     font-size: 1.4rem;
 }
 
-/* Trust Indicators Section */
 .trust-indicators {
     background-color: #f8f8f8;
     padding: 4rem 0;
@@ -195,11 +184,10 @@ body {
 .additional-trust p {
     font-size: 1.4rem;
     color: #003366;
-    font-weight: 600px;
+    font-weight: 600;
     margin-bottom: 0.75rem;
 }
 
-/* Final CTA Section */
 .final-cta {
     margin-top: 1.5rem;
     background-color: rgb(190, 190, 230);

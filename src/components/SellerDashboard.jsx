@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './SellerDashboard.css';
 import axiosInstance from "./utils/axiosConfig";
 
-
 const SellerDashboard = () => {
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);

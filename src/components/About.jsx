@@ -35,7 +35,9 @@ const About = () => {
       </div>
 
       <div className="cta-container">
-        <p>Are you looking to find your next great acquisition? <a href="/auction-items" className="cta-link">Browse here</a></p>
+        <span className="cta-background">
+          Are you looking to find your next great acquisition? <a href="/auction-items" className="cta-link">Browse here</a>
+        </span>
       </div>
     </>
   );

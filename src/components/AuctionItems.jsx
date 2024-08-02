@@ -1,10 +1,22 @@
-// AuctionItems.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './AuctionItems.css';
-import { useItems } from './ItemsContext';
+import axiosInstance from "./utils/axiosConfig";
 
 const AuctionItems = () => {
-    const { items } = useItems(); // Get items from context
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        fetchItems();
+    }, []);
+
+    const fetchItems = async () => {
+        try {
+            const response = await axiosInstance.get('http://localhost:5000/items');
+            setItems(response.data);
+        } catch (err) {
+            console.error('Error fetching items:', err);
+        }
+    };
 
     return (
         <div className="auction-items-container">
