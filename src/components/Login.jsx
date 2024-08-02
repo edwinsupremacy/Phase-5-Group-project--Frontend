@@ -68,6 +68,7 @@ function Login({ setIsAuthenticated }) {
         } else {
           const data = await response.json();
           localStorage.setItem('token', data.access_token);
+          localStorage.setItem('userId', data.user_id); // Store the user ID in local storage
           setIsAuthenticated(true);
           navigate('/');
         }

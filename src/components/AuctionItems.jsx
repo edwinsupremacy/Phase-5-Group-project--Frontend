@@ -12,20 +12,17 @@ const AuctionItems = () => {
         fetchItems();
     }, []);
 
-    const fetchUserId = async () => {
+    // Function to fetch user ID from local storage
+    const fetchUserId = () => {
         const storedUserId = localStorage.getItem('userId');
         if (storedUserId) {
             setUserId(parseInt(storedUserId, 10));
         } else {
-            // Simulated API call to fetch user ID if not in local storage
-            const user = await new Promise((resolve) => {
-                setTimeout(() => resolve({ id: 1 }), 1000);
-            });
-            setUserId(user.id);
-            localStorage.setItem('userId', user.id);
+            console.error('User ID not found in local storage.');
         }
     };
 
+    // Function to fetch items from the server
     const fetchItems = async () => {
         try {
             const response = await fetch('http://localhost:5000/items');
@@ -40,17 +37,24 @@ const AuctionItems = () => {
         }
     };
 
+    // Handle bid amount change
     const handleBidChange = (itemId, amount) => {
-        setBidAmount({
-            ...bidAmount,
+        setBidAmount(prevBidAmount => ({
+            ...prevBidAmount,
             [itemId]: amount
-        });
+        }));
     };
 
+    // Handle bid submission
     const handleBidSubmit = async (itemId) => {
-        const bid = bidAmount[itemId];
-        if (!bid || bid <= 0) {
+        const bid = parseFloat(bidAmount[itemId]);
+        if (isNaN(bid) || bid <= 0) {
             setMessage('Please enter a valid bid amount.');
+            return;
+        }
+
+        if (!userId) {
+            setMessage('User is not logged in.');
             return;
         }
 
@@ -62,9 +66,10 @@ const AuctionItems = () => {
                 },
                 body: JSON.stringify({ amount: bid, item_id: itemId, user_id: userId })
             });
+
             if (response.ok) {
                 setMessage('Bid placed successfully!');
-                fetchItems();
+                fetchItems();  // Refresh items list after placing a bid
             } else {
                 const errorData = await response.json();
                 setMessage(`Failed to place bid: ${errorData.error}`);
@@ -81,12 +86,12 @@ const AuctionItems = () => {
             <div className="items-list">
                 {items.length > 0 ? (
                     <ul>
-                        {items.map((item) => (
+                        {items.map(item => (
                             <li key={item.id} className="item-card">
                                 <img src={item.image_url} alt={item.name} />
                                 <h3>{item.name}</h3>
                                 <p>{item.description}</p>
-                                <p>Starting Bid: ksh {item.starting_price}</p>
+                                <p>Starting Bid: ksh {item.starting_price.toFixed(2)}</p>
                                 <p>Category: {item.category}</p>
                                 <form
                                     onSubmit={(e) => {
@@ -96,6 +101,7 @@ const AuctionItems = () => {
                                 >
                                     <input
                                         type="number"
+                                        step="0.01"
                                         value={bidAmount[item.id] || ''}
                                         onChange={(e) => handleBidChange(item.id, e.target.value)}
                                         placeholder="Enter your bid"
@@ -109,7 +115,7 @@ const AuctionItems = () => {
                     <p>No items available at the moment.</p>
                 )}
             </div>
-            {message && <p>{message}</p>}
+            {message && <p className="message">{message}</p>}
         </div>
     );
 };
