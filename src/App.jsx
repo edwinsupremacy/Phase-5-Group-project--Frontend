@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="App">
-      {showNavbar() && <Navbar setIsAuthenticated={setIsAuthenticated} />}
+      {showNavbar() && <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
       <div className="content">
         <Routes>
           {!isAuthenticated ? (

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar = ({ setIsAuthenticated }) => {
+const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -15,7 +15,11 @@ const Navbar = ({ setIsAuthenticated }) => {
       <Link to="/" className="nav-link">Home</Link>
       <Link to="/about" className="nav-link">About</Link>
       <Link to="/contact" className="nav-link">Contact</Link>
-      <button onClick={handleLogout} className="nav-link logout-button">Logout</button>
+      {isAuthenticated ? (
+        <button onClick={handleLogout} className="nav-link logout-button">Logout</button>
+      ) : (
+        <Link to="/login" className="nav-link">Login</Link>
+      )}
     </nav>
   );
 };
