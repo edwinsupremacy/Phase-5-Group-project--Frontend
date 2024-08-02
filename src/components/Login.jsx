@@ -150,6 +150,9 @@ function Login({ setIsAuthenticated }) {
               Sign Up
             </Link>
           </p>
+          <p className="forgot-password-link">
+            <Link to="/forgot-password">Forgot Password?</Link>
+          </p>
           <p className="admin-seller-link">
             Are you an admin?{' '}
             <Link to="/login/admin">Login here</Link>

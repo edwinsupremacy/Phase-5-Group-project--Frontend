@@ -11,6 +11,8 @@ import Contact from './components/Contact';
 import AuctionItems from './components/AuctionItems';
 import Navbar from './components/Navbar';
 import AdminDashboard from './components/AdminDashboard';
+import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -23,8 +25,10 @@ function App() {
       location.pathname.startsWith('/login') ||
       location.pathname.startsWith('/admin-dashboard') ||
       location.pathname.startsWith('/login/admin') ||
-      location.pathname.startsWith('/login/seller')||
-      location.pathname.startsWith('/seller-dashboard')
+      location.pathname.startsWith('/login/seller') ||
+      location.pathname.startsWith('/seller-dashboard') ||
+      location.pathname.startsWith('/forgot-password') ||
+      location.pathname.startsWith('/reset-password')
     );
   };
 
@@ -42,6 +46,8 @@ function App() {
               <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
               <Route path="/login/admin" element={<AdminLogin setIsAuthenticated={setIsAuthenticated} />} />
               <Route path="/login/seller" element={<SellerLogin setIsAuthenticated={setIsAuthenticated} />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="*" element={<Navigate to="/login" replace />} />
             </>
           ) : (
