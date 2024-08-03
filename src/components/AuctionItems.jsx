@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './AuctionItems.css';
+import { FaSearch } from 'react-icons/fa';
 
 const AuctionItems = () => {
     const [items, setItems] = useState([]);
+    const [filteredItems, setFilteredItems] = useState([]);
     const [bidAmount, setBidAmount] = useState({});
     const [message, setMessage] = useState('');
     const [userId, setUserId] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState('All Categories');
+    const [categories] = useState(['All Categories', 'Vehicle', 'Jewelry', 'Electronic', 'Watch', 'House', 'Art']);
 
     useEffect(() => {
         fetchUserId();
         fetchItems();
     }, []);
 
-    // Function to fetch user ID from local storage
     const fetchUserId = () => {
         const storedUserId = localStorage.getItem('userId');
         if (storedUserId) {
@@ -22,13 +25,13 @@ const AuctionItems = () => {
         }
     };
 
-    // Function to fetch items from the server
     const fetchItems = async () => {
         try {
             const response = await fetch('http://localhost:5000/items');
             if (response.ok) {
                 const data = await response.json();
                 setItems(data);
+                setFilteredItems(data);
             } else {
                 console.error('Error fetching items:', response.statusText);
             }
@@ -37,7 +40,6 @@ const AuctionItems = () => {
         }
     };
 
-    // Handle bid amount change
     const handleBidChange = (itemId, amount) => {
         setBidAmount(prevBidAmount => ({
             ...prevBidAmount,
@@ -45,7 +47,6 @@ const AuctionItems = () => {
         }));
     };
 
-    // Handle bid submission
     const handleBidSubmit = async (itemId) => {
         const bid = parseFloat(bidAmount[itemId]);
         if (isNaN(bid) || bid <= 0) {
@@ -69,7 +70,7 @@ const AuctionItems = () => {
 
             if (response.ok) {
                 setMessage('Bid placed successfully!');
-                fetchItems();  // Refresh items list after placing a bid
+                fetchItems();
             } else {
                 const errorData = await response.json();
                 setMessage(`Failed to place bid: ${errorData.error}`);
@@ -80,13 +81,38 @@ const AuctionItems = () => {
         }
     };
 
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
+        if (category === 'All Categories') {
+            setFilteredItems(items);
+        } else {
+            setFilteredItems(items.filter(item => item.category === category));
+        }
+    };
+
     return (
         <div className="auction-items-container">
             <h2>Available Auction Items</h2>
+
+            <div className="category-filter">
+                <FaSearch className="search-icon" />
+                <div className="category-buttons">
+                    {categories.map(category => (
+                        <button
+                            key={category}
+                            className={`category-button ${selectedCategory === category ? 'active' : ''}`}
+                            onClick={() => handleCategoryChange(category)}
+                        >
+                            {category}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
             <div className="items-list">
-                {items.length > 0 ? (
+                {filteredItems.length > 0 ? (
                     <ul>
-                        {items.map(item => (
+                        {filteredItems.map(item => (
                             <li key={item.id} className="item-card">
                                 <img src={item.image_url} alt={item.name} />
                                 <h3>{item.name}</h3>

@@ -2,19 +2,59 @@
     padding: 2rem;
     background-color: #f9f9f9;
     color: rgb(117, 76, 21);
-    overflow-x: auto;
-    /* Enable horizontal scrolling if needed */
-    white-space: nowrap;
-    /* Prevent line breaks */
+    max-width: 1200px;
+    /* Increased max-width for better fit */
+    margin: 0 auto;
+    /* Center the container */
+    margin-top: 5rem;
+    /* Adjust margin-top for spacing */
+}
+
+.category-filter {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #bb7c7c;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.category-button:hover {
+    background-color: #d39d9d;
+}
+
+.category-button.active {
+    background-color: #947171;
+    font-weight: bold;
 }
 
 .items-list {
     display: flex;
+    flex-wrap: wrap;
+    /* Allow items to wrap */
     gap: 1rem;
-    /* Add space between the items */
     color: rgb(117, 76, 21);
-    flex-wrap: nowrap;
-    /* Ensure items are in a single row */
+    justify-content: center;
+    /* Center items in the container */
+    list-style-type: none;
+    /* Remove default list styling */
+    padding: 0;
 }
 
 .item-card {
@@ -23,39 +63,45 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 1rem;
-    width: 150px;
-    /* Smaller width for a more compact container */
+    width: 200px;
+    /* Adjust width */
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: inline-block;
-    /* Allow horizontal arrangement */
-    white-space: normal;
-    /* Allow text to wrap inside the card */
     transition: transform 0.2s ease-in-out;
-    /* Smooth transform effect */
+    margin-bottom: 1rem;
+    /* Add space below each card */
 }
 
 .item-card img {
     width: 100%;
-    /* Image fits the width of the card */
     height: auto;
-    /* Maintain aspect ratio */
+    margin-bottom: 15px;
     border-radius: 5px;
-    /* Optional: round the corners of the image */
 }
 
 .item-card h3,
 .item-card p {
     margin: 0.5rem 0;
-    /* Add some space between elements */
 }
 
 .item-card p {
     font-size: 0.9rem;
-    /* Slightly smaller font size for details */
 }
 
 .item-card:hover {
     transform: scale(1.05);
-    /* Slightly enlarge on hover */
+}
+
+.message {
+    color: red;
+    font-weight: bold;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .item-card {
+        width: 100%;
+        /* Full width on small screens */
+    }
 }
