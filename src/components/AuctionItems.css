@@ -1,71 +1,103 @@
-/* AdminDashboard.css */
+body {
+    background-color:#f6e6cb; /* Off-white background color */
+}
 
-.admin-dashboard {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-  }
-  
-  header {
+.auction-items-container {
+    padding: 2rem;
+    background-color: #f6e6cb; /* Changed background color to match the palette */
+    color: #a0937d;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 5rem;
+}
+
+.category-filter {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-  }
-  
-  h1 {
-    color: #A0937D; /* Color from palette */
-  }
-  
-  .logout-button {
-    background-color: #B6C7AA; /* Color from palette */
-    color: #fff;
-    border: none;
+}
+
+.search-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-button {
     padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-  .logout-button:hover {
-    background-color: #E7D4B5; /* Color from palette */
-  }
-  
-  .dashboard-container {
-    background-color: #F6E6CB; /* Color from palette */
-    padding: 20px;
-    border-radius: 8px;
-  }
-  
-  .user-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .user-table th, .user-table td {
-    border: 1px solid #A0937D; /* Color from palette */
-    padding: 10px;
-    text-align: left;
-  }
-  
-  .user-table th {
-    background-color: #B6C7AA; /* Color from palette */
-  }
-  
-  .user-table tr:nth-child(even) {
-    background-color: #F6E6CB; /* Color from palette */
-  }
-  
-  .delete-button {
-    background-color: #E7D4B5; /* Color from palette */
-    color: #fff;
     border: none;
-    padding: 5px 10px;
+    background-color: #b6c7aa;
+    color: #a0937d; /* Changed text color */
     cursor: pointer;
-  }
-  
-  .delete-button:hover {
-    background-color: #A0937D; /* Color from palette */
-  }
-  
-  .error {
+    transition: background-color 0.3s;
+}
+
+.category-button:hover {
+    background-color: #e7d4b5; /* Adjusted hover color */
+}
+
+.category-button.active {
+    background-color: #a0937d;
+    color: #f6e6cb; /* Changed active button text color */
+    font-weight: bold;
+}
+
+.items-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem; /* Increased gap for better spacing */
+    color: #a0937d;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+.item-card {
+    background-color: #f6e6cb; /* Changed background color to match the palette */
+    color: #a0937d;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1.5rem; /* Increased padding */
+    width: 250px; /* Increased width */
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Increased shadow for better emphasis */
+    display: inline-block;
+    transition: transform 0.2s ease-in-out;
+    margin-bottom: 1.5rem; /* Increased margin-bottom for better spacing */
+}
+
+.item-card img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.item-card h3,
+.item-card p {
+    margin: 0.5rem 0;
+}
+
+.item-card p {
+    font-size: 1rem; /* Increased font size */
+}
+
+.item-card:hover {
+    transform: scale(1.1); /* Increased scale for hover effect */
+}
+
+.message {
     color: red;
-  }
-  
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .item-card {
+        width: 100%;
+    }
+}
