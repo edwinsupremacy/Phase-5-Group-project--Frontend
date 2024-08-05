@@ -10,6 +10,7 @@ const AuctionItems = () => {
     const [userId, setUserId] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState('All Categories');
     const [categories] = useState(['All Categories', 'Vehicle', 'Jewelry', 'Electronic', 'Watch', 'House', 'Art']);
+    const [placedBids, setPlacedBids] = useState({});
 
     useEffect(() => {
         fetchUserId();
@@ -69,6 +70,11 @@ const AuctionItems = () => {
             });
 
             if (response.ok) {
+                const bidData = await response.json();
+                setPlacedBids(prevBids => ({
+                    ...prevBids,
+                    [itemId]: bidData.bid.id  // Store the bid ID
+                }));
                 setMessage('Bid placed successfully!');
                 fetchItems();
             } else {
@@ -81,6 +87,48 @@ const AuctionItems = () => {
         }
     };
 
+    const handleBidCancel = async (itemId) => {
+        const bidId = placedBids[itemId];
+        if (!bidId) {
+            setMessage('No bid to cancel.');
+            return;
+        }
+    
+        try {
+            const response = await fetch(`http://localhost:5000/bids/${bidId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            if (response.ok) {
+                // Clear the bid amount for the item
+                setPlacedBids(prevBids => {
+                    const newBids = { ...prevBids };
+                    delete newBids[itemId];
+                    return newBids;
+                });
+    
+                setBidAmount(prevBidAmount => {
+                    const newBidAmount = { ...prevBidAmount };
+                    delete newBidAmount[itemId];
+                    return newBidAmount;
+                });
+    
+                setMessage('Bid canceled successfully!');
+                fetchItems();
+            } else {
+                const errorData = await response.json();
+                setMessage(`Failed to cancel bid: ${errorData.error}`);
+            }
+        } catch (err) {
+            console.error('Error canceling bid:', err);
+            setMessage('Error canceling bid. Please try again.');
+        }
+    };
+    
+    
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
         if (category === 'All Categories') {
@@ -122,7 +170,11 @@ const AuctionItems = () => {
                                 <form
                                     onSubmit={(e) => {
                                         e.preventDefault();
-                                        handleBidSubmit(item.id);
+                                        if (placedBids[item.id]) {
+                                            handleBidCancel(item.id);
+                                        } else {
+                                            handleBidSubmit(item.id);
+                                        }
                                     }}
                                 >
                                     <input
@@ -132,7 +184,9 @@ const AuctionItems = () => {
                                         onChange={(e) => handleBidChange(item.id, e.target.value)}
                                         placeholder="Enter your bid"
                                     />
-                                    <button type="submit">Place Bid</button>
+                                    <button type="submit">
+                                        {placedBids[item.id] ? 'Cancel Bid' : 'Place Bid'}
+                                    </button>
                                 </form>
                             </li>
                         ))}
