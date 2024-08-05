@@ -91,7 +91,7 @@ const AuctionItems = () => {
     };
 
     return (
-        <div className="auction-items-container">
+        <p className="auction-items-container">
             <h2>Available Auction Items</h2>
 
             <div className="category-filter">
@@ -142,7 +142,7 @@ const AuctionItems = () => {
                 )}
             </div>
             {message && <p className="message">{message}</p>}
-        </div>
+        </p>
     );
 };
 
