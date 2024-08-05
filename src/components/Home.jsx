@@ -59,7 +59,7 @@ const Home = () => {
           <p>{testimonialsData[currentTestimonial]}</p>
         </div>
       </div>
-      <div className="cta-container" style={{ marginTop: '50px' }}> {/* Lower the CTA container */}
+      <div className="cta-container" style={{ marginTop: '10px' }}> {/* Lower the CTA container */}
         <span className="cta-background">
           Are you looking to find your next great acquisition? <Link to="/auction-items" className="cta-link">Browse here</Link>
         </span>

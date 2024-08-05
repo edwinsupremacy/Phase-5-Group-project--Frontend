@@ -16,10 +16,6 @@ body {
     height: auto;
 }
 
-.main-container {
-    margin-bottom: 800px;
-}
-
 .home-container {
     background-color: #F6E6CB;
     color: #4F4F4F;
@@ -35,7 +31,7 @@ body {
     max-width: 768px;
     width: 100%;
     margin: 20px 0;
-    margin-top: 5000px;
+    margin-top: 50px;
     margin-left: 0px;
 }
 
