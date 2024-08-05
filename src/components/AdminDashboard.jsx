@@ -1,87 +1,155 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import './AdminDashboard.css';
+import axiosInstance from "./utils/axiosConfig";
 
-function AdminDashboard({ setIsAuthenticated }) {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+const AdminDashboard = () => {
+    const [items, setItems] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [bids, setBids] = useState({});
+    const [shouldFetchData, setShouldFetchData] = useState(true);
+    const [showItems, setShowItems] = useState(false);
+    const [showUsers, setShowUsers] = useState(false);
+    const [biddersVisibility, setBiddersVisibility] = useState({});
 
-  useEffect(() => {
-    // Fetch users data from API
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/register'); // Replace with your API endpoint
-        setUsers(response.data);
-        setLoading(false);
-      } catch (err) {
-        setError('Error fetching users');
-        setLoading(false);
-      }
+    useEffect(() => {
+        if (shouldFetchData) {
+            fetchItems();
+            fetchUsers();
+        }
+    }, [shouldFetchData]);
+
+    const fetchItems = async () => {
+        try {
+            const response = await axiosInstance.get('http://localhost:5000/items');
+            setItems(response.data);
+        } catch (err) {
+            console.error('Error fetching items:', err);
+        }
     };
 
-    fetchUsers();
-  }, []);
+    const fetchUsers = async () => {
+        try {
+            const response = await axiosInstance.get('http://localhost:5000/users');
+            setUsers(response.data);
+        } catch (err) {
+            console.error('Error fetching users:', err);
+        }
+    };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    setIsAuthenticated(false);
-    navigate('/login/admin');
-  };
+    const fetchBids = async (itemId) => {
+        try {
+            const response = await axiosInstance.get(`http://localhost:5000/items/${itemId}/bids`);
+            setBids(prev => ({
+                ...prev,
+                [itemId]: response.data.bids
+            }));
+        } catch (err) {
+            console.error('Error fetching bids:', err);
+        }
+    };
 
-  const handleDeleteUser = async (id) => {
-    try {
-      await axios.delete(`http://localhost:5000/register/${id}`); // Replace with your API endpoint
-      setUsers(users.filter(user => user.id !== id));
-    } catch (err) {
-      setError('Error deleting user');
-    }
-  };
+    const handleDeleteUser = async (userId) => {
+        try {
+            await axiosInstance.delete(`http://localhost:5000/users/${userId}`);
+            setShouldFetchData(true);
+        } catch (err) {
+            console.error('Error deleting user:', err);
+        }
+    };
 
-  return (
-    <div className="admin-dashboard">
-      <header>
-        <h1>Admin Dashboard</h1>
-        <button className="logout-button" onClick={handleLogout}>Logout</button>
-      </header>
+    const toggleItemsVisibility = () => {
+        setShowItems(!showItems);
+    };
 
-      <div className="dashboard-container">
-        {loading ? (
-          <p>Loading users...</p>
-        ) : error ? (
-          <p className="error">{error}</p>
-        ) : users.length === 0 ? (
-          <p>No users available</p>
-        ) : (
-          <table className="user-table">
-            <thead>
-              <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map(user => (
-                <tr key={user.id}>
-                  <td>{user.username}</td>
-                  <td>{user.email}</td>
-                  <td>{user.phone_number}</td>
-                  <td>
-                    <button className="delete-button" onClick={() => handleDeleteUser(user.id)}>Delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
-    </div>
-  );
-}
+    const toggleUsersVisibility = () => {
+        setShowUsers(!showUsers);
+    };
+
+    const toggleBiddersVisibility = (index) => {
+        const itemId = items[index].id;
+        if (!biddersVisibility[index]) {
+            fetchBids(itemId);
+        }
+        setBiddersVisibility(prev => ({
+            ...prev,
+            [index]: !prev[index]
+        }));
+    };
+
+    return (
+        <div className="admin-dashboard-container">
+            <h1 className="admin-dashboard-title">Admin Dashboard</h1>
+
+            <div className="admin-section">
+                <button onClick={toggleItemsVisibility} className="admin-list-toggle-button">
+                    {showItems ? 'Hide Items' : 'Show Items'}
+                </button>
+                {showItems && (
+                    <div className="admin-items-container">
+                        {items.length > 0 ? (
+                            items.map((item, index) => (
+                                <div key={item.id} className="admin-item-card">
+                                    <img src={item.image_url} alt={item.name} className="admin-item-image" />
+                                    <div className="admin-item-details">
+                                        <h3 className="admin-item-name">{item.name}</h3>
+                                        <p className="admin-item-description">{item.description}</p>
+                                        <p className="admin-item-price">Starting Price: ksh {new Intl.NumberFormat().format(item.starting_price.toFixed(2))}</p>
+                                        <p className="admin-item-category">Category: {item.category}</p>
+                                    </div>
+                                    <div className="admin-item-actions">
+                                        <button onClick={() => toggleBiddersVisibility(index)} className="admin-item-button">
+                                            {biddersVisibility[index] ? 'Hide Bidders' : 'View Bidders'}
+                                        </button>
+                                    </div>
+                                    {biddersVisibility[index] && (
+                                        <div className="admin-item-bids">
+                                            <h4>Bids:</h4>
+                                            {bids[item.id] && bids[item.id].length > 0 ? (
+                                                <ul>
+                                                    {bids[item.id].map(bid => (
+                                                        <li key={bid.id}>{bid.bidder_name} - ksh {bid.amount.toFixed(2)}</li>
+                                                    ))}
+                                                </ul>
+                                            ) : (
+                                                <p>No bids yet</p>
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                            ))
+                        ) : (
+                            <p>No items found.</p>
+                        )}
+                    </div>
+                )}
+            </div>
+
+            <div className="admin-section">
+                <button onClick={toggleUsersVisibility} className="admin-list-toggle-button">
+                    {showUsers ? 'Hide Users' : 'Show Users'}
+                </button>
+                {showUsers && (
+                    <div className="admin-users-container">
+                        {users.length > 0 ? (
+                            users.map((user) => (
+                                <div key={user.id} className="admin-user-card">
+                                    <div className="admin-user-details">
+                                        <h3 className="admin-user-name">{user.name}</h3>
+                                        <p className="admin-user-email">{user.email}</p>
+                                    </div>
+                                    <div className="admin-user-actions">
+                                        <button onClick={() => handleDeleteUser(user.id)} className="admin-user-button">Delete User</button>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No users found.</p>
+                        )}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
 
 export default AdminDashboard;

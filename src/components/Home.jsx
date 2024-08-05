@@ -59,6 +59,11 @@ const Home = () => {
           <p>{testimonialsData[currentTestimonial]}</p>
         </div>
       </div>
+      <div className="cta-container">
+        <span className="cta-background">
+          Are you looking to find your next great acquisition? <Link to="/auction-items" className="cta-link">Browse here</Link>
+        </span>
+      </div>
       {/* 
         The commented-out section below includes additional content such as images, 
         a "How It Works" section, and a special offer. Uncomment and modify as needed.
