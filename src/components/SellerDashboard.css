@@ -1,103 +1,232 @@
-.dashboard-container {
-    background-color: #F6E6CB;
-    /* Very light cream b
-    ackground */
-    border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-    padding: 20px 40px;
-    max-width: 800px;
-    margin: 20px auto;
+/* General Container */
+.seller-dashboard-container {
+    max-width: 5000px; /* Increased from 1400px to 1600px */
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #F9F3E0; /* Warm beige */
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Garamond', serif; /* Classic serif font */
+    width: 1000px;
 }
 
-h1 {
-    font-size: 28px;
-    color: #A0937D;
-    /* Dark beige color */
+/* Title */
+.seller-dashboard-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #8E735B;
+    /* Classic brown */
+    font-size: 2.5em;
+    font-family: 'Garamond', serif;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    /* Soft text shadow */
 }
 
-.add-item-section,
-.items-list-section {
+/* Add Item Section */
+.seller-add-item-section {
+    flex: 1;
+    margin-right: 30px;
+    overflow: auto;
+    background-color: #E1D8C9;
+    /* Soft cream */
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    border: 1px solid #D0BFAE;
+    /* Warm border */
+}
+
+/* Add Item Title */
+.seller-add-item-title {
     margin-bottom: 20px;
+    color: #8E735B;
+    /* Classic brown */
+    font-size: 1.8em;
+    font-family: 'Garamond', serif;
 }
 
-.add-item-section h2,
-.items-list-section h2 {
-    font-size: 22px;
-    color: #A0937D;
-    /* Dark beige color */
+/* Form */
+.seller-add-item-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-form {
-    background-color: #F6E6CB;
-    /* Very light cream background */
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+/* Input Fields */
+.seller-input {
+    padding: 15px;
+    border: 1px solid #D0BFAE;
+    /* Warm border */
+    border-radius: 12px;
+    font-size: 1.1em;
+    background-color: #FFFFFF;
+    /* Clean white */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Subtle inset shadow */
+    color: rgb(0, 0, 0);
 }
 
-input {
-    background-color: #EEE;
-    /* Light grey input background */
-    color: #333;
-    /* Dark text color */
+/* Submit Button */
+.seller-submit-button {
+    padding: 15px;
+    background-color: #8E735B;
+    /* Classic brown */
+    color: white;
     border: none;
-    margin: 8px 0;
-    padding: 10px 15px;
-    font-size: 13px;
-    border-radius: 8px;
-    width: 100%;
-    outline: none;
-}
-
-button {
-    background-color: #A0937D;
-    /* Dark beige button background */
-    color: #fff;
-    font-size: 12px;
-    padding: 10px 20px;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-top: 10px;
+    border-radius: 12px;
     cursor: pointer;
+    font-size: 1.1em;
+    font-family: 'Garamond', serif;
+    transition: background-color 0.3s ease;
+    /* Smooth transition */
 }
 
-button:hover {
-    background-color: #8c7b5a;
-    /* Slightly darker on hover */
+.seller-submit-button:hover {
+    background-color: #6E5D4F;
+    /* Darker brown */
 }
 
-.items-list-section ul {
-    list-style: none;
-    padding: 0;
+/* Error Message */
+.seller-error {
+    color: #E74C3C;
+    /* Error red */
+    margin-top: 15px;
+    font-size: 1.1em;
+    font-family: 'Garamond', serif;
 }
 
-.items-list-section li {
-    background-color: #F6E6CB;
-    /* Very light cream background */
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+/* Items Section */
+.seller-items-section {
+    flex: 2;
+    position: relative;
+    overflow: auto;
+    background-color: #FFFFFF;
+    /* Clean white */
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-.items-list-section li h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #A0937D;
-    /* Dark beige color */
+/* Items Title */
+.seller-items-title {
+    margin-bottom: 30px;
+    color: #8E735B;
+    /* Classic brown */
+    font-size: 1.8em;
+    font-family: 'Garamond', serif;
 }
 
-.items-list-section li p {
-    margin: 5px 0;
+/* Items Container */
+.seller-items-container {
+    width: 100%;
+    max-height: 700px;
+    overflow-y: auto;
+    background-color: #FFFFFF;
+    /* Clean white */
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #D0BFAE;
+    /* Warm border */
+}
+
+/* Item Card */
+.seller-item-card {
+    background-color: #FFFFFF;
+    /* Clean white */
+    border: 1px solid #D0BFAE;
+    /* Warm border */
+    border-radius: 16px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth transitions */
+}
+
+.seller-item-card:hover {
+    transform: translateY(-5px);
+    /* Slight lift effect */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    /* Enhanced shadow on hover */
+}
+
+/* Item Image */
+.seller-item-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 16px 16px 0 0;
+    /* Rounded corners for the top */
+}
+
+/* Item Details */
+.seller-item-details {
+    padding: 15px;
+}
+
+/* Item Name */
+.seller-item-name {
+    margin: 10px 0;
+    font-size: 1.4em;
+    color: #8E735B;
+    /* Classic brown */
+    font-family: 'Garamond', serif;
+}
+
+/* Item Description */
+.seller-item-description {
+    font-size: 1.1em;
+    color: #666;
+}
+
+/* Item Price and Category */
+.seller-item-price,
+.seller-item-category {
+    font-size: 1.1em;
     color: #333;
-    /* Dark text color */
 }
 
-.error {
-    color: red;
-    font-size: 12px;
-    margin-top: 10px;
+/* Item Actions */
+.seller-item-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* Item Button */
+.seller-item-button {
+    background-color: #D0BFAE;
+    /* Warm beige */
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-family: 'Garamond', serif;
+    transition: background-color 0.3s ease;
+    /* Smooth transition */
+}
+
+.seller-item-button:hover {
+    background-color: #B19B7F;
+    /* Slightly darker beige */
+}
+
+/* No Items Message */
+.seller-no-items {
+    text-align: center;
+    color: #777;
+    font-size: 1.3em;
+    font-family: 'Garamond', serif;
+}
+
+.seller-item-bids {
+    color: black;
 }
