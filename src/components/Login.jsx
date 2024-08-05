@@ -68,6 +68,7 @@ function Login({ setIsAuthenticated }) {
         } else {
           const data = await response.json();
           localStorage.setItem('token', data.access_token);
+          localStorage.setItem('userId', data.user_id); // Store the user ID in local storage
           setIsAuthenticated(true);
           navigate('/');
         }
@@ -149,6 +150,9 @@ function Login({ setIsAuthenticated }) {
             <Link to="#" onClick={() => setIsSignUp(true)}>
               Sign Up
             </Link>
+          </p>
+          <p className="forgot-password-link">
+            <Link to="/forgot-password">Forgot Password?</Link>
           </p>
           <p className="admin-seller-link">
             Are you an admin?{' '}

@@ -14,8 +14,11 @@ const SellerDashboard = () => {
     });
     const [error, setError] = useState('');
     const [editIndex, setEditIndex] = useState(null);
-    const [shouldFetchItems, setShouldFetchItems] = useState(true); // Initially set to true
+    const [shouldFetchItems, setShouldFetchItems] = useState(true);
     const [showItems, setShowItems] = useState(false);
+    const [biddersVisibility, setBiddersVisibility] = useState({});
+    const [bids, setBids] = useState({});
+    const [selectedCategory, setSelectedCategory] = useState('');
 
     useEffect(() => {
         if (shouldFetchItems) {
@@ -25,7 +28,7 @@ const SellerDashboard = () => {
 
     useEffect(() => {
         filterItems();
-    }, [items]);
+    }, [items, selectedCategory]);
 
     const fetchItems = async () => {
         try {
@@ -38,8 +41,25 @@ const SellerDashboard = () => {
         }
     };
 
+    const fetchBids = async (itemId) => {
+        try {
+            const response = await axiosInstance.get(`http://localhost:5000/items/${itemId}/bids`);
+            setBids(prev => ({
+                ...prev,
+                [itemId]: response.data.bids
+            }));
+        } catch (err) {
+            console.error('Error fetching bids:', err);
+            setError('Failed to fetch bids');
+        }
+    };
+
     const filterItems = () => {
-        setFilteredItems(items);
+        if (selectedCategory) {
+            setFilteredItems(items.filter(item => item.category === selectedCategory));
+        } else {
+            setFilteredItems(items);
+        }
     };
 
     const handleChange = (e) => {
@@ -79,7 +99,7 @@ const SellerDashboard = () => {
 
             setFormData({ name: '', description: '', startingPrice: '', category: '', imageUrl: '' });
             setEditIndex(null);
-            setShouldFetchItems(true); // Fetch items after adding/updating
+            setShouldFetchItems(true);
         } catch (err) {
             setError('Error adding/updating item');
             console.error(err);
@@ -90,7 +110,7 @@ const SellerDashboard = () => {
         const itemId = items[index].id;
         try {
             await axiosInstance.delete(`http://localhost:5000/items/${itemId}`);
-            setShouldFetchItems(true); // Fetch items after deleting
+            setShouldFetchItems(true);
         } catch (err) {
             setError('Error deleting item');
             console.error(err);
@@ -111,6 +131,21 @@ const SellerDashboard = () => {
 
     const toggleItemsVisibility = () => {
         setShowItems(!showItems);
+    };
+
+    const toggleBiddersVisibility = (index) => {
+        const itemId = items[index].id;
+        if (!biddersVisibility[index]) {
+            fetchBids(itemId);
+        }
+        setBiddersVisibility(prev => ({
+            ...prev,
+            [index]: !prev[index]
+        }));
+    };
+
+    const handleCategoryChange = (e) => {
+        setSelectedCategory(e.target.value);
     };
 
     return (
@@ -146,15 +181,20 @@ const SellerDashboard = () => {
                         className="seller-input"
                         autoComplete="off"
                     />
-                    <input
-                        type="text"
+                    <select
                         name="category"
-                        placeholder="Category"
                         value={formData.category}
                         onChange={handleChange}
                         className="seller-input"
-                        autoComplete="off"
-                    />
+                    >
+                        <option value="">Select Category</option>
+                        <option value="Vehicle">Vehicle</option>
+                        <option value="Jewelry">Jewelry</option>
+                        <option value="Electronic">Electronic</option>
+                        <option value="Watch">Watch</option>
+                        <option value="House">House</option>
+                        <option value="Art">Art</option>
+                    </select>
                     <input
                         type="text"
                         name="imageUrl"
@@ -170,37 +210,65 @@ const SellerDashboard = () => {
                     {error && <p className="seller-error">{error}</p>}
                 </form>
             </div>
+
             <div className="seller-items-section">
                 <button onClick={toggleItemsVisibility} className="seller-list-toggle-button">
-                    {showItems ? 'Hide Items' : 'List All Your Items'}
+                    {showItems ? 'Hide Items' : 'Show Items'}
                 </button>
                 {showItems && (
-                    <div className="seller-items-container">
-                        <h2 className="seller-items-title">Your Items</h2>
-                        {filteredItems.length > 0 ? (
-                            filteredItems.map((item, index) => (
-                                <div className="seller-item-card" key={item.id}>
-                                    <img src={item.image_url} alt={item.name} className="seller-item-image" />
-                                    <div className="seller-item-details">
-                                        <h3 className="seller-item-name">{item.name}</h3>
-                                        <p className="seller-item-description">{item.description}</p>
-                                        <p className="seller-item-price">Starting Price: <span>ksh {item.starting_price.toFixed(2)}</span></p>
-                                        <p className="seller-item-category">Category: <span>{item.category}</span></p>
-                                        <div className="seller-item-actions">
-                                            <button onClick={() => handleEdit(index)} className="seller-item-button">
-                                                Update
-                                            </button>
-                                            <button onClick={() => handleDelete(index)} className="seller-item-button">
-                                                Delete
-                                            </button>
-                                        </div>
-                                    </div>
+                    <>
+                        <div className="seller-category-filter">
+                            <select value={selectedCategory} onChange={handleCategoryChange} className="seller-input">
+                                <option value="">All Categories</option>
+                                <option value="Vehicle">Vehicle</option>
+                                <option value="Jewelry">Jewelry</option>
+                                <option value="Electronic">Electronic</option>
+                                <option value="Watch">Watch</option>
+                                <option value="House">House</option>
+                                <option value="Art">Art</option>
+                            </select>
+                        </div>
+                          <div className="seller-items-container">
+                {filteredItems.length > 0 ? (
+                    filteredItems.map((item, index) => (
+                        <div key={item.id} className="seller-item-card">
+                            <img src={item.image_url} alt={item.name} className="seller-item-image" />
+                            <div className="seller-item-details">
+                                <h3 className="seller-item-name">{item.name}</h3>
+                                <p className="seller-item-description">{item.description}</p>
+                                <p className="seller-item-price">Starting Price: ksh {new Intl.NumberFormat().format(item.starting_price.toFixed(2))}</p>
+                                <p className="seller-item-category">Category: {item.category}</p>
+                            </div>
+                            <div className="seller-item-actions">
+                                <button onClick={() => handleEdit(index)} className="seller-item-button">Edit</button>
+                                <button onClick={() => handleDelete(index)} className="seller-item-button">Delete</button>
+                                <button onClick={() => toggleBiddersVisibility(index)} className="seller-item-button">
+                                    {biddersVisibility[index] ? 'Hide Bidders' : 'View Bidders'}
+                                </button>
+                            </div>
+                            {biddersVisibility[index] && (
+                                <div className="seller-item-bids">
+                                    <h4>Bids:</h4>
+                                    {bids[item.id] && bids[item.id].length > 0 ? (
+                                        <ul>
+                                            {bids[item.id].map(bid => (
+                                                <li key={bid.id}>
+                                                    {bid.bidder_name} ({bid.username}) - ksh {bid.amount.toFixed(2)}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    ) : (
+                                        <p>No bids yet</p>
+                                    )}
                                 </div>
-                            ))
-                        ) : (
-                            <p className="seller-no-items">No items to display.</p>
-                        )}
-                    </div>
+                            )}
+                        </div>
+                    ))
+                ) : (
+                    <p>No items found in this category.</p>
+                )}
+            </div>
+                    </>
                 )}
             </div>
         </div>

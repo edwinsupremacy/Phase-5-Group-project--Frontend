@@ -1,18 +1,16 @@
 /* General Container */
 .seller-dashboard-container {
-    max-width: 1400px;
+    max-width: 5000px; /* Increased from 1400px to 1600px */
     margin: 0 auto;
     padding: 40px;
-    background-color: #F9F3E0;
-    /* Warm beige */
+    background-color: #F9F3E0; /* Warm beige */
     border-radius: 18px;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
-    /* Subtle shadow for depth */
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
     display: flex;
     height: 100vh;
     overflow: hidden;
-    font-family: 'Garamond', serif;
-    /* Classic serif font */
+    font-family: 'Garamond', serif; /* Classic serif font */
+    width: 1000px;
 }
 
 /* Title */
@@ -69,6 +67,7 @@
     /* Clean white */
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
     /* Subtle inset shadow */
+    color: rgb(0, 0, 0);
 }
 
 /* Submit Button */
@@ -226,4 +225,8 @@
     color: #777;
     font-size: 1.3em;
     font-family: 'Garamond', serif;
+}
+
+.seller-item-bids {
+    color: black;
 }

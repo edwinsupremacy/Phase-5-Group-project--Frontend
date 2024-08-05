@@ -1,0 +1,96 @@
+.admin-dashboard-container {
+    padding: 20px;
+    background-color: #F6E6CB; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    height: calc(100vh - 40px); 
+    overflow-y: auto; 
+}
+
+.admin-dashboard-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #A0937D; 
+}
+
+.admin-section {
+    margin-bottom: 20px;
+}
+
+.admin-list-toggle-button {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background-color: #B6C7AA; 
+    color: #A0937D; 
+    border: none;
+    border-radius: 5px;
+}
+
+.admin-items-container, .admin-users-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.admin-item-card, .admin-user-card {
+    border: 1px solid #E7D4B5; 
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #FFF; 
+    width: 300px;
+}
+
+.admin-item-image {
+    width: 100%;
+    height: auto;
+}
+
+.admin-item-details, .admin-user-details {
+    margin-top: 10px;
+    color: #A0937D; 
+}
+
+.admin-item-name, .admin-user-name {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: #A0937D; 
+}
+
+.admin-item-description, .admin-user-email {
+    margin-bottom: 5px;
+    color: #B6C7AA; 
+}
+
+.admin-item-price, .admin-item-category {
+    margin-bottom: 10px;
+    color: #A0937D; 
+}
+
+.admin-item-actions, .admin-user-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-item-button, .admin-user-button {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #E7D4B5; 
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+}
+
+.admin-item-bids {
+    margin-top: 10px;
+}
+
+.admin-item-bids ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.admin-item-bids li {
+    padding: 5px 0;
+    color: #A0937D; 
+}
