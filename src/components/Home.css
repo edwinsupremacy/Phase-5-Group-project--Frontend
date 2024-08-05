@@ -204,3 +204,32 @@ body {
 .final-cta {
     background-color: #FFF5E6;
 }
+
+.cta-container {
+    text-align: center;
+    margin: 2rem 0;
+    padding-bottom: 60px;
+}
+
+.cta-background {
+    background-color: #f6e6cb;
+    /* Light beige background */
+    color: #3f2e11;
+    /* Dark brown for text */
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.cta-link {
+    color: #3f2e11;
+    /* Dark brown for the link */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cta-link:hover {
+    text-decoration: underline;
+    color: #a0937d;
+    /* Lighter brown for hover effect */
+}
