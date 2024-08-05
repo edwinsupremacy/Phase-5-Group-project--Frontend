@@ -228,44 +228,46 @@ const SellerDashboard = () => {
                                 <option value="Art">Art</option>
                             </select>
                         </div>
-                        <div className="seller-items-container">
-                            {filteredItems.length > 0 ? (
-                                filteredItems.map((item, index) => (
-                                    <div key={item.id} className="seller-item-card">
-                                        <img src={item.image_url} alt={item.name} className="seller-item-image" />
-                                        <div className="seller-item-details">
-                                            <h3 className="seller-item-name">{item.name}</h3>
-                                            <p className="seller-item-description">{item.description}</p>
-                                            <p className="seller-item-price">Starting Price: ksh {new Intl.NumberFormat().format(item.starting_price.toFixed(2))}</p>
-                                            <p className="seller-item-category">Category: {item.category}</p>
-                                        </div>
-                                        <div className="seller-item-actions">
-                                            <button onClick={() => handleEdit(index)} className="seller-item-button">Edit</button>
-                                            <button onClick={() => handleDelete(index)} className="seller-item-button">Delete</button>
-                                            <button onClick={() => toggleBiddersVisibility(index)} className="seller-item-button">
-                                                {biddersVisibility[index] ? 'Hide Bidders' : 'View Bidders'}
-                                            </button>
-                                        </div>
-                                        {biddersVisibility[index] && (
-                                            <div className="seller-item-bids">
-                                                <h4>Bids:</h4>
-                                                {bids[item.id] && bids[item.id].length > 0 ? (
-                                                    <ul>
-                                                        {bids[item.id].map(bid => (
-                                                            <li key={bid.id}>{bid.bidder_name} - ksh {bid.amount.toFixed(2)}</li>
-                                                        ))}
-                                                    </ul>
-                                                ) : (
-                                                    <p>No bids yet</p>
-                                                )}
-                                            </div>
-                                        )}
-                                    </div>
-                                ))
-                            ) : (
-                                <p>No items found in this category.</p>
+                          <div className="seller-items-container">
+                {filteredItems.length > 0 ? (
+                    filteredItems.map((item, index) => (
+                        <div key={item.id} className="seller-item-card">
+                            <img src={item.image_url} alt={item.name} className="seller-item-image" />
+                            <div className="seller-item-details">
+                                <h3 className="seller-item-name">{item.name}</h3>
+                                <p className="seller-item-description">{item.description}</p>
+                                <p className="seller-item-price">Starting Price: ksh {new Intl.NumberFormat().format(item.starting_price.toFixed(2))}</p>
+                                <p className="seller-item-category">Category: {item.category}</p>
+                            </div>
+                            <div className="seller-item-actions">
+                                <button onClick={() => handleEdit(index)} className="seller-item-button">Edit</button>
+                                <button onClick={() => handleDelete(index)} className="seller-item-button">Delete</button>
+                                <button onClick={() => toggleBiddersVisibility(index)} className="seller-item-button">
+                                    {biddersVisibility[index] ? 'Hide Bidders' : 'View Bidders'}
+                                </button>
+                            </div>
+                            {biddersVisibility[index] && (
+                                <div className="seller-item-bids">
+                                    <h4>Bids:</h4>
+                                    {bids[item.id] && bids[item.id].length > 0 ? (
+                                        <ul>
+                                            {bids[item.id].map(bid => (
+                                                <li key={bid.id}>
+                                                    {bid.bidder_name} ({bid.username}) - ksh {bid.amount.toFixed(2)}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    ) : (
+                                        <p>No bids yet</p>
+                                    )}
+                                </div>
                             )}
                         </div>
+                    ))
+                ) : (
+                    <p>No items found in this category.</p>
+                )}
+            </div>
                     </>
                 )}
             </div>
