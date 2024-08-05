@@ -91,9 +91,7 @@ body {
     font-size: 1rem; /* Increased font size */
 }
 
-.item-card:hover {
-    transform: scale(1.1); /* Increased scale for hover effect */
-}
+
 
 .message {
     color: red;
