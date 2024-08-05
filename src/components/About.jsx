@@ -33,12 +33,6 @@ const About = () => {
           </div>
         </div>
       </div>
-
-      <div className="cta-container">
-        <span className="cta-background">
-          Are you looking to find your next great acquisition? <a href="/auction-items" className="cta-link">Browse here</a>
-        </span>
-      </div>
     </>
   );
 };
