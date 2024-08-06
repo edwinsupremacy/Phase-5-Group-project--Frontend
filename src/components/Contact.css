@@ -1,34 +1,32 @@
-/* Custom Scrollbar Styles */
 .contact-container::-webkit-scrollbar {
-    width: 10px; /* Width of the scrollbar */
+    width: 4px; /* Set to a very thin width */
 }
 
 .contact-container::-webkit-scrollbar-track {
-    background: #E7D4B5; /* Track color */
-    border-radius: 10px; /* Rounded corners for the track */
+    background: #E7D4B5;
+    border-radius: 10px;
 }
 
 .contact-container::-webkit-scrollbar-thumb {
-    background: #A0937D; /* Scrollbar color */
-    border-radius: 10px; /* Rounded corners for the scrollbar */
-    transition: background 0.3s ease; /* Smooth transition */
+    background: #A0937D;
+    border-radius: 10px;
+    transition: background 0.3s ease;
 }
 
 .contact-container::-webkit-scrollbar-thumb:hover {
-    background: #7C6B5F; /* Color on hover */
+    background: #7C6B5F;
 }
 
-/* For Firefox */
 .contact-container {
-    scrollbar-width: thin; /* Thin scrollbar */
-    scrollbar-color: #A0937D #E7D4B5; /* Thumb color and track color */
+    scrollbar-width: thin;
+    scrollbar-color: #A0937D #E7D4B5;
 }
 
-/* Rest of your CSS */
 html,
 body {
     height: 100%;
     margin: 0;
+    background-color: #F5F5DC;
 }
 
 .contact-container {
@@ -38,8 +36,8 @@ body {
     min-height: calc(100vh - 4rem);
     box-sizing: border-box;
     border-radius: 50px;
-    max-height: 90vh; /* Set a max height to enable scrolling */
-    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 90vh;
+    overflow-y: auto;
     margin-top: 50px;
 }
 
@@ -75,7 +73,7 @@ body {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #C3B49A;
-    border-radius: 8px;
+    border-radius: 50px;
     box-sizing: border-box;
     background-color: #FFF5E1;
     color: #5A4D3A;
@@ -134,21 +132,53 @@ body {
     padding: 1rem;
     margin-bottom: 1rem;
     border-radius: 8px;
-    color: #5A4D3A;
+    color: #000000;
 }
 
 .section1 {
-    background-color: #A0937D;
+    background-color: white;
+    border-radius: 50px;
 }
 
 .section2 {
-    background-color: #E7D4B5;
+    background-color: white;
+    border-radius: 50px;
 }
 
 .section3 {
-    background-color: #9bac8f;
+    background-color: white;
+    border-radius: 50px;
 }
 
 .section4 {
-    background-color: #9bac8f;
+    background-color: white;
+    border-radius: 50px;
+}
+
+.loading-indicator {
+    color: #7C6B5F;
+    font-weight: bold;
+}
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-media a {
+    font-size: 24px;
+    color: #5A4D3A;
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: #A0937D;
+}
+
+@media (max-width: 768px) {
+    .social-media {
+        flex-direction: column;
+    }
 }

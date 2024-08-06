@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import './ResetPassword.css'; // Make sure to create this CSS file
+import './ResetPassword.css'; 
 
 function ResetPassword() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,7 +24,7 @@ function ResetPassword() {
       const response = await fetch('http://localhost:5000/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: userId, new_password: newPassword, confirm_password: confirmPassword }),
+        body: JSON.stringify({ user_id: userId, new_password: newPassword, confirm_password: confirmPassword, verification_code: verificationCode }),
       });
 
       if (response.ok) {
@@ -54,6 +55,14 @@ function ResetPassword() {
           placeholder="Confirm Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+          className="input-field"
+        />
+        <input
+          type="text"
+          placeholder="Verification Code sent on your email"
+          value={verificationCode}
+          onChange={(e) => setVerificationCode(e.target.value)}
           required
           className="input-field"
         />

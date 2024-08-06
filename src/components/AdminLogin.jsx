@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminLogin.css';
 
-function AdminLogin({ setIsAuthenticated }) {  // Accept setIsAuthenticated as a prop
+function AdminLogin({ setIsAuthenticated }) {  
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -29,10 +29,9 @@ function AdminLogin({ setIsAuthenticated }) {  // Accept setIsAuthenticated as a
                 const { access_token, refresh_token } = await response.json();
                 localStorage.setItem('access_token', access_token);
                 localStorage.setItem('refresh_token', refresh_token);
-                setIsAuthenticated(true);  // Set authentication state
+                setIsAuthenticated(true);  
                 navigate('/admin-dashboard');
             } else {
-                // Handle response errors
                 if (response.status === 401) {
                     setError('You are not permitted to access this page.');
                 } else {

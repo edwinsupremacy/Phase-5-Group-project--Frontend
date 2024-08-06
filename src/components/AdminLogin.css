@@ -1,66 +1,65 @@
-/* AdminLogin.css */
 .admin-login-container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #E7D4B5; /* Light beige background */
+    background-color: #E7D4B5; 
 }
 
 .admin-login-form {
-    background-color: #F6E6CB; /* Very light cream background */
+    background-color: #F6E6CB; 
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-    padding: 40px 60px; /* Increased padding for larger form */
-    max-width: 500px; /* Increased max width */
+    padding: 40px 60px; 
+    max-width: 500px;
     width: 100%;
 }
 
 .admin-login-form h1 {
-    font-size: 28px; /* Larger font size */
-    color: #A0937D; /* Dark beige color */
-    margin-bottom: 20px; /* Increased margin */
+    font-size: 28px; 
+    color: #A0937D; 
+    margin-bottom: 20px;
 }
 
 .admin-login-form span {
     display: block;
-    margin-bottom: 20px; /* Increased margin */
-    color: #000000; /* Dark text color */
-    font-size: 16px; /* Larger font size */
+    margin-bottom: 20px;
+    color: #000000; 
+    font-size: 16px;
 }
 
 .admin-login-form input {
-    background-color: #EEE; /* Light grey input background */
-    color: #333; /* Dark text color */
+    background-color: #EEE;
+    color: #333; 
     border: none;
-    margin: 12px 0; /* Increased margin */
-    padding: 15px 20px; /* Larger padding */
-    font-size: 16px; /* Larger font size */
+    margin: 12px 0; 
+    padding: 15px 20px; 
+    font-size: 16px; 
     border-radius: 8px;
     width: 100%;
     outline: none;
 }
 
 .admin-login-form button {
-    background-color: #A0937D; /* Dark beige button background */
+    background-color: #A0937D; 
     color: #fff;
-    font-size: 16px; /* Larger font size */
-    padding: 15px 30px; /* Larger padding */
+    font-size: 16px; 
+    padding: 15px 30px;
     border: 1px solid transparent;
     border-radius: 8px;
     font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    margin-top: 15px; /* Increased margin */
+    margin-top: 15px; 
     cursor: pointer;
 }
 
 .admin-login-form button:hover {
-    background-color: #8c7b5a; /* Slightly darker on hover */
+    background-color: #8c7b5a; 
 }
 
 .error {
     color: red;
-    font-size: 14px; /* Larger font size */
-    margin-top: 15px; /* Increased margin */
+    font-size: 14px; 
+    margin-top: 15px; 
 }
