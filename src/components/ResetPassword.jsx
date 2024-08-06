@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import './ResetPassword.css'; // Make sure to create this CSS file
+import './ResetPassword.css'; 
 
 function ResetPassword() {
   const [newPassword, setNewPassword] = useState('');

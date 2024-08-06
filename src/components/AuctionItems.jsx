@@ -73,7 +73,7 @@ const AuctionItems = () => {
                 const bidData = await response.json();
                 setPlacedBids(prevBids => ({
                     ...prevBids,
-                    [itemId]: bidData.bid.id  // Store the bid ID
+                    [itemId]: bidData.bid.id  
                 }));
                 setMessage('Bid placed successfully!');
                 fetchItems();
@@ -103,7 +103,7 @@ const AuctionItems = () => {
             });
     
             if (response.ok) {
-                // Clear the bid amount for the item
+
                 setPlacedBids(prevBids => {
                     const newBids = { ...prevBids };
                     delete newBids[itemId];

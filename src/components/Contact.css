@@ -1,30 +1,29 @@
-/* Custom Scrollbar Styles */
+
 .contact-container::-webkit-scrollbar {
-    width: 10px; /* Width of the scrollbar */
+    width: 10px; 
 }
 
 .contact-container::-webkit-scrollbar-track {
-    background: #E7D4B5; /* Track color */
-    border-radius: 10px; /* Rounded corners for the track */
+    background: #E7D4B5; 
+    border-radius: 10px;
 }
 
 .contact-container::-webkit-scrollbar-thumb {
-    background: #A0937D; /* Scrollbar color */
-    border-radius: 10px; /* Rounded corners for the scrollbar */
-    transition: background 0.3s ease; /* Smooth transition */
+    background: #A0937D;
+    border-radius: 10px; 
+    transition: background 0.3s ease;
 }
 
 .contact-container::-webkit-scrollbar-thumb:hover {
-    background: #7C6B5F; /* Color on hover */
+    background: #7C6B5F; 
 }
 
-/* For Firefox */
+
 .contact-container {
-    scrollbar-width: thin; /* Thin scrollbar */
-    scrollbar-color: #A0937D #E7D4B5; /* Thumb color and track color */
+    scrollbar-width: thin; 
+    scrollbar-color: #A0937D #E7D4B5; 
 }
 
-/* Rest of your CSS */
 html,
 body {
     height: 100%;
@@ -38,8 +37,8 @@ body {
     min-height: calc(100vh - 4rem);
     box-sizing: border-box;
     border-radius: 50px;
-    max-height: 90vh; /* Set a max height to enable scrolling */
-    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 90vh; 
+    overflow-y: auto;
     margin-top: 50px;
 }
 

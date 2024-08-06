@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Contact.css';
-// import Footer from './Footer';
+
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -9,7 +9,7 @@ const Contact = () => {
         message: ''
     });
 
-    const [messageSent, setMessageSent] = useState(false); // State to track if message is sent
+    const [messageSent, setMessageSent] = useState(false); 
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,7 +20,7 @@ const Contact = () => {
         const { name, email, message } = formData;
         const mailtoLink = `mailto:info@dinemate.com?subject=Contact from ${name}&body=${message}%0D%0A%0D%0AFrom: ${name}%0D%0AEmail: ${email}`;
         window.location.href = mailtoLink;
-        setMessageSent(true); // Set message sent to true after form submission
+        setMessageSent(true); 
     };
 
     return (
@@ -32,7 +32,7 @@ const Contact = () => {
                 <div className="contact-content">
                     <div className="contact-form">
                         <h2>Send us a message</h2>
-                        {messageSent ? ( // Conditional rendering of feedback message
+                        {messageSent ? ( 
                             <p className="feedback-message">Message sent. Thank you for contacting us!</p>
                         ) : (
                             <form onSubmit={handleSubmit}>

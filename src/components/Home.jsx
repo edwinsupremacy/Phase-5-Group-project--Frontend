@@ -25,16 +25,16 @@ const Home = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   useEffect(() => {
-    // Cycle through testimonials every 2 seconds
+  
     const interval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonialsData.length);
     }, 2000);
 
-    // Clear the interval when the component is unmounted
+   
     return () => clearInterval(interval);
   }, []);
 
-  // Inline styling for the main container with a background image
+  
   const homeContainerStyle = {
     backgroundImage: 'url(https://img.pikbest.com/ai/illus_our/20230422/496433dd6ebc4a5b3e3d36817ff489c5.jpg!w700wp)',
     backgroundSize: 'cover',
@@ -43,15 +43,15 @@ const Home = () => {
     minHeight: '80vh',
     borderRadius: '45px',
     padding: '20px',
-    color: '#fff', // Text color for contrast with the background
-    marginTop: '100px', // Lower the container
+    color: '#fff', 
+    marginTop: '100px',
   };
 
   return (
     <Fragment>
       <div style={homeContainerStyle}>
         <div className='main-container'>
-          <h2>Welcome to the Online Auction Platform</h2>
+          <h2>Welcome to the Vintage Auction House</h2>
           <p>Where buyers and sellers connect for seamless transactions.</p>
         </div>
         <div className="testimonials-container">
