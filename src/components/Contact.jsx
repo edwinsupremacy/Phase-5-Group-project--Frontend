@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Contact.css';
-
+import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'; // Import icons
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -9,7 +9,8 @@ const Contact = () => {
         message: ''
     });
 
-    const [messageSent, setMessageSent] = useState(false); 
+    const [messageSent, setMessageSent] = useState(false);
+    const [loading, setLoading] = useState(false); // Loading state
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,14 +18,16 @@ const Contact = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true); // Set loading to true
         const { name, email, message } = formData;
         const mailtoLink = `mailto:info@dinemate.com?subject=Contact from ${name}&body=${message}%0D%0A%0D%0AFrom: ${name}%0D%0AEmail: ${email}`;
         window.location.href = mailtoLink;
-        setMessageSent(true); 
+        setMessageSent(true);
+        setLoading(false); // Reset loading
     };
 
     return (
-        <><div className="contact-container">
+        <div className="contact-container">
             <div className="contact-section section1">
                 <h1>Contact Us</h1>
             </div>
@@ -32,32 +35,35 @@ const Contact = () => {
                 <div className="contact-content">
                     <div className="contact-form">
                         <h2>Send us a message</h2>
-                        {messageSent ? ( 
+                        {loading && <p className="loading-indicator">Sending...</p>} {/* Loading Indicator */}
+                        {messageSent ? (
                             <p className="feedback-message">Message sent. Thank you for contacting us!</p>
                         ) : (
                             <form onSubmit={handleSubmit}>
                                 <div className="form-group">
-                                    <label htmlFor="name">Name</label>
+                                    <label htmlFor="name" className={formData.name ? 'filled' : ''}>Name</label>
                                     <input
                                         type="text"
                                         id="name"
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        required />
+                                        required
+                                    />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="email">Email</label>
+                                    <label htmlFor="email" className={formData.email ? 'filled' : ''}>Email</label>
                                     <input
                                         type="email"
                                         id="email"
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        required />
+                                        required
+                                    />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="message">Message</label>
+                                    <label htmlFor="message" className={formData.message ? 'filled' : ''}>Message</label>
                                     <textarea
                                         id="message"
                                         name="message"
@@ -86,10 +92,13 @@ const Contact = () => {
             <div className="contact-section section4">
                 <h2>Stay Connected</h2>
                 <p>Follow us on our social media channels for the latest updates.</p>
+                <div className="social-media">
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+                </div>
             </div>
         </div>
-        {/* <Footer /> */}
-        </>
     );
 };
 

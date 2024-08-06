@@ -1,27 +1,27 @@
 
 .contact-container::-webkit-scrollbar {
-    width: 10px; 
+    width: 10px;
 }
 
 .contact-container::-webkit-scrollbar-track {
-    background: #E7D4B5; 
+    background: #E7D4B5;
     border-radius: 10px;
 }
 
 .contact-container::-webkit-scrollbar-thumb {
     background: #A0937D;
-    border-radius: 10px; 
+    border-radius: 10px;
     transition: background 0.3s ease;
 }
 
 .contact-container::-webkit-scrollbar-thumb:hover {
-    background: #7C6B5F; 
+    background: #7C6B5F;
 }
 
 
 .contact-container {
-    scrollbar-width: thin; 
-    scrollbar-color: #A0937D #E7D4B5; 
+    scrollbar-width: thin;
+    scrollbar-color: #A0937D #E7D4B5;
 }
 
 html,
@@ -37,7 +37,7 @@ body {
     min-height: calc(100vh - 4rem);
     box-sizing: border-box;
     border-radius: 50px;
-    max-height: 90vh; 
+    max-height: 90vh;
     overflow-y: auto;
     margin-top: 50px;
 }
@@ -150,4 +150,37 @@ body {
 
 .section4 {
     background-color: #9bac8f;
+}
+
+
+
+.loading-indicator {
+    color: #7C6B5F;
+    font-weight: bold;
+}
+
+
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-media a {
+    font-size: 24px;
+    color: #5A4D3A;
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: #A0937D;
+}
+
+
+@media (max-width: 768px) {
+    .social-media {
+        flex-direction: column;
+    }
 }
