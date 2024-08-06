@@ -62,13 +62,22 @@ const testimonialsData = [
 
 const Home = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [itemsSoldCount, setItemsSoldCount] = useState(120); // Initial count of items sold
 
   useEffect(() => {
     const interval = setInterval(() => {
+      setItemsSoldCount((prevCount) => prevCount + 1); // Increase items sold count by 1 every 3 seconds
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const testimonialInterval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonialsData.length);
     }, 2000);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(testimonialInterval);
   }, []);
 
   const homeContainerStyle = {
@@ -83,11 +92,19 @@ const Home = () => {
     marginTop: '100px',
   };
 
+  const itemsSoldStyle = {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    marginBottom: '20px',
+    textAlign: 'center',
+    color: '#fff',
+  };
+
   const testimonialsContainerStyle = {
     width: '600px', // Set a specific width for the testimonials container
     margin: '20px auto', // Center the container
     padding: '20px',
-    backgroundColor: 'rgba(246, 230, 203, 0.8)',
+    backgroundColor: 'rgba(246, 230, 203, 0.5)', // Increased transparency
     borderRadius: '45px',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
     textAlign: 'center',
@@ -116,6 +133,9 @@ const Home = () => {
         <div className='main-container'>
           <h2>Welcome to the Vintage Auction House</h2>
           <p>Where buyers and sellers connect for seamless transactions.</p>
+        </div>
+        <div style={itemsSoldStyle}>
+          {itemsSoldCount} + items sold
         </div>
         <div style={testimonialsContainerStyle}>
           <h3>User Testimonials</h3>
