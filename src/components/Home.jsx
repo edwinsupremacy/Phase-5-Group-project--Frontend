@@ -90,6 +90,7 @@ const Home = () => {
     padding: '20px',
     color: '#fff',
     marginTop: '100px',
+    backgroundColor: '#00000059',
   };
 
   const itemsSoldStyle = {
