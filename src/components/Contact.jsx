@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Contact.css';
-import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'; // Import icons
+import { FaFacebook, FaTwitter, FaInstagram, FaStar } from 'react-icons/fa'; // Import icons
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -8,12 +8,21 @@ const Contact = () => {
         email: '',
         message: ''
     });
-
     const [messageSent, setMessageSent] = useState(false);
     const [loading, setLoading] = useState(false); // Loading state
+    const [reviews, setReviews] = useState([]); // State to store reviews
+    const [reviewData, setReviewData] = useState({
+        reviewName: '',
+        rating: '',
+        reviewMessage: ''
+    });
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleReviewChange = (e) => {
+        setReviewData({ ...reviewData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = (e) => {
@@ -24,6 +33,12 @@ const Contact = () => {
         window.location.href = mailtoLink;
         setMessageSent(true);
         setLoading(false); // Reset loading
+    };
+
+    const handleReviewSubmit = (e) => {
+        e.preventDefault();
+        setReviews([...reviews, reviewData]);
+        setReviewData({ reviewName: '', rating: '', reviewMessage: '' });
     };
 
     return (
@@ -96,6 +111,69 @@ const Contact = () => {
                     <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
                     <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
                     <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+                </div>
+            </div>
+
+            {/* Vintage-Themed Reviews and Ratings Section */}
+            <div className="reviews-section">
+                <h2>Customer Reviews</h2>
+                <div className="review-form">
+                    <h3>Leave a Review</h3>
+                    <form onSubmit={handleReviewSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="reviewName">Name</label>
+                            <input
+                                type="text"
+                                id="reviewName"
+                                name="reviewName"
+                                value={reviewData.reviewName}
+                                onChange={handleReviewChange}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="rating">Rating</label>
+                            <select
+                                id="rating"
+                                name="rating"
+                                value={reviewData.rating}
+                                onChange={handleReviewChange}
+                                required
+                            >
+                                <option value="" disabled>Select Rating</option>
+                                <option value="1">1 - Very Poor</option>
+                                <option value="2">2 - Poor</option>
+                                <option value="3">3 - Average</option>
+                                <option value="4">4 - Good</option>
+                                <option value="5">5 - Excellent</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="reviewMessage">Review</label>
+                            <textarea
+                                id="reviewMessage"
+                                name="reviewMessage"
+                                value={reviewData.reviewMessage}
+                                onChange={handleReviewChange}
+                                required
+                            ></textarea>
+                        </div>
+                        <button type="submit" className="submit-btn1">Submit Review</button>
+                    </form>
+                </div>
+                <div className="reviews-list">
+                    <h3>What Our Users Say</h3>
+                    {reviews.length > 0 ? (
+                        reviews.map((review, index) => (
+                            <div key={index} className="review-item">
+                                <h4>{review.reviewName}</h4>
+                                <p className="rating">{[...Array(Number(review.rating))].map((_, i) => <FaStar key={i} />)}</p>
+                                <p>{review.reviewMessage}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No reviews yet. Be the first to leave a review!</p>
+                    )}
                 </div>
             </div>
         </div>
