@@ -6,11 +6,11 @@ import './SellerLogin.css';
 function SellerLogin({ setIsAuthenticated }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState(''); // For registration
-    const [username, setUsername] = useState(''); // For registration
-    const [phone, setPhone] = useState(''); // For registration
+    const [confirmPassword, setConfirmPassword] = useState(''); 
+    const [username, setUsername] = useState(''); 
+    const [phone, setPhone] = useState('');
     const [error, setError] = useState('');
-    const [isRegister, setIsRegister] = useState(true); // Toggle between register and login
+    const [isRegister, setIsRegister] = useState(true); 
     const navigate = useNavigate();
 
     const validateEmail = (email) => {
@@ -50,7 +50,7 @@ function SellerLogin({ setIsAuthenticated }) {
                 throw new Error('Registration failed.');
             }
 
-            setIsRegister(false); // Switch to login after successful registration
+            setIsRegister(false); 
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 setError('Email or username already exists.');
@@ -85,8 +85,8 @@ function SellerLogin({ setIsAuthenticated }) {
                 throw new Error('Login failed.');
             }
 
-            setIsAuthenticated(true); // Set authentication state
-            navigate('/seller-dashboard'); // Navigate to the seller dashboard
+            setIsAuthenticated(true); 
+            navigate('/seller-dashboard'); 
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 setError('Invalid credentials.');

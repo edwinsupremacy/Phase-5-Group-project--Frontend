@@ -1,4 +1,4 @@
-/* Ensure the page content takes at least full height of the viewport */
+
 html,
 body {
     height: 100%;
@@ -24,21 +24,18 @@ body {
 
 .footer {
     background-color: #F1E3D3;
-    /* Light cream background */
     color: #5A4D3A;
-    /* Dark brown text color */
     padding: 1rem 0;
     font-size: 1.2rem;
     font-weight: 600;
     text-align: center;
     width: 100%;
     position: fixed;
-    /* Stick to the bottom */
     left: 0;
     right: 0;
     bottom: 0;
     box-sizing: border-box;
-    /* Ensure padding is included in the width calculation */
+   
 }
 
 .footer-content {
@@ -49,17 +46,15 @@ body {
     margin: 0 auto;
     padding: 0 2rem;
     box-sizing: border-box;
-    /* Ensure padding is included in width calculation */
+
 }
 
 .footer-bottom {
     text-align: center;
     padding-top: 1rem;
     border-top: 1px solid #C3B49A;
-    /* Muted beige border color */
     width: 100%;
     box-sizing: border-box;
-    /* Ensure padding is included in width calculation */
 }
 
 .footer-section {
@@ -70,7 +65,6 @@ body {
 
 .footer-section h3 {
     color: #5A4D3A;
-    /* Dark brown heading color */
     margin-bottom: 1rem;
 }
 
@@ -90,14 +84,12 @@ body {
 
 .footer-section.links a {
     color: #7C6B5F;
-    /* Soft brown link color */
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .footer-section.links a:hover {
     color: #5A4D3A;
-    /* Dark brown for hover effect */
 }
 
 .footer-section.contact p {
@@ -108,10 +100,8 @@ body {
 .footer-section.contact .fa {
     margin-right: 0.5rem;
     color: #C3B49A;
-    /* Muted beige for icons */
 }
 
-/* Media queries */
 @media (max-width: 768px) {
     .footer-content {
         flex-direction: column;

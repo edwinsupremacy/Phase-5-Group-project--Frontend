@@ -4,22 +4,26 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Montserrat', sans-serif;
+    background-color: #F5F5DC;
+    /* Beige background color */
+    background-image: url('https://img.pikbest.com/ai/illus_our/20230422/496433dd6ebc4a5b3e3d36817ff489c5.jpg!w700wp');
+    /* Replace with your image path */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 body {
     display: flex;
     flex-direction: column;
-    background-color: #e7d4b5;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    align-items: center;
 }
 
 .home-container {
     background-color: #F6E6CB;
     color: #4F4F4F;
     border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 5px 15px #00000059;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,9 +33,8 @@ body {
     padding: 40px;
     max-width: 768px;
     width: 100%;
-    margin: 20px 0;
-    margin-top: 50px;
-    margin-left: 0px;
+    margin: 20px;
+    margin-top: 100px;
 }
 
 .how-it-works {
@@ -212,9 +215,7 @@ body {
 
 .cta-background {
     background-color: #f6e6cb;
-    /* Light beige background */
     color: #3f2e11;
-    /* Dark brown for text */
     padding: 10px 20px;
     border-radius: 10px;
     display: inline-block;
@@ -222,7 +223,6 @@ body {
 
 .cta-link {
     color: #3f2e11;
-    /* Dark brown for the link */
     text-decoration: none;
     font-weight: bold;
 }
@@ -230,5 +230,25 @@ body {
 .cta-link:hover {
     text-decoration: underline;
     color: #a0937d;
-    /* Lighter brown for hover effect */
+}
+
+.testimonials-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f6e6cb;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.testimonials-container h3 {
+    font-size: 1.8rem;
+    color: #4f4f4f;
+    margin-bottom: 10px;
+}
+
+.testimonials-container p {
+    font-size: 1.2rem;
+    color: #4f4f4f;
+    font-style: italic;
 }
