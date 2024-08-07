@@ -15,6 +15,7 @@ const AdminDashboard = () => {
         if (shouldFetchData) {
             fetchItems();
             fetchUsers();
+            setShouldFetchData(false); // Ensure we do not refetch unnecessarily
         }
     }, [shouldFetchData]);
 
@@ -134,8 +135,9 @@ const AdminDashboard = () => {
                             users.map((user) => (
                                 <div key={user.id} className="admin-user-card">
                                     <div className="admin-user-details">
-                                        <h3 className="admin-user-name">{user.name}</h3>
+                                        <h3 className="admin-user-name">{user.username}</h3>
                                         <p className="admin-user-email">{user.email}</p>
+                                        <p className="admin-user-phone">{user.phone_number}</p>
                                     </div>
                                     <div className="admin-user-actions">
                                         <button onClick={() => handleDeleteUser(user.id)} className="admin-user-button">Delete User</button>
