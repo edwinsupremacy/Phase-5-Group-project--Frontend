@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Contact.css';
 import { FaFacebook, FaTwitter, FaInstagram, FaStar } from 'react-icons/fa'; // Import icons
 
@@ -17,6 +17,25 @@ const Contact = () => {
         reviewMessage: ''
     });
 
+    
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/reviews');
+                if (response.ok) {
+                    const result = await response.json();
+                    setReviews(result);
+                } else {
+                    console.error('Failed to fetch reviews');
+                }
+            } catch (error) {
+                console.error('Error fetching reviews:', error);
+            }
+        };
+
+        fetchReviews();
+    }, []); 
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -27,7 +46,7 @@ const Contact = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setLoading(true); // Set loading to true
+        setLoading(true); 
         const { name, email, message } = formData;
         const mailtoLink = `mailto:info@dinemate.com?subject=Contact from ${name}&body=${message}%0D%0A%0D%0AFrom: ${name}%0D%0AEmail: ${email}`;
         window.location.href = mailtoLink;
@@ -37,7 +56,7 @@ const Contact = () => {
 
     const handleReviewSubmit = async (e) => {
         e.preventDefault();
-    
+ 
         const response = await fetch('http://localhost:5000/reviews', {
             method: 'POST',
             headers: {
@@ -45,18 +64,17 @@ const Contact = () => {
             },
             body: JSON.stringify(reviewData)
         });
-    
+ 
         if (response.ok) {
             const result = await response.json();
             console.log(result.message);
             setReviews([...reviews, reviewData]);
             setReviewData({ reviewName: '', rating: '', reviewMessage: '' });
         } else {
-         
             console.error('Failed to submit review');
         }
     };
-    
+ 
 
     return (
         <div className="contact-container">

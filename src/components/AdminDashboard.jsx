@@ -6,16 +6,19 @@ const AdminDashboard = () => {
     const [items, setItems] = useState([]);
     const [users, setUsers] = useState([]);
     const [bids, setBids] = useState({});
-    const [shouldFetchData, setShouldFetchData] = useState(true);
+    const [reviews, setReviews] = useState([]);
     const [showItems, setShowItems] = useState(false);
     const [showUsers, setShowUsers] = useState(false);
+    const [showReviews, setShowReviews] = useState(false);
     const [biddersVisibility, setBiddersVisibility] = useState({});
+    const [shouldFetchData, setShouldFetchData] = useState(true);
 
     useEffect(() => {
         if (shouldFetchData) {
             fetchItems();
             fetchUsers();
-            setShouldFetchData(false); // Ensure we do not refetch unnecessarily
+            fetchReviews();
+            setShouldFetchData(false); 
         }
     }, [shouldFetchData]);
 
@@ -34,6 +37,15 @@ const AdminDashboard = () => {
             setUsers(response.data);
         } catch (err) {
             console.error('Error fetching users:', err);
+        }
+    };
+
+    const fetchReviews = async () => {
+        try {
+            const response = await axiosInstance.get('http://localhost:5000/reviews');
+            setReviews(response.data);
+        } catch (err) {
+            console.error('Error fetching reviews:', err);
         }
     };
 
@@ -62,20 +74,49 @@ const AdminDashboard = () => {
             const result = await response.json();
             console.log(result.message);
 
-           
-            setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
+            fetchUsers();
         } catch (err) {
             console.error('Error deleting user:', err);
         }
     };
 
+    const handleDeleteReview = async (reviewId) => {
+        try {
+            const response = await fetch(`http://localhost:5000/reviews/${reviewId}`, {
+                method: 'DELETE',
+            });
     
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+       
+            let result;
+            try {
+                result = await response.json();
+            } catch (e) {
+                result = {}; 
+            }
+    
+            console.log(result.message || 'Review deleted successfully');
+    
+            fetchReviews();
+        } catch (err) {
+            console.error('Error deleting review:', err);
+        }
+    };
+    
+
     const toggleItemsVisibility = () => {
         setShowItems(!showItems);
     };
 
     const toggleUsersVisibility = () => {
         setShowUsers(!showUsers);
+    };
+
+    const toggleReviewsVisibility = () => {
+        setShowReviews(!showReviews);
     };
 
     const toggleBiddersVisibility = (index) => {
@@ -158,6 +199,32 @@ const AdminDashboard = () => {
                             ))
                         ) : (
                             <p>No users found.</p>
+                        )}
+                    </div>
+                )}
+            </div>
+
+            <div className="admin-section">
+                <button onClick={toggleReviewsVisibility} className="admin-list-toggle-button">
+                    {showReviews ? 'Hide Reviews' : 'Show Reviews'}
+                </button>
+                {showReviews && (
+                    <div className="admin-reviews-container">
+                        {reviews.length > 0 ? (
+                            reviews.map((review) => (
+                                <div key={review.id} className="admin-review-card">
+                                    <div className="admin-review-details">
+                                        <h3 className="admin-review-name">{review.reviewName}</h3>
+                                        <p className="admin-review-rating">Rating: {review.rating}</p>
+                                        <p className="admin-review-message">{review.reviewMessage}</p>
+                                    </div>
+                                    <div className="admin-review-actions">
+                                        <button onClick={() => handleDeleteReview(review.id)} className="admin-review-button">Delete Review</button>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No reviews found.</p>
                         )}
                     </div>
                 )}
