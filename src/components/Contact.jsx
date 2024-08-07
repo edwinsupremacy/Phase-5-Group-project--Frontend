@@ -32,14 +32,31 @@ const Contact = () => {
         const mailtoLink = `mailto:info@dinemate.com?subject=Contact from ${name}&body=${message}%0D%0A%0D%0AFrom: ${name}%0D%0AEmail: ${email}`;
         window.location.href = mailtoLink;
         setMessageSent(true);
-        setLoading(false); // Reset loading
+        setLoading(false); 
     };
 
-    const handleReviewSubmit = (e) => {
+    const handleReviewSubmit = async (e) => {
         e.preventDefault();
-        setReviews([...reviews, reviewData]);
-        setReviewData({ reviewName: '', rating: '', reviewMessage: '' });
+    
+        const response = await fetch('http://localhost:5000/reviews', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(reviewData)
+        });
+    
+        if (response.ok) {
+            const result = await response.json();
+            console.log(result.message);
+            setReviews([...reviews, reviewData]);
+            setReviewData({ reviewName: '', rating: '', reviewMessage: '' });
+        } else {
+         
+            console.error('Failed to submit review');
+        }
     };
+    
 
     return (
         <div className="contact-container">
@@ -50,7 +67,7 @@ const Contact = () => {
                 <div className="contact-content">
                     <div className="contact-form">
                         <h2>Send us a message</h2>
-                        {loading && <p className="loading-indicator">Sending...</p>} {/* Loading Indicator */}
+                        {loading && <p className="loading-indicator">Sending...</p>} 
                         {messageSent ? (
                             <p className="feedback-message">Message sent. Thank you for contacting us!</p>
                         ) : (
@@ -94,8 +111,8 @@ const Contact = () => {
                     <div className="contact-info">
                         <h2>Contact Information</h2>
                         <p className='contact-headers'><strong>Address:</strong> 123 Vintage Auction House St, Vint City, VC 12345</p>
-                        <p className='contact-headers'><strong>Phone:</strong> (123) 456-7890</p>
-                        <p className='contact-headers'><strong>Email:</strong> info@eauctionease.com</p>
+                        <p className='contact-headers'><strong>Phone:</strong> (254) 756-7890-4895</p>
+                        <p className='contact-headers'><strong>Email:</strong> info@Vintageauctionehse.com</p>
                         <p className=''><strong>Hours:</strong> Mon-Fri: 8am-5pm</p>
                     </div>
                 </div>

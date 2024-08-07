@@ -50,13 +50,25 @@ const AdminDashboard = () => {
 
     const handleDeleteUser = async (userId) => {
         try {
-            await axiosInstance.delete(`http://localhost:5000/users/${userId}`);
-            setShouldFetchData(true);
+            const response = await fetch(`http://localhost:5000/users/delete/${userId}`, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            console.log(result.message);
+
+           
+            setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
         } catch (err) {
             console.error('Error deleting user:', err);
         }
     };
 
+    
     const toggleItemsVisibility = () => {
         setShowItems(!showItems);
     };
