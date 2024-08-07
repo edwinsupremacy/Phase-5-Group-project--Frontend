@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Contact.css';
-import { FaFacebook, FaTwitter, FaInstagram, FaStar } from 'react-icons/fa'; // Import icons
+import { FaFacebook, FaTwitter, FaInstagram, FaStar } from 'react-icons/fa';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -17,7 +17,6 @@ const Contact = () => {
         reviewMessage: ''
     });
 
-    
     useEffect(() => {
         const fetchReviews = async () => {
             try {
@@ -34,7 +33,7 @@ const Contact = () => {
         };
 
         fetchReviews();
-    }, []); 
+    }, []);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -46,17 +45,18 @@ const Contact = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setLoading(true); 
+        setLoading(true);
         const { name, email, message } = formData;
-        const mailtoLink = `mailto:info@dinemate.com?subject=Contact from ${name}&body=${message}%0D%0A%0D%0AFrom: ${name}%0D%0AEmail: ${email}`;
-        window.location.href = mailtoLink;
+        const whatsappNumber = '254707499607';
+        const whatsappMessage = `Hello, my name is ${name}. ${message}`;
+        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+        window.open(whatsappLink, '_blank'); // Open WhatsApp in a new tab
         setMessageSent(true);
-        setLoading(false); 
+        setLoading(false);
     };
 
     const handleReviewSubmit = async (e) => {
         e.preventDefault();
- 
         const response = await fetch('http://localhost:5000/reviews', {
             method: 'POST',
             headers: {
@@ -64,7 +64,7 @@ const Contact = () => {
             },
             body: JSON.stringify(reviewData)
         });
- 
+
         if (response.ok) {
             const result = await response.json();
             console.log(result.message);
@@ -74,7 +74,6 @@ const Contact = () => {
             console.error('Failed to submit review');
         }
     };
- 
 
     return (
         <div className="contact-container">
@@ -85,7 +84,7 @@ const Contact = () => {
                 <div className="contact-content">
                     <div className="contact-form">
                         <h2>Send us a message</h2>
-                        {loading && <p className="loading-indicator">Sending...</p>} 
+                        {loading && <p className="loading-indicator">Sending...</p>}
                         {messageSent ? (
                             <p className="feedback-message">Message sent. Thank you for contacting us!</p>
                         ) : (
@@ -101,17 +100,7 @@ const Contact = () => {
                                         required
                                     />
                                 </div>
-                                <div className="form-group">
-                                    <label htmlFor="email" className={formData.email ? 'filled' : ''}>Email</label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                </div>
+                                
                                 <div className="form-group">
                                     <label htmlFor="message" className={formData.message ? 'filled' : ''}>Message</label>
                                     <textarea
