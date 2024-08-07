@@ -16,10 +16,11 @@ import ResetPassword from './components/ResetPassword';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
   const location = useLocation();
 
   // Determine if Navbar should be shown
-  const showNavbar = () => {
+  const determineNavbarVisibility = () => {
     // Show Navbar on all pages except login pages and admin dashboard
     return !(
       location.pathname.startsWith('/login') ||
@@ -28,13 +29,14 @@ function App() {
       location.pathname.startsWith('/login/seller') ||
       location.pathname.startsWith('/seller-dashboard') ||
       location.pathname.startsWith('/forgot-password') ||
-      location.pathname.startsWith('/reset-password')
+      location.pathname.startsWith('/reset-password') ||
+      !showNavbar // Hide Navbar if showNavbar state is false
     );
   };
 
   return (
     <div className="App">
-      {showNavbar() && <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
+      {determineNavbarVisibility() && <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
       <div className="content">
         <Routes>
           {!isAuthenticated ? (
@@ -54,7 +56,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/auction-items" element={<AuctionItems />} />
+              <Route path="/auction-items" element={<AuctionItems setShowNavbar={setShowNavbar} />} />
               <Route path="/seller-dashboard" element={<SellerDashboard />} />
               <Route path="/admin-dashboard" element={<AdminDashboard setIsAuthenticated={setIsAuthenticated} />} />
             </>

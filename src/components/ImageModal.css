@@ -1,0 +1,70 @@
+.image-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    /* Ensure it appears above other content */
+    transition: opacity 0.3s ease;
+    /* Smooth fade effect */
+}
+
+.image-modal-content {
+    position: relative;
+    max-width: 95%;
+    /* Slightly more margin for mobile view */
+    max-height: 95%;
+    background: #fff;
+    /* White background for content */
+    border-radius: 10px;
+    /* Rounded corners */
+    overflow: hidden;
+    /* Ensure content doesn’t overflow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    /* Subtle shadow effect */
+    padding: 10px;
+    /* Padding around content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-modal-content img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 5px;
+    /* Rounded corners for the image */
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    background: #f53535;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s, border 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.close-button:hover {
+    background: #e0e0e0;
+    border-color: #d32424;
+}
+
+.close-button::before {
+    content: '×';
+    font-size: 18px;
+    color: #555;
+}

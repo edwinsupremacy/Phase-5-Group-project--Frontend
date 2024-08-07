@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './AuctionItems.css';
 import { FaSearch } from 'react-icons/fa';
+import ImageModal from './ImageModal'; // Import the modal component
 
 const AuctionItems = () => {
     const [items, setItems] = useState([]);
@@ -11,6 +12,7 @@ const AuctionItems = () => {
     const [selectedCategory, setSelectedCategory] = useState('All Categories');
     const [categories] = useState(['All Categories', 'Vehicle', 'Jewelry', 'Electronic', 'Watch', 'House', 'Art']);
     const [placedBids, setPlacedBids] = useState({});
+    const [selectedImage, setSelectedImage] = useState(null); // State for modal
 
     useEffect(() => {
         fetchUserId();
@@ -128,7 +130,6 @@ const AuctionItems = () => {
         }
     };
     
-    
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
         if (category === 'All Categories') {
@@ -138,8 +139,16 @@ const AuctionItems = () => {
         }
     };
 
+    const handleImageClick = (imageUrl) => {
+        setSelectedImage(imageUrl);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedImage(null);
+    };
+
     return (
-        <p className="auction-items-container">
+        <div className="auction-items-container">
             <h2>Available Auction Items</h2>
 
             <div className="category-filter">
@@ -162,7 +171,11 @@ const AuctionItems = () => {
                     <ul>
                         {filteredItems.map(item => (
                             <li key={item.id} className="item-card">
-                                <img src={item.image_url} alt={item.name} />
+                                <img 
+                                    src={item.image_url} 
+                                    alt={item.name} 
+                                    onClick={() => handleImageClick(item.image_url)} 
+                                />
                                 <h3>{item.name}</h3>
                                 <p>{item.description}</p>
                                 <p>Starting Bid: ksh {item.starting_price.toFixed(2)}</p>
@@ -196,7 +209,8 @@ const AuctionItems = () => {
                 )}
             </div>
             {message && <p className="message">{message}</p>}
-        </p>
+            <ImageModal imageUrl={selectedImage} onClose={handleCloseModal} />
+        </div>
     );
 };
 
