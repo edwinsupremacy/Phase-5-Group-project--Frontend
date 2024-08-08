@@ -10,14 +10,29 @@ const AuctionItems = () => {
     const [message, setMessage] = useState('');
     const [userId, setUserId] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState('All Categories');
+    const [selectedSubCategory, setSelectedSubCategory] = useState('');
     const [categories] = useState(['All Categories', 'Vehicle', 'Jewelry', 'Electronic', 'Watch', 'House', 'Art']);
+    const [subCategories, setSubCategories] = useState([]);
     const [placedBids, setPlacedBids] = useState({});
     const [selectedImage, setSelectedImage] = useState(null); // State for modal
+
+    const categoryData = {
+        Vehicle: ["Car", "Motorcycle", "Truck"],
+        Jewelry: ["Ring", "Necklace", "Bracelet"],
+        Electronic: ["Phone", "Laptop", "Tablet"],
+        Watch: ["Analog", "Digital", "Smart"],
+        House: ["Apartment", "Villa", "Cottage"],
+        Art: ["Painting", "Sculpture", "Photography"]
+    };
 
     useEffect(() => {
         fetchUserId();
         fetchItems();
     }, []);
+
+    useEffect(() => {
+        filterItems();
+    }, [items, selectedCategory, selectedSubCategory]);
 
     const fetchUserId = () => {
         const storedUserId = localStorage.getItem('userId');
@@ -105,7 +120,6 @@ const AuctionItems = () => {
             });
     
             if (response.ok) {
-
                 setPlacedBids(prevBids => {
                     const newBids = { ...prevBids };
                     delete newBids[itemId];
@@ -129,14 +143,22 @@ const AuctionItems = () => {
             setMessage('Error canceling bid. Please try again.');
         }
     };
-    
+
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
-        if (category === 'All Categories') {
-            setFilteredItems(items);
-        } else {
-            setFilteredItems(items.filter(item => item.category === category));
-        }
+        setSubCategories(categoryData[category] || []);
+        setSelectedSubCategory('');
+    };
+
+    const handleSubCategoryChange = (subCategory) => {
+        setSelectedSubCategory(subCategory);
+    };
+
+    const filterItems = () => {
+        setFilteredItems(items.filter(item => 
+            (selectedCategory === 'All Categories' || item.category === selectedCategory) &&
+            (selectedSubCategory === '' || item.subCategory === selectedSubCategory)
+        ));
     };
 
     const handleImageClick = (imageUrl) => {
@@ -164,6 +186,19 @@ const AuctionItems = () => {
                         </button>
                     ))}
                 </div>
+                {selectedCategory !== 'All Categories' && (
+                    <div className="subcategory-buttons">
+                        {subCategories.map(subCategory => (
+                            <button
+                                key={subCategory}
+                                className={`subcategory-button ${selectedSubCategory === subCategory ? 'active' : ''}`}
+                                onClick={() => handleSubCategoryChange(subCategory)}
+                            >
+                                {subCategory}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
 
             <div className="items-list">
@@ -180,6 +215,7 @@ const AuctionItems = () => {
                                 <p>{item.description}</p>
                                 <p>Starting Bid: ksh {item.starting_price.toFixed(2)}</p>
                                 <p>Category: {item.category}</p>
+                                <p>Subcategory: {item.subCategory}</p>
                                 <form
                                     onSubmit={(e) => {
                                         e.preventDefault();
