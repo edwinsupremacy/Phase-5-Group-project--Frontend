@@ -5,11 +5,13 @@ import axiosInstance from "./utils/axiosConfig";
 const AdminDashboard = () => {
     const [items, setItems] = useState([]);
     const [users, setUsers] = useState([]);
+    const [sellers, setSellers] = useState([]);
     const [bids, setBids] = useState({});
     const [reviews, setReviews] = useState([]);
     const [showItems, setShowItems] = useState(false);
     const [showUsers, setShowUsers] = useState(false);
     const [showReviews, setShowReviews] = useState(false);
+    const [showSellers, setShowSellers] = useState(false);
     const [biddersVisibility, setBiddersVisibility] = useState({});
     const [shouldFetchData, setShouldFetchData] = useState(true);
 
@@ -18,6 +20,7 @@ const AdminDashboard = () => {
             fetchItems();
             fetchUsers();
             fetchReviews();
+            fetchSellers(); // Fetch sellers data
             setShouldFetchData(false); 
         }
     }, [shouldFetchData]);
@@ -49,6 +52,15 @@ const AdminDashboard = () => {
         }
     };
 
+    const fetchSellers = async () => {
+        try {
+            const response = await axiosInstance.get('http://localhost:5000/sellers');
+            setSellers(response.data);
+        } catch (err) {
+            console.error('Error fetching sellers:', err);
+        }
+    };
+
     const fetchBids = async (itemId) => {
         try {
             const response = await axiosInstance.get(`http://localhost:5000/items/${itemId}/bids`);
@@ -63,18 +75,8 @@ const AdminDashboard = () => {
 
     const handleDeleteUser = async (userId) => {
         try {
-            const response = await fetch(`http://localhost:5000/users/delete/${userId}`, {
-                method: 'DELETE',
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const result = await response.json();
-            console.log(result.message);
-
-            fetchUsers();
+            await axiosInstance.delete(`http://localhost:5000/users/delete/${userId}`);
+            fetchUsers(); // Refresh the user list after deletion
         } catch (err) {
             console.error('Error deleting user:', err);
         }
@@ -82,30 +84,21 @@ const AdminDashboard = () => {
 
     const handleDeleteReview = async (reviewId) => {
         try {
-            const response = await fetch(`http://localhost:5000/reviews/${reviewId}`, {
-                method: 'DELETE',
-            });
-    
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-    
-       
-            let result;
-            try {
-                result = await response.json();
-            } catch (e) {
-                result = {}; 
-            }
-    
-            console.log(result.message || 'Review deleted successfully');
-    
-            fetchReviews();
+            await axiosInstance.delete(`http://localhost:5000/reviews/${reviewId}`);
+            fetchReviews(); // Refresh the review list after deletion
         } catch (err) {
             console.error('Error deleting review:', err);
         }
     };
-    
+
+    const handleDeleteSeller = async (sellerId) => {
+        try {
+            await axiosInstance.delete(`http://localhost:5000/sellers/${sellerId}`);
+            fetchSellers(); // Refresh the seller list after deletion
+        } catch (err) {
+            console.error('Error deleting seller:', err);
+        }
+    };
 
     const toggleItemsVisibility = () => {
         setShowItems(!showItems);
@@ -117,6 +110,10 @@ const AdminDashboard = () => {
 
     const toggleReviewsVisibility = () => {
         setShowReviews(!showReviews);
+    };
+
+    const toggleSellersVisibility = () => {
+        setShowSellers(!showSellers);
     };
 
     const toggleBiddersVisibility = (index) => {
@@ -225,6 +222,32 @@ const AdminDashboard = () => {
                             ))
                         ) : (
                             <p>No reviews found.</p>
+                        )}
+                    </div>
+                )}
+            </div>
+
+            <div className="admin-section">
+                <button onClick={toggleSellersVisibility} className="admin-list-toggle-button">
+                    {showSellers ? 'Hide Sellers' : 'Show Sellers'}
+                </button>
+                {showSellers && (
+                    <div className="admin-sellers-container">
+                        {sellers.length > 0 ? (
+                            sellers.map((seller) => (
+                                <div key={seller.id} className="admin-seller-card">
+                                    <div className="admin-seller-details">
+                                        <h3 className="admin-seller-name">{seller.name}</h3>
+                                        <p className="admin-seller-email">{seller.email}</p>
+                                        <p className="admin-seller-phone">{seller.phone}</p>
+                                    </div>
+                                    <div className="admin-seller-actions">
+                                        <button onClick={() => handleDeleteSeller(seller.id)} className="admin-seller-button">Delete Seller</button>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No sellers found.</p>
                         )}
                     </div>
                 )}
