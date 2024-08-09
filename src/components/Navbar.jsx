@@ -5,7 +5,8 @@ import './Navbar.css';
 const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = (e) => {
+    e.preventDefault(); // Prevent the default link behavior
     setIsAuthenticated(false);
     navigate('/login');
   };
@@ -17,7 +18,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
       <Link to="/about" className="nav-link">About</Link>
       <Link to="/contact" className="nav-link">Contact</Link>
       {isAuthenticated ? (
-        <button onClick={handleLogout} className="nav-link logout-button">Logout</button>
+        <Link to="/login" onClick={handleLogout} className="nav-link">Logout</Link>
       ) : (
         <Link to="/login" className="nav-link">Login</Link>
       )}
@@ -26,3 +27,4 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
 };
 
 export default Navbar;
+
