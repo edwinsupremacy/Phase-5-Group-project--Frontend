@@ -1,3 +1,4 @@
+/* Container for the entire dashboard */
 .seller-dashboard-container {
     max-width: 5000px;
     margin: 0 auto;
@@ -8,116 +9,58 @@
     display: flex;
     height: 100vh;
     overflow: hidden;
+    /* Prevent overflow on the main container */
+    color: black;
     font-family: 'Garamond', serif;
     width: 1100px;
 }
 
-
-.seller-dashboard-title {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #8E735B;
-    font-size: 2.5em;
-    font-family: 'Garamond', serif;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+/* Flexbox container with scrolling enabled for the item section */
+.seller-dashboard-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    /* Ensure internal scrolling works */
 }
 
-
+/* Section to add items with scrolling */
 .seller-add-item-section {
     flex: 1;
     margin-right: 30px;
-    overflow: auto;
+    overflow-y: auto;
+    /* Enable vertical scrolling */
     background-color: #E1D8C9;
     border-radius: 18px;
     padding: 30px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     border: 1px solid #D0BFAE;
-
 }
 
-
-.seller-add-item-title {
-    margin-bottom: 20px;
-    color: #8E735B;
-    font-size: 1.8em;
-    font-family: 'Garamond', serif;
-}
-
-
-.seller-add-item-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.seller-input {
-    padding: 15px;
-    border: 1px solid #D0BFAE;
-    border-radius: 12px;
-    font-size: 1.1em;
-    background-color: #FFFFFF;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-    color: rgb(0, 0, 0);
-}
-
-
-.seller-submit-button {
-    padding: 15px;
-    background-color: #8E735B;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 1.1em;
-    font-family: 'Garamond', serif;
-    transition: background-color 0.3s ease;
-}
-
-.seller-submit-button:hover {
-    background-color: #6E5D4F;
-
-}
-
-
-.seller-error {
-    color: #E74C3C;
-    margin-top: 15px;
-    font-size: 1.1em;
-    font-family: 'Garamond', serif;
-}
-
-
+/* Items section with scrolling */
 .seller-items-section {
     flex: 2;
-    position: relative;
-    overflow: auto;
+    overflow-y: auto;
+    /* Enable vertical scrolling */
     background-color: #FFFFFF;
     padding: 30px;
     border-radius: 18px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-
-.seller-items-title {
-    margin-bottom: 30px;
-    color: #8E735B;
-    font-size: 1.8em;
-    font-family: 'Garamond', serif;
-}
-
-
+/* Container for list of items with fixed max height */
 .seller-items-container {
     width: 100%;
     max-height: 700px;
+    /* Adjust as needed */
     overflow-y: auto;
+    /* Enable vertical scrolling */
     background-color: #FFFFFF;
     padding: 15px;
     border-radius: 12px;
     border: 1px solid #D0BFAE;
-
 }
 
-
+/* Item card styling */
 .seller-item-card {
     background-color: #FFFFFF;
     border: 1px solid #D0BFAE;
@@ -128,48 +71,36 @@
     margin-bottom: 20px;
     padding: 15px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-
 }
 
 .seller-item-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-
 }
 
+/* Ensure the seller-item list also gets the correct styling */
+.seller-items-list {
+    margin-top: 20px;
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+}
+
+.seller-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
 
 .seller-item-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 16px 16px 0 0;
+    max-width: 100px;
+    height: auto;
 }
-
 
 .seller-item-details {
-    padding: 15px;
+    margin-left: 20px;
 }
-
-
-.seller-item-name {
-    margin: 10px 0;
-    font-size: 1.4em;
-    color: #8E735B;
-    font-family: 'Garamond', serif;
-}
-
-
-.seller-item-description {
-    font-size: 1.1em;
-    color: #666;
-}
-
-.seller-item-price,
-.seller-item-category {
-    font-size: 1.1em;
-    color: #333;
-}
-
 
 .seller-item-actions {
     display: flex;
@@ -177,10 +108,9 @@
     margin-top: 15px;
 }
 
-
 .seller-item-button {
     background-color: #D0BFAE;
-    color: white;
+    color: rgb(19, 8, 8);
     border: none;
     border-radius: 12px;
     padding: 10px 20px;
@@ -203,4 +133,136 @@
 
 .seller-item-bids {
     color: black;
+}
+
+.seller-bidder-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.seller-bidder-card.pending {
+    background-color: #f9f9f9;
+}
+
+.seller-bidder-card.accepted {
+    background-color: #d4edda;
+}
+
+.seller-bidder-status {
+    font-weight: bold;
+    color: #555;
+}
+
+.seller-bidder-amount,
+.seller-bidder-name {
+    margin: 5px 0;
+}
+
+.seller-accept-bid-button {
+    background-color: #28a745;
+    color: #643c3c;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.seller-accept-bid-button:hover {
+    background-color: #218838;
+}
+
+.seller-bidder-card.accepted .seller-accept-bid-button {
+    display: none;
+}
+
+.seller-filter-section {
+    margin-bottom: 20px;
+}
+
+.seller-filter-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.seller-input {
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 1em;
+    width: 100%;
+}
+
+.seller-toggle-items-btn {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.seller-items-list {
+    margin-top: 20px;
+}
+
+.seller-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.seller-item-image {
+    max-width: 100px;
+    height: auto;
+}
+
+.seller-item-details {
+    margin-left: 20px;
+}
+
+.seller-edit-btn,
+.seller-delete-btn,
+.seller-bidders-btn,
+.seller-start-live-bid-btn,
+.seller-end-live-bid-btn {
+    margin-right: 10px;
+    padding: 8px;
+    background-color: #007bff;
+    color: rgb(88, 76, 76);
+    border: none;
+    cursor: pointer;
+}
+
+.seller-accept-bid-btn {
+    background-color: #28a745;
+}
+
+.seller-filter-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.seller-filter-button {
+    background-color: #ce8989;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.seller-filter-button.active {
+    background-color: #333;
+    color: #fff;
+}
+
+.seller-list-toggle-button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
 }

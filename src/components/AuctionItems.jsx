@@ -212,9 +212,9 @@ const AuctionItems = () => {
                             />
                             <h3>{item.name}</h3>
                             <p>{item.description}</p>
-                            <p>Starting Bid: ksh {item.starting_price.toFixed(2)}</p>
+                           <p>Starting Bid: ksh {parseFloat(item.starting_price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                             <p>Category: {item.category}</p>
-                            <p>Subcategory: {item.sub_category || 'None'} {/* Ensure correct case and display a fallback if needed */}</p>
+                            <p>Subcategory: {item.sub_category || 'None'}</p>
                             <form
                                 onSubmit={(e) => {
                                     e.preventDefault();

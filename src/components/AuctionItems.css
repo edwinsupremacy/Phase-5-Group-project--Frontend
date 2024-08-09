@@ -76,10 +76,25 @@ body {
 }
 
 .item-card img {
-    width: 100%;
+    width: auto;
     height: auto;
     margin-bottom: 15px;
     border-radius: 5px;
+}
+
+.item-card input[type="number"] {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.item-card input[type="number"]:focus {
+    border-color: #007bff;
+    outline: none;
 }
 
 .item-card h3,
