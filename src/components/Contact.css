@@ -1,15 +1,16 @@
 .contact-container::-webkit-scrollbar {
     width: 4px; /* Set to a very thin width */
+    border-radius: 50px;
 }
 
 .contact-container::-webkit-scrollbar-track {
     background: #E7D4B5;
-    border-radius: 10px;
+    border-radius: 50px;
 }
 
 .contact-container::-webkit-scrollbar-thumb {
     background: #A0937D;
-    border-radius: 10px;
+    border-radius: 50px;
     transition: background 0.3s ease;
 }
 
