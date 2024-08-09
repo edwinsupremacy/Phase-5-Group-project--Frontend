@@ -50,7 +50,7 @@ const Contact = () => {
         const whatsappNumber = '254707499607';
         const whatsappMessage = `Hello, my name is ${name}. ${message}`;
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-        window.open(whatsappLink, '_blank'); // Open WhatsApp in a new tab
+        window.open(whatsappLink, '_blank'); 
         setMessageSent(true);
         setLoading(false);
     };
