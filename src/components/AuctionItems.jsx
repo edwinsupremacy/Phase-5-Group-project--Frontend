@@ -157,10 +157,9 @@ const AuctionItems = () => {
     const filterItems = () => {
         setFilteredItems(items.filter(item => 
             (selectedCategory === 'All Categories' || item.category === selectedCategory) &&
-            (selectedSubCategory === '' || item.subCategory === selectedSubCategory)
+            (selectedSubCategory === '' || item.sub_category === selectedSubCategory) // Correct case
         ));
     };
-
     const handleImageClick = (imageUrl) => {
         setSelectedImage(imageUrl);
     };
@@ -204,42 +203,42 @@ const AuctionItems = () => {
             <div className="items-list">
                 {filteredItems.length > 0 ? (
                     <ul>
-                        {filteredItems.map(item => (
-                            <li key={item.id} className="item-card">
-                                <img 
-                                    src={item.image_url} 
-                                    alt={item.name} 
-                                    onClick={() => handleImageClick(item.image_url)} 
+                    {filteredItems.map(item => (
+                        <li key={item.id} className="item-card">
+                            <img 
+                                src={item.image_url} 
+                                alt={item.name} 
+                                onClick={() => handleImageClick(item.image_url)} 
+                            />
+                            <h3>{item.name}</h3>
+                            <p>{item.description}</p>
+                            <p>Starting Bid: ksh {item.starting_price.toFixed(2)}</p>
+                            <p>Category: {item.category}</p>
+                            <p>Subcategory: {item.sub_category || 'None'} {/* Ensure correct case and display a fallback if needed */}</p>
+                            <form
+                                onSubmit={(e) => {
+                                    e.preventDefault();
+                                    if (placedBids[item.id]) {
+                                        handleBidCancel(item.id);
+                                    } else {
+                                        handleBidSubmit(item.id);
+                                    }
+                                }}
+                            >
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    value={bidAmount[item.id] || ''}
+                                    onChange={(e) => handleBidChange(item.id, e.target.value)}
+                                    placeholder="Enter your bid"
                                 />
-                                <h3>{item.name}</h3>
-                                <p>{item.description}</p>
-                                <p>Starting Bid: ksh {item.starting_price.toFixed(2)}</p>
-                                <p>Category: {item.category}</p>
-                                <p>Subcategory: {item.subCategory}</p>
-                                <form
-                                    onSubmit={(e) => {
-                                        e.preventDefault();
-                                        if (placedBids[item.id]) {
-                                            handleBidCancel(item.id);
-                                        } else {
-                                            handleBidSubmit(item.id);
-                                        }
-                                    }}
-                                >
-                                    <input
-                                        type="number"
-                                        step="0.01"
-                                        value={bidAmount[item.id] || ''}
-                                        onChange={(e) => handleBidChange(item.id, e.target.value)}
-                                        placeholder="Enter your bid"
-                                    />
-                                    <button type="submit">
-                                        {placedBids[item.id] ? 'Cancel Bid' : 'Place Bid'}
-                                    </button>
-                                </form>
-                            </li>
-                        ))}
-                    </ul>
+                                <button type="submit">
+                                    {placedBids[item.id] ? 'Cancel Bid' : 'Place Bid'}
+                                </button>
+                            </form>
+                        </li>
+                    ))}
+                </ul>
                 ) : (
                     <p>No items available at the moment.</p>
                 )}
