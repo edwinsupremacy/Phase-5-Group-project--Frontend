@@ -11,7 +11,7 @@ const SellerDashboard = () => {
         description: '',
         startingPrice: '',
         category: '',
-        subCategory: '',
+        subCategory: '', // Ensure this is properly initialized
         imageUrl: ''
     });
     const [error, setError] = useState('');
@@ -39,7 +39,7 @@ const SellerDashboard = () => {
 
     useEffect(() => {
         filterItems();
-    }, [items, selectedCategory]);
+    }, [items, selectedCategory, formData.subCategory]);
 
     const fetchItems = async () => {
         try {
@@ -54,7 +54,7 @@ const SellerDashboard = () => {
 
     const fetchBids = async (itemId) => {
         try {
-            const response = await axiosInstance.get(http://localhost:5000/items/${itemId}/bids);
+            const response = await axiosInstance.get(`http://localhost:5000/items/${itemId}/bids`);
             setBids(prev => ({
                 ...prev,
                 [itemId]: response.data.bids
@@ -67,7 +67,10 @@ const SellerDashboard = () => {
 
     const filterItems = () => {
         if (selectedCategory) {
-            setFilteredItems(items.filter(item => item.category === selectedCategory));
+            setFilteredItems(items.filter(item => 
+                item.category === selectedCategory &&
+                (!formData.subCategory || item.subCategory === formData.subCategory)
+            ));
         } else {
             setFilteredItems(items);
         }
@@ -75,14 +78,18 @@ const SellerDashboard = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData(prev => ({ ...prev, [name]: value }));
     };
 
     const handleCategoryChange = (e) => {
         const selectedCategory = e.target.value;
         setSelectedCategory(selectedCategory);
         setSubCategories(categoryData[selectedCategory] || []);
-        setFormData({ ...formData, category: selectedCategory, subCategory: '' });
+        setFormData(prev => ({
+            ...prev,
+            category: selectedCategory,
+            subCategory: '' // Reset subCategory when category changes
+        }));
     };
 
     const handleSubmit = async (event) => {
@@ -101,13 +108,15 @@ const SellerDashboard = () => {
             description,
             starting_price: parseFloat(startingPrice),
             category,
-            subCategory,
+            sub_category: subCategory, // Ensure this is correctly included
             image_url: imageUrl
         };
 
+        console.log('Submitting Item:', newItem); // Debugging log
+
         try {
             const url = editIndex !== null
-                ? http://localhost:5000/items/${items[editIndex].id}
+                ? `http://localhost:5000/items/${items[editIndex].id}`
                 : 'http://localhost:5000/items';
 
             const method = editIndex !== null ? 'PUT' : 'POST';
@@ -129,7 +138,7 @@ const SellerDashboard = () => {
     const handleDelete = async (index) => {
         const itemId = items[index].id;
         try {
-            await axiosInstance.delete(http://localhost:5000/items/${itemId});
+            await axiosInstance.delete(`http://localhost:5000/items/${itemId}`);
             setShouldFetchItems(true);
         } catch (err) {
             setError('Error deleting item');
@@ -144,7 +153,7 @@ const SellerDashboard = () => {
             description: itemToEdit.description,
             startingPrice: itemToEdit.starting_price,
             category: itemToEdit.category,
-            subCategory: itemToEdit.subCategory,
+            subCategory: itemToEdit.sub_category || '', // Handle potential undefined value
             imageUrl: itemToEdit.image_url
         });
         setEditIndex(index);
@@ -205,16 +214,13 @@ const SellerDashboard = () => {
                         className="seller-input"
                     >
                         <option value="">Select Category</option>
-                        <option value="Vehicle">Vehicle</option>
-                        <option value="Jewelry">Jewelry</option>
-                        <option value="Electronic">Electronic</option>
-                        <option value="Watch">Watch</option>
-                        <option value="House">House</option>
-                        <option value="Art">Art</option>
+                        {Object.keys(categoryData).map(category => (
+                            <option key={category} value={category}>{category}</option>
+                        ))}
                     </select>
                     <select
                         name="subCategory"
-                        value={formData.subCategory || ''}
+                        value={formData.subCategory} // Ensure value is correctly set
                         onChange={handleChange}
                         className="seller-input"
                         disabled={!selectedCategory}
@@ -245,56 +251,41 @@ const SellerDashboard = () => {
                     {showItems ? 'Hide Items' : 'Show Items'}
                 </button>
                 {showItems && (
-                    <>
-                        <div className="seller-category-filter">
-                            <select value={selectedCategory} onChange={handleCategoryChange} className="seller-input">
-                                <option value="">All Categories</option>
-                                <option value="Vehicle">Vehicle</option>
-                                <option value="Jewelry">Jewelry</option>
-                                <option value="Electronic">Electronic</option>
-                                <option value="Watch">Watch</option>
-                                <option value="House">House</option>
-                                <option value="Art">Art</option>
-                            </select>
-                        </div>
-                        <div className="seller-items-container">
-                            {filteredItems.length > 0 ? (
-                                filteredItems.map((item, index) => (
-                                    <div key={item.id} className="seller-item-card">
-                                        <img src={item.image_url} alt={item.name} className="seller-item-image" />
-                                        <div className="seller-item-details">
-                                            <h3 className="seller-item-name">{item.name}</h3>
-                                            <p className="seller-item-description">{item.description}</p>
-                                            <p className="seller-item-price">Starting Price: ksh {new Intl.NumberFormat().format(item.starting_price.toFixed(2))}</p>
-                                            <p className="seller-item-category">Category: {item.category}</p>
-                                            <p className="seller-item-subCategory">Subcategory: {item.subCategory}</p>
-                                            <div className="seller-item-buttons">
-                                                <button onClick={() => handleEdit(index)} className="seller-edit-button">Edit</button>
-                                                <button onClick={() => handleDelete(index)} className="seller-delete-button">Delete</button>
-                                                <button onClick={() => toggleBiddersVisibility(index)} className="seller-bids-button">
-                                                    {biddersVisibility[index] ? 'Hide Bidders' : 'Show Bidders'}
-                                                </button>
-                                            </div>
-                                            {biddersVisibility[index] && bids[item.id] && (
-                                                <div className="seller-bidders-section">
-                                                    <h4 className="seller-bidders-title">Bidders:</h4>
-                                                    {bids[item.id].length > 0 ? (
-                                                        bids[item.id].map((bid, i) => (
-                                                            <p key={i} className="seller-bidder-detail">Bidder: {bid.bidder_name}, Bid: ksh {new Intl.NumberFormat().format(bid.amount.toFixed(2))}</p>
-                                                        ))
-                                                    ) : (
-                                                        <p>No bids available</p>
-                                                    )}
+                    <div className="seller-items-list">
+                        {filteredItems.length > 0 ? (
+                            filteredItems.map((item, index) => (
+                                <div key={item.id} className="seller-item-card">
+                                    <h3 className="seller-item-title">{item.name}</h3>
+                                    <p className="seller-item-description">{item.description}</p>
+                                    <p className="seller-item-price">Starting Price: ${item.starting_price}</p>
+                                    <p className="seller-item-category">Category: {item.category}</p>
+                                    <p className="seller-item-subcategory">Subcategory: {item.sub_category}</p>
+                                    <img src={item.image_url} alt={item.name} className="seller-item-image" />
+                                    <button onClick={() => handleEdit(index)} className="seller-item-edit-button">
+                                        Edit
+                                    </button>
+                                    <button onClick={() => handleDelete(index)} className="seller-item-delete-button">
+                                        Delete
+                                    </button>
+                                    <button onClick={() => toggleBiddersVisibility(index)} className="seller-item-bidders-button">
+                                        {biddersVisibility[index] ? 'Hide Bidders' : 'Show Bidders'}
+                                    </button>
+                                    {biddersVisibility[index] && bids[item.id] && (
+                                        <div className="seller-bidders-list">
+                                            {bids[item.id].map(bid => (
+                                                <div key={bid.id} className="seller-bid">
+                                                    <p className="seller-bid-amount">Bid Amount: ${bid.amount}</p>
+                                                    <p className="seller-bid-user">User: {bid.username}</p>
                                                 </div>
-                                            )}
+                                            ))}
                                         </div>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>No items available</p>
-                            )}
-                        </div>
-                    </>
+                                    )}
+                                </div>
+                            ))
+                        ) : (
+                            <p>No items found.</p>
+                        )}
+                    </div>
                 )}
             </div>
         </div>
