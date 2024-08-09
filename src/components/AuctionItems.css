@@ -6,10 +6,9 @@ body {
     padding: 2rem;
     background-color: #f6e6cb;
     color: #a0937d;
-    max-width: 1200px;
     margin: 0 auto;
     margin-top: 120px;
-    height: 600px;
+    height: 400px;
     overflow-y: scroll;
     border-radius: 30px;
     margin-top: -30px;
@@ -32,50 +31,23 @@ body {
     gap: 10px;
 }
 
-/* Pulse animation */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.05);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* Apply the pulse effect to all buttons */
-.category-button,
-.subcategory-button {
+.category-button {
     padding: 10px 20px;
     border: none;
     background-color: #b6c7aa;
     color: #a0937d;
     cursor: pointer;
     transition: background-color 0.3s;
-    animation: pulse 1.5s infinite;
-    /* Adjust duration as needed */
 }
 
-.category-button:hover,
-.subcategory-button:hover {
+.category-button:hover {
     background-color: #e7d4b5;
-    /* Change background on hover */
-    animation: none;
-    /* Disable pulse effect when hovered */
 }
 
-.category-button.active,
-.subcategory-button.active {
+.category-button.active {
     background-color: #a0937d;
-    /* Active button background color */
     color: #f6e6cb;
-    /* Active button text color */
     font-weight: bold;
-    /* Bold text for active button */
 }
 
 .items-list {
@@ -94,7 +66,7 @@ body {
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 1.5rem;
-    width: 250px;
+    width: 350px;
     text-align: center;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     display: inline-block;
@@ -103,7 +75,7 @@ body {
 }
 
 .item-card img {
-    width: auto;
+    width: 100%;
     height: auto;
     margin-bottom: 15px;
     border-radius: 5px;
@@ -133,7 +105,7 @@ body {
     font-size: 1rem;
 }
 
-.message {
+*/ .message {
     color: red;
     font-weight: bold;
 }
@@ -164,61 +136,4 @@ body {
 
 .bidders-list li {
     margin-bottom: 5px;
-}
-
-.subcategory-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    /* Space between buttons */
-    margin-bottom: 20px;
-    /* Space below the subcategory buttons */
-    justify-content: center;
-}
-
-.subcategory-button {
-    padding: 10px 15px;
-    border: none;
-    background-color: #b6c7aa;
-    /* Match category button background */
-    color: #a0937d;
-    /* Match text color */
-    cursor: pointer;
-    transition: background-color 0.3s;
-    /* Add transition for background color */
-    border-radius: 5px;
-    /* Rounded corners */
-}
-
-.subcategory-button.active {
-    background-color: #a0937d;
-    /* Active button background color */
-    color: #f6e6cb;
-    /* Active button text color */
-    font-weight: bold;
-    /* Bold text for active button */
-}
-
-.item-card {
-    background-color: #f6e6cb;
-    color: #a0937d;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 1.5rem;
-    width: 250px;
-    text-align: center;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    display: inline-block;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    /* Add transition for box-shadow */
-    margin-bottom: 1.5rem;
-    margin-top: -5px;
-}
-
-/* Hover effect for item card */
-.item-card:hover {
-    transform: scale(1.05);
-    /* Slightly scale up on hover */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    /* Increase shadow on hover */
 }
