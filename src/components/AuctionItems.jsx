@@ -90,7 +90,7 @@ const AuctionItems = () => {
                 const bidData = await response.json();
                 setPlacedBids(prevBids => ({
                     ...prevBids,
-                    [itemId]: bidData.bid.id  
+                    [itemId]: bidData.bid.id
                 }));
                 setMessage('Bid placed successfully!');
                 fetchItems();
@@ -110,7 +110,7 @@ const AuctionItems = () => {
             setMessage('No bid to cancel.');
             return;
         }
-    
+
         try {
             const response = await fetch(`http://localhost:5000/bids/${bidId}`, {
                 method: 'DELETE',
@@ -118,20 +118,20 @@ const AuctionItems = () => {
                     'Content-Type': 'application/json'
                 }
             });
-    
+
             if (response.ok) {
                 setPlacedBids(prevBids => {
                     const newBids = { ...prevBids };
                     delete newBids[itemId];
                     return newBids;
                 });
-    
+
                 setBidAmount(prevBidAmount => {
                     const newBidAmount = { ...prevBidAmount };
                     delete newBidAmount[itemId];
                     return newBidAmount;
                 });
-    
+
                 setMessage('Bid canceled successfully!');
                 fetchItems();
             } else {
@@ -155,11 +155,12 @@ const AuctionItems = () => {
     };
 
     const filterItems = () => {
-        setFilteredItems(items.filter(item => 
+        setFilteredItems(items.filter(item =>
             (selectedCategory === 'All Categories' || item.category === selectedCategory) &&
             (selectedSubCategory === '' || item.sub_category === selectedSubCategory) // Correct case
         ));
     };
+
     const handleImageClick = (imageUrl) => {
         setSelectedImage(imageUrl);
     };
@@ -185,36 +186,38 @@ const AuctionItems = () => {
                         </button>
                     ))}
                 </div>
-                {selectedCategory !== 'All Categories' && (
-                    <div className="subcategory-buttons">
-                        {subCategories.map(subCategory => (
-                            <button
-                                key={subCategory}
-                                className={`subcategory-button ${selectedSubCategory === subCategory ? 'active' : ''}`}
-                                onClick={() => handleSubCategoryChange(subCategory)}
-                            >
-                                {subCategory}
-                            </button>
-                        ))}
-                    </div>
-                )}
             </div>
+
+            {/* Subcategory container */}
+            {selectedCategory !== 'All Categories' && subCategories.length > 0 && (
+                <div className="subcategory-container">
+                    {subCategories.map(subCategory => (
+                        <button
+                            key={subCategory}
+                            className={`subcategory-button ${selectedSubCategory === subCategory ? 'active' : ''}`}
+                            onClick={() => handleSubCategoryChange(subCategory)}
+                        >
+                            {subCategory}
+                        </button>
+                    ))}
+                </div>
+            )}
 
             <div className="items-list">
                 {filteredItems.length > 0 ? (
                     <ul>
                     {filteredItems.map(item => (
                         <li key={item.id} className="item-card">
-                            <img 
-                                src={item.image_url} 
-                                alt={item.name} 
-                                onClick={() => handleImageClick(item.image_url)} 
+                            <img
+                                src={item.image_url}
+                                alt={item.name}
+                                onClick={() => handleImageClick(item.image_url)}
                             />
                             <h3>{item.name}</h3>
                             <p>{item.description}</p>
                             <p>Starting Bid: ksh {item.starting_price.toFixed(2)}</p>
                             <p>Category: {item.category}</p>
-                            <p>Subcategory: {item.sub_category || 'None'} {/* Ensure correct case and display a fallback if needed */}</p>
+                            <p>Subcategory: {item.sub_category || 'None'}</p>
                             <form
                                 onSubmit={(e) => {
                                     e.preventDefault();

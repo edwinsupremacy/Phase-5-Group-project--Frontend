@@ -22,20 +22,23 @@
   display: inline;
 }
 
-.navbar ul li a {
-  text-decoration: none;
+.navbar ul li a,
+.logout-link {
+  text-decoration: none; /* Remove underline */
   color: #A0937D;
   font-weight: 600;
   transition: color 0.3s ease, background-color 0.3s ease;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 5px 10px; /* Adjust padding for button */
+  border-radius: 5px; /* Match the button to links */
+  background: none; /* Ensure no background */
+  border: none; /* Remove border if any */
 }
 
-.navbar ul li a:hover {
+.navbar ul li a:hover,
+.logout-link:hover {
   color: #fff;
-  background-color: #7e725a;
+  background-color: #7e725a; /* Hover background for logout */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
 }
 
 .nav-link {
@@ -64,4 +67,8 @@
 
 .nav-link:hover::after {
   transform: scaleX(1);
+}
+
+.logout-link {
+  cursor: pointer; /* Makes it clear it's clickable */
 }
