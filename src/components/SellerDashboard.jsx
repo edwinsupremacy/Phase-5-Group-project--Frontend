@@ -5,12 +5,14 @@ import io from 'socket.io-client';
 
 const SellerDashboard = () => {
     const [items, setItems] = useState([]);
+    const [subCategories, setSubCategories] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
     const [formData, setFormData] = useState({
         name: '',
         description: '',
         startingPrice: '',
         category: '',
+        subCategory: '', // Ensure this is properly initialized
         imageUrl: ''
     });
     const [error, setError] = useState('');
@@ -21,6 +23,15 @@ const SellerDashboard = () => {
     const [bids, setBids] = useState({});
     const [selectedCategory, setSelectedCategory] = useState('');
 
+    const categoryData = {
+        Vehicle: ["Car", "Motorcycle", "Truck"],
+        Jewelry: ["Ring", "Necklace", "Bracelet"],
+        Electronic: ["Phone", "Laptop", "Tablet"],
+        Watch: ["Analog", "Digital", "Smart"],
+        House: ["Apartment", "Villa", "Cottage"],
+        Art: ["Painting", "Sculpture", "Photography"]
+    };
+
     useEffect(() => {
         if (shouldFetchItems) {
             fetchItems();
@@ -29,7 +40,7 @@ const SellerDashboard = () => {
 
     useEffect(() => {
         filterItems();
-    }, [items, selectedCategory]);
+    }, [items, selectedCategory, formData.subCategory]);
 
     const fetchItems = async () => {
         try {
@@ -57,7 +68,10 @@ const SellerDashboard = () => {
 
     const filterItems = () => {
         if (selectedCategory) {
-            setFilteredItems(items.filter(item => item.category === selectedCategory));
+            setFilteredItems(items.filter(item => 
+                item.category === selectedCategory &&
+                (!formData.subCategory || item.subCategory === formData.subCategory)
+            ));
         } else {
             setFilteredItems(items);
         }
@@ -65,17 +79,29 @@ const SellerDashboard = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleCategoryChange = (e) => {
+        const selectedCategory = e.target.value;
+        setSelectedCategory(selectedCategory);
+        setSubCategories(categoryData[selectedCategory] || []);
+        setFormData(prev => ({
+            ...prev,
+            category: selectedCategory,
+            subCategory: '' // Reset subCategory when category changes
+        }));
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { name, description, startingPrice, category, imageUrl } = formData;
+        const { name, description, startingPrice, category, subCategory, imageUrl } = formData;
 
-        if (!name || !description || !startingPrice || !category || !imageUrl) {
+        if (!name || !description || !startingPrice || !category || !subCategory || !imageUrl) {
             setError('Please fill in all fields.');
             return;
         }
+
         setError('');
 
         const newItem = {
@@ -83,8 +109,11 @@ const SellerDashboard = () => {
             description,
             starting_price: parseFloat(startingPrice),
             category,
+            sub_category: subCategory, // Ensure this is correctly included
             image_url: imageUrl
         };
+
+        console.log('Submitting Item:', newItem); // Debugging log
 
         try {
             const url = editIndex !== null
@@ -98,7 +127,7 @@ const SellerDashboard = () => {
                 data: newItem
             });
 
-            setFormData({ name: '', description: '', startingPrice: '', category: '', imageUrl: '' });
+            setFormData({ name: '', description: '', startingPrice: '', category: '', subCategory: '', imageUrl: '' });
             setEditIndex(null);
             setShouldFetchItems(true);
         } catch (err) {
@@ -125,6 +154,7 @@ const SellerDashboard = () => {
             description: itemToEdit.description,
             startingPrice: itemToEdit.starting_price,
             category: itemToEdit.category,
+            subCategory: itemToEdit.sub_category || '', // Handle potential undefined value
             imageUrl: itemToEdit.image_url
         });
         setEditIndex(index);
@@ -145,6 +175,7 @@ const SellerDashboard = () => {
         }));
     };
 
+<<<<<<< HEAD
     const handleStartLiveBidSession = async (itemId) => {
         try {
            await axiosInstance.post(`http://localhost:5000/auctions/${itemId}/start`);
@@ -170,6 +201,8 @@ const SellerDashboard = () => {
         setSelectedCategory(e.target.value);
     };
 
+=======
+>>>>>>> 822d48ce2c4e7b49a1dbd3564960ba370f0e4e67
     return (
         <div className="seller-dashboard-container">
             <div className="seller-add-item-section">
@@ -206,16 +239,25 @@ const SellerDashboard = () => {
                     <select
                         name="category"
                         value={formData.category}
-                        onChange={handleChange}
+                        onChange={handleCategoryChange}
                         className="seller-input"
                     >
                         <option value="">Select Category</option>
-                        <option value="Vehicle">Vehicle</option>
-                        <option value="Jewelry">Jewelry</option>
-                        <option value="Electronic">Electronic</option>
-                        <option value="Watch">Watch</option>
-                        <option value="House">House</option>
-                        <option value="Art">Art</option>
+                        {Object.keys(categoryData).map(category => (
+                            <option key={category} value={category}>{category}</option>
+                        ))}
+                    </select>
+                    <select
+                        name="subCategory"
+                        value={formData.subCategory} // Ensure value is correctly set
+                        onChange={handleChange}
+                        className="seller-input"
+                        disabled={!selectedCategory}
+                    >
+                        <option value="">Select Subcategory</option>
+                        {subCategories.map((subCategory, index) => (
+                            <option key={index} value={subCategory}>{subCategory}</option>
+                        ))}
                     </select>
                     <input
                         type="text"
@@ -238,6 +280,7 @@ const SellerDashboard = () => {
                     {showItems ? 'Hide Items' : 'Show Items'}
                 </button>
                 {showItems && (
+<<<<<<< HEAD
                     <>
                         <div className="seller-category-filter">
                             <select value={selectedCategory} onChange={handleCategoryChange} className="seller-input">
@@ -292,6 +335,43 @@ const SellerDashboard = () => {
                             )}
                         </div>
                     </>
+=======
+                    <div className="seller-items-list">
+                        {filteredItems.length > 0 ? (
+                            filteredItems.map((item, index) => (
+                                <div key={item.id} className="seller-item-card">
+                                    <h3 className="seller-item-title">{item.name}</h3>
+                                    <p className="seller-item-description">{item.description}</p>
+                                    <p className="seller-item-price">Starting Price: ${item.starting_price}</p>
+                                    <p className="seller-item-category">Category: {item.category}</p>
+                                    <p className="seller-item-subcategory">Subcategory: {item.sub_category}</p>
+                                    <img src={item.image_url} alt={item.name} className="seller-item-image" />
+                                    <button onClick={() => handleEdit(index)} className="seller-item-edit-button">
+                                        Edit
+                                    </button>
+                                    <button onClick={() => handleDelete(index)} className="seller-item-delete-button">
+                                        Delete
+                                    </button>
+                                    <button onClick={() => toggleBiddersVisibility(index)} className="seller-item-bidders-button">
+                                        {biddersVisibility[index] ? 'Hide Bidders' : 'Show Bidders'}
+                                    </button>
+                                    {biddersVisibility[index] && bids[item.id] && (
+                                        <div className="seller-bidders-list">
+                                            {bids[item.id].map(bid => (
+                                                <div key={bid.id} className="seller-bid">
+                                                    <p className="seller-bid-amount">Bid Amount: ${bid.amount}</p>
+                                                    <p className="seller-bid-user">User: {bid.username}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            ))
+                        ) : (
+                            <p>No items found.</p>
+                        )}
+                    </div>
+>>>>>>> 822d48ce2c4e7b49a1dbd3564960ba370f0e4e67
                 )}
             </div>
         </div>

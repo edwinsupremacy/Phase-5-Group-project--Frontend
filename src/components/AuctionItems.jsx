@@ -10,14 +10,29 @@ const AuctionItems = () => {
     const [message, setMessage] = useState('');
     const [userId, setUserId] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState('All Categories');
+    const [selectedSubCategory, setSelectedSubCategory] = useState('');
     const [categories] = useState(['All Categories', 'Vehicle', 'Jewelry', 'Electronic', 'Watch', 'House', 'Art']);
+    const [subCategories, setSubCategories] = useState([]);
     const [placedBids, setPlacedBids] = useState({});
     const [selectedImage, setSelectedImage] = useState(null); // State for modal
+
+    const categoryData = {
+        Vehicle: ["Car", "Motorcycle", "Truck"],
+        Jewelry: ["Ring", "Necklace", "Bracelet"],
+        Electronic: ["Phone", "Laptop", "Tablet"],
+        Watch: ["Analog", "Digital", "Smart"],
+        House: ["Apartment", "Villa", "Cottage"],
+        Art: ["Painting", "Sculpture", "Photography"]
+    };
 
     useEffect(() => {
         fetchUserId();
         fetchItems();
     }, []);
+
+    useEffect(() => {
+        filterItems();
+    }, [items, selectedCategory, selectedSubCategory]);
 
     const fetchUserId = () => {
         const storedUserId = localStorage.getItem('userId');
@@ -105,7 +120,6 @@ const AuctionItems = () => {
             });
     
             if (response.ok) {
-
                 setPlacedBids(prevBids => {
                     const newBids = { ...prevBids };
                     delete newBids[itemId];
@@ -129,16 +143,23 @@ const AuctionItems = () => {
             setMessage('Error canceling bid. Please try again.');
         }
     };
-    
+
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
-        if (category === 'All Categories') {
-            setFilteredItems(items);
-        } else {
-            setFilteredItems(items.filter(item => item.category === category));
-        }
+        setSubCategories(categoryData[category] || []);
+        setSelectedSubCategory('');
     };
 
+    const handleSubCategoryChange = (subCategory) => {
+        setSelectedSubCategory(subCategory);
+    };
+
+    const filterItems = () => {
+        setFilteredItems(items.filter(item => 
+            (selectedCategory === 'All Categories' || item.category === selectedCategory) &&
+            (selectedSubCategory === '' || item.sub_category === selectedSubCategory) // Correct case
+        ));
+    };
     const handleImageClick = (imageUrl) => {
         setSelectedImage(imageUrl);
     };
@@ -164,46 +185,60 @@ const AuctionItems = () => {
                         </button>
                     ))}
                 </div>
+                {selectedCategory !== 'All Categories' && (
+                    <div className="subcategory-buttons">
+                        {subCategories.map(subCategory => (
+                            <button
+                                key={subCategory}
+                                className={`subcategory-button ${selectedSubCategory === subCategory ? 'active' : ''}`}
+                                onClick={() => handleSubCategoryChange(subCategory)}
+                            >
+                                {subCategory}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
 
             <div className="items-list">
                 {filteredItems.length > 0 ? (
                     <ul>
-                        {filteredItems.map(item => (
-                            <li key={item.id} className="item-card">
-                                <img 
-                                    src={item.image_url} 
-                                    alt={item.name} 
-                                    onClick={() => handleImageClick(item.image_url)} 
+                    {filteredItems.map(item => (
+                        <li key={item.id} className="item-card">
+                            <img 
+                                src={item.image_url} 
+                                alt={item.name} 
+                                onClick={() => handleImageClick(item.image_url)} 
+                            />
+                            <h3>{item.name}</h3>
+                            <p>{item.description}</p>
+                            <p>Starting Bid: ksh {item.starting_price.toFixed(2)}</p>
+                            <p>Category: {item.category}</p>
+                            <p>Subcategory: {item.sub_category || 'None'} {/* Ensure correct case and display a fallback if needed */}</p>
+                            <form
+                                onSubmit={(e) => {
+                                    e.preventDefault();
+                                    if (placedBids[item.id]) {
+                                        handleBidCancel(item.id);
+                                    } else {
+                                        handleBidSubmit(item.id);
+                                    }
+                                }}
+                            >
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    value={bidAmount[item.id] || ''}
+                                    onChange={(e) => handleBidChange(item.id, e.target.value)}
+                                    placeholder="Enter your bid"
                                 />
-                                <h3>{item.name}</h3>
-                                <p>{item.description}</p>
-                                <p>Starting Bid: ksh {item.starting_price.toFixed(2)}</p>
-                                <p>Category: {item.category}</p>
-                                <form
-                                    onSubmit={(e) => {
-                                        e.preventDefault();
-                                        if (placedBids[item.id]) {
-                                            handleBidCancel(item.id);
-                                        } else {
-                                            handleBidSubmit(item.id);
-                                        }
-                                    }}
-                                >
-                                    <input
-                                        type="number"
-                                        step="0.01"
-                                        value={bidAmount[item.id] || ''}
-                                        onChange={(e) => handleBidChange(item.id, e.target.value)}
-                                        placeholder="Enter your bid"
-                                    />
-                                    <button type="submit">
-                                        {placedBids[item.id] ? 'Cancel Bid' : 'Place Bid'}
-                                    </button>
-                                </form>
-                            </li>
-                        ))}
-                    </ul>
+                                <button type="submit">
+                                    {placedBids[item.id] ? 'Cancel Bid' : 'Place Bid'}
+                                </button>
+                            </form>
+                        </li>
+                    ))}
+                </ul>
                 ) : (
                     <p>No items available at the moment.</p>
                 )}
