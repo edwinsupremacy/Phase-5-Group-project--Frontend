@@ -1,16 +1,18 @@
 .admin-dashboard-container {
     padding: 20px;
-    background-color: #F6E6CB; 
-    max-width: 1200px; 
-    margin: 0 auto; 
-    height: calc(100vh - 40px); 
-    overflow-y: auto; 
+    background-color: #F6E6CB;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: calc(100vh - 40px);
+    overflow-y: auto;
+    border-radius: 30px;
+
 }
 
 .admin-dashboard-title {
     font-size: 2em;
     margin-bottom: 20px;
-    color: #A0937D; 
+    color: #A0937D;
 }
 
 .admin-section {
@@ -21,8 +23,8 @@
     padding: 10px 20px;
     margin-bottom: 10px;
     cursor: pointer;
-    background-color: #B6C7AA; 
-    color: #A0937D; 
+    background-color: #B6C7AA;
+    color: #A0937D;
     border: none;
     border-radius: 5px;
 }
@@ -34,10 +36,10 @@
 }
 
 .admin-item-card, .admin-user-card {
-    border: 1px solid #E7D4B5; 
+    border: 1px solid #E7D4B5;
     border-radius: 5px;
     padding: 15px;
-    background-color: #FFF; 
+    background-color: #FFF;
     width: 300px;
 }
 
@@ -48,23 +50,23 @@
 
 .admin-item-details, .admin-user-details {
     margin-top: 10px;
-    color: #A0937D; 
+    color: #A0937D;
 }
 
 .admin-item-name, .admin-user-name {
     font-size: 1.2em;
     margin-bottom: 5px;
-    color: #A0937D; 
+    color: #A0937D;
 }
 
 .admin-item-description, .admin-user-email {
     margin-bottom: 5px;
-    color: #B6C7AA; 
+    color: #B6C7AA;
 }
 
 .admin-item-price, .admin-item-category {
     margin-bottom: 10px;
-    color: #A0937D; 
+    color: #A0937D;
 }
 
 .admin-item-actions, .admin-user-actions {
@@ -75,7 +77,7 @@
 .admin-item-button, .admin-user-button {
     padding: 5px 10px;
     cursor: pointer;
-    background-color: #E7D4B5; 
+    background-color: #E7D4B5;
     color: #FFF;
     border: none;
     border-radius: 5px;
@@ -92,5 +94,29 @@
 
 .admin-item-bids li {
     padding: 5px 0;
-    color: #A0937D; 
+    color: #A0937D;
+}
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.contact-container {
+    padding: 2rem;
+    background-color: #F1E3D3;
+    color: #5A4D3A;
+    min-height: calc(100vh - 4rem);
+    box-sizing: border-box;
+    border-radius: 50px;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin-top: 50px;
+    animation: pulse 2s infinite; /* Apply the pulse animation */
 }

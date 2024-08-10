@@ -1,11 +1,11 @@
-.seller-login-container {
+/* .seller-login-container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
     background-color: #E7D4B5;
 
-}
+} */
 
 .seller-login-form {
     background-color: #F6E6CB;
@@ -56,7 +56,7 @@
 
 .seller-login-form button:hover {
     background-color: #8c7b5a;
-   
+
 }
 
 .error {
