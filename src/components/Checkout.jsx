@@ -35,7 +35,7 @@ function Checkout() {
       // Assuming payment was successful, update the bid status to 'Paid Successfully'
       const bidId = location.state?.bidId; // Assuming the bid ID is passed in location.state
       if (bidId) {
-        await axios.patch(`/api/bids/${bidId}`, { status: 'Paid Successfully' });
+        await axios.patch(`http://localhost:5000/bids/${bidId}`, { status: 'Paid Successfully' });
       }
 
       // Display success message and navigate to home page

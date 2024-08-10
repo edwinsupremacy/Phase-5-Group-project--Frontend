@@ -37,9 +37,11 @@ body {
     0% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.05);
     }
+
     100% {
         transform: scale(1);
     }
@@ -54,20 +56,26 @@ body {
     color: #a0937d;
     cursor: pointer;
     transition: background-color 0.3s;
-    animation: pulse 1.5s infinite; /* Adjust duration as needed */
+    animation: pulse 1.5s infinite;
+    /* Adjust duration as needed */
 }
 
 .category-button:hover,
 .subcategory-button:hover {
-    background-color: #e7d4b5; /* Change background on hover */
-    animation: none; /* Disable pulse effect when hovered */
+    background-color: #e7d4b5;
+    /* Change background on hover */
+    animation: none;
+    /* Disable pulse effect when hovered */
 }
 
 .category-button.active,
 .subcategory-button.active {
-    background-color: #a0937d; /* Active button background color */
-    color: #f6e6cb; /* Active button text color */
-    font-weight: bold; /* Bold text for active button */
+    background-color: #a0937d;
+    /* Active button background color */
+    color: #f6e6cb;
+    /* Active button text color */
+    font-weight: bold;
+    /* Bold text for active button */
 }
 
 .items-list {
@@ -157,23 +165,32 @@ body {
 .subcategory-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Space between buttons */
-    margin-bottom: 20px; /* Space below the subcategory buttons */
+    gap: 10px;
+    /* Space between buttons */
+    margin-bottom: 20px;
+    /* Space below the subcategory buttons */
     justify-content: center;
 }
 
 .subcategory-button {
     padding: 10px 15px;
     border: none;
-    background-color: #b6c7aa; /* Match category button background */
-    color: #a0937d; /* Match text color */
+    background-color: #b6c7aa;
+    /* Match category button background */
+    color: #a0937d;
+    /* Match text color */
     cursor: pointer;
-    transition: background-color 0.3s; /* Add transition for background color */
-    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s;
+    /* Add transition for background color */
+    border-radius: 5px;
+    /* Rounded corners */
 }
 
 .subcategory-button.active {
-    background-color: #a0937d; /* Active button background color */
-    color: #f6e6cb; /* Active button text color */
-    font-weight: bold; /* Bold text for active button */
+    background-color: #a0937d;
+    /* Active button background color */
+    color: #f6e6cb;
+    /* Active button text color */
+    font-weight: bold;
+    /* Bold text for active button */
 }

@@ -301,7 +301,7 @@ const SellerDashboard = ({ sellerId }) => {
                         <div key={item.id} className="item-card">
                             <h3>{item.name}</h3>
                             <p>{item.description}</p>
-                            <p>Starting Price: ${item.starting_price}</p>
+                            <p>Starting Price: ksh {item.starting_price}</p>
                             <p>Category: {item.category}</p>
                             <p>Sub-Category: {item.sub_category}</p>
                             <img src={item.image_url} alt={item.name} className="item-image" />

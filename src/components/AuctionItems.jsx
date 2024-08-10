@@ -253,7 +253,7 @@ const AuctionItems = () => {
                             </button>
                         ) : (
                             <>
-                                <input
+                               <input
                                     type="number"
                                     value={bidAmount[item.id] || ''}
                                     onChange={(e) => handleBidChange(item.id, e.target.value)}
