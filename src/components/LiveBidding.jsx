@@ -14,7 +14,7 @@ const LiveBidding = () => {
     }, []);
 
     const placeBid = (amount) => {
-        socket.emit('place_bid', { auction_id: 1, amount, user_id: 1 }); // Replace with actual auction_id and user_id
+        socket.emit('place_bid', { auction_id: 1, amount, user_id: 1 }); 
     };
 
     return (

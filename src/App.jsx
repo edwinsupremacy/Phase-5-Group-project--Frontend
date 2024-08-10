@@ -1,3 +1,5 @@
+// src/App.jsx
+
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import './App.css';
@@ -13,15 +15,15 @@ import Navbar from './components/Navbar';
 import AdminDashboard from './components/AdminDashboard';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
+import RecentBids from './components/RecentBids';
+import Checkout from './components/Checkout'; // Import Checkout component
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const location = useLocation();
 
-  // Determine if Navbar should be shown
   const determineNavbarVisibility = () => {
-    // Show Navbar on all pages except login pages and admin dashboard
     return !(
       location.pathname.startsWith('/login') ||
       location.pathname.startsWith('/admin-dashboard') ||
@@ -30,7 +32,7 @@ function App() {
       location.pathname.startsWith('/seller-dashboard') ||
       location.pathname.startsWith('/forgot-password') ||
       location.pathname.startsWith('/reset-password') ||
-      !showNavbar // Hide Navbar if showNavbar state is false
+      !showNavbar
     );
   };
 
@@ -39,6 +41,7 @@ function App() {
       {determineNavbarVisibility() && <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
       <div className="content">
         <Routes>
+          {/* Unauthenticated Routes */}
           {!isAuthenticated ? (
             <>
               <Route path="/" element={<Home />} />
@@ -53,12 +56,15 @@ function App() {
             </>
           ) : (
             <>
+              {/* Authenticated Routes */}
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/auction-items" element={<AuctionItems setShowNavbar={setShowNavbar} />} />
               <Route path="/seller-dashboard" element={<SellerDashboard />} />
               <Route path="/admin-dashboard" element={<AdminDashboard setIsAuthenticated={setIsAuthenticated} />} />
+              <Route path="/recent-bids" element={<RecentBids />} />
+              <Route path="/checkout/:bidId" element={<Checkout />} /> {/* Add route for Checkout */}
             </>
           )}
         </Routes>

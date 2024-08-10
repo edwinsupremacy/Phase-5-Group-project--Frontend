@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './AuctionItems.css';
-import { FaSearch } from 'react-icons/fa';
-import ImageModal from './ImageModal'; // Import the modal component
+import { FaSearch, FaClock, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import ImageModal from './ImageModal';
+import { useNavigate } from 'react-router-dom';
 
 const AuctionItems = () => {
     const [items, setItems] = useState([]);
@@ -14,7 +15,11 @@ const AuctionItems = () => {
     const [categories] = useState(['All Categories', 'Vehicle', 'Jewelry', 'Electronic', 'Watch', 'House', 'Art']);
     const [subCategories, setSubCategories] = useState([]);
     const [placedBids, setPlacedBids] = useState({});
-    const [selectedImage, setSelectedImage] = useState(null); // State for modal
+    const [recentBids, setRecentBids] = useState([]);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [showRecentBids, setShowRecentBids] = useState(true); // State to control collapsible section
+
+    const navigate = useNavigate();
 
     const categoryData = {
         Vehicle: ["Car", "Motorcycle", "Truck"],
@@ -28,6 +33,7 @@ const AuctionItems = () => {
     useEffect(() => {
         fetchUserId();
         fetchItems();
+        fetchRecentBids();
     }, []);
 
     useEffect(() => {
@@ -55,6 +61,21 @@ const AuctionItems = () => {
             }
         } catch (err) {
             console.error('Error fetching items:', err);
+        }
+    };
+
+    const fetchRecentBids = async () => {
+        if (!userId) return;
+        try {
+            const response = await fetch(`http://localhost:5000/users/${userId}/recent-bids`);
+            if (response.ok) {
+                const data = await response.json();
+                setRecentBids(data);
+            } else {
+                console.error('Error fetching recent bids:', response.statusText);
+            }
+        } catch (err) {
+            console.error('Error fetching recent bids:', err);
         }
     };
 
@@ -94,6 +115,7 @@ const AuctionItems = () => {
                 }));
                 setMessage('Bid placed successfully!');
                 fetchItems();
+                fetchRecentBids();
             } else {
                 const errorData = await response.json();
                 setMessage(`Failed to place bid: ${errorData.error}`);
@@ -134,6 +156,7 @@ const AuctionItems = () => {
 
                 setMessage('Bid canceled successfully!');
                 fetchItems();
+                fetchRecentBids();
             } else {
                 const errorData = await response.json();
                 setMessage(`Failed to cancel bid: ${errorData.error}`);
@@ -157,7 +180,7 @@ const AuctionItems = () => {
     const filterItems = () => {
         setFilteredItems(items.filter(item =>
             (selectedCategory === 'All Categories' || item.category === selectedCategory) &&
-            (selectedSubCategory === '' || item.sub_category === selectedSubCategory) // Correct case
+            (selectedSubCategory === '' || item.sub_category === selectedSubCategory)
         ));
     };
 
@@ -167,6 +190,10 @@ const AuctionItems = () => {
 
     const handleCloseModal = () => {
         setSelectedImage(null);
+    };
+
+    const toggleRecentBids = () => {
+        navigate('/recent-bids');
     };
 
     return (
@@ -188,7 +215,6 @@ const AuctionItems = () => {
                 </div>
             </div>
 
-            {/* Subcategory container */}
             {selectedCategory !== 'All Categories' && subCategories.length > 0 && (
                 <div className="subcategory-container">
                     {subCategories.map(subCategory => (
@@ -202,52 +228,71 @@ const AuctionItems = () => {
                     ))}
                 </div>
             )}
-
-            <div className="items-list">
-                {filteredItems.length > 0 ? (
-                    <ul>
-                    {filteredItems.map(item => (
-                        <li key={item.id} className="item-card">
-                            <img
-                                src={item.image_url}
-                                alt={item.name}
-                                onClick={() => handleImageClick(item.image_url)}
-                            />
-                            <h3>{item.name}</h3>
-                            <p>{item.description}</p>
-                           <p>Starting Bid: ksh {parseFloat(item.starting_price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                            <p>Category: {item.category}</p>
-                            <p>Subcategory: {item.sub_category || 'None'}</p>
-                            <form
-                                onSubmit={(e) => {
-                                    e.preventDefault();
-                                    if (placedBids[item.id]) {
-                                        handleBidCancel(item.id);
-                                    } else {
-                                        handleBidSubmit(item.id);
-                                    }
-                                }}
+           <div className="recent-bids-section">
+                <h3 onClick={toggleRecentBids} className="recent-bids-title">
+                    <FaClock /> Recent Bids {showRecentBids ? <FaChevronUp /> : <FaChevronDown />}
+                </h3>
+            <div className="items-grid">
+                {filteredItems.map(item => (
+                    <div key={item.id} className="item-card">
+                        <img
+                            src={item.image_url}
+                            alt={item.name}
+                            className="item-image"
+                            onClick={() => handleImageClick(item.image_url)}
+                        />
+                        <h3 className="item-title">{item.name}</h3>
+                        <p className="item-description">{item.description}</p>
+                        <p className="item-price">Starting Price: ksh {item.starting_price.toLocaleString()}</p>
+                        {placedBids[item.id] ? (
+                            <button
+                                className="cancel-bid-button"
+                                onClick={() => handleBidCancel(item.id)}
                             >
+                                Cancel Bid
+                            </button>
+                        ) : (
+                            <>
                                 <input
                                     type="number"
-                                    step="0.01"
                                     value={bidAmount[item.id] || ''}
                                     onChange={(e) => handleBidChange(item.id, e.target.value)}
-                                    placeholder="Enter your bid"
+                                    placeholder="Enter bid amount"
                                 />
-                                <button type="submit">
-                                    {placedBids[item.id] ? 'Cancel Bid' : 'Place Bid'}
+                                <button
+                                    className="place-bid-button"
+                                    onClick={() => handleBidSubmit(item.id)}
+                                >
+                                    Place Bid
                                 </button>
-                            </form>
-                        </li>
-                    ))}
-                </ul>
-                ) : (
-                    <p>No items available at the moment.</p>
+                            </>
+                        )}
+                    </div>
+                ))}
+            </div>
+
+            {selectedImage && (
+                <ImageModal
+                    imageUrl={selectedImage}
+                    onClose={handleCloseModal}
+                />
+            )}
+
+           
+                {showRecentBids && recentBids.length > 0 && (
+                    <ul className="recent-bids-list">
+                        {recentBids.map(bid => (
+                            <li key={bid.id} className="recent-bid-card">
+                                <p><strong>Item:</strong> {bid.item.name}</p>
+                                <p><strong>Bid Amount:</strong> ksh {parseFloat(bid.amount).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                                <p><strong>Status:</strong> <span className={`bid-status ${bid.status.toLowerCase()}`}>{bid.status}</span></p>
+                            </li>
+                        ))}
+                    </ul>
                 )}
             </div>
+
             {message && <p className="message">{message}</p>}
-            <ImageModal imageUrl={selectedImage} onClose={handleCloseModal} />
         </div>
     );
 };

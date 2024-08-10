@@ -14,7 +14,12 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
   return (
     <nav className="navbar">
       <Link to="/" className="nav-link">Home</Link>
-      {isAuthenticated && <Link to="/auction-items" className="nav-link">Auction Items</Link>}
+      {isAuthenticated && (
+        <>
+          <Link to="/auction-items" className="nav-link">Auction Items</Link>
+          <Link to="/recent-bids" className="nav-link">Recent Bids</Link>
+        </>
+      )}
       <Link to="/about" className="nav-link">About</Link>
       <Link to="/contact" className="nav-link">Contact</Link>
       {isAuthenticated ? (
@@ -27,4 +32,3 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
 };
 
 export default Navbar;
-

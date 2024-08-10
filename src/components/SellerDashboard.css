@@ -1,6 +1,6 @@
 /* Container for the entire dashboard */
 .seller-dashboard-container {
-    max-width: 5000px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 40px;
     background-color: #F9F3E0;
@@ -9,10 +9,8 @@
     display: flex;
     height: 100vh;
     overflow: hidden;
-    /* Prevent overflow on the main container */
     color: black;
     font-family: 'Garamond', serif;
-    width: 1100px;
 }
 
 /* Flexbox container with scrolling enabled for the item section */
@@ -20,7 +18,6 @@
     display: flex;
     flex: 1;
     overflow: hidden;
-    /* Ensure internal scrolling works */
 }
 
 /* Section to add items with scrolling */
@@ -28,7 +25,6 @@
     flex: 1;
     margin-right: 30px;
     overflow-y: auto;
-    /* Enable vertical scrolling */
     background-color: #E1D8C9;
     border-radius: 18px;
     padding: 30px;
@@ -40,7 +36,6 @@
 .seller-items-section {
     flex: 2;
     overflow-y: auto;
-    /* Enable vertical scrolling */
     background-color: #FFFFFF;
     padding: 30px;
     border-radius: 18px;
@@ -51,9 +46,7 @@
 .seller-items-container {
     width: 100%;
     max-height: 700px;
-    /* Adjust as needed */
     overflow-y: auto;
-    /* Enable vertical scrolling */
     background-color: #FFFFFF;
     padding: 15px;
     border-radius: 12px;
@@ -82,7 +75,6 @@
 .seller-items-list {
     margin-top: 20px;
     overflow-y: auto;
-    /* Enable vertical scrolling */
 }
 
 .seller-item {
@@ -94,20 +86,15 @@
 }
 
 .seller-item-image {
-    width: 100%;
-    /* Make sure the image takes the full width of its container */
-    height: 200px;
-    /* Fixed height to maintain consistent layout */
-    object-fit: contain;
-    /* Maintain aspect ratio, cropping the image as needed */
-    border-radius: 16px 16px 0 0;
-    /* Keep existing border radius */
-    display: block;
-    /* Ensures the image behaves like a block element */
+    width: 150px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .seller-item-details {
     margin-left: 20px;
+    flex: 1;
 }
 
 .seller-item-actions {
@@ -170,7 +157,7 @@
 
 .seller-accept-bid-button {
     background-color: #28a745;
-    color: #643c3c;
+    color: #fff;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
@@ -188,6 +175,9 @@
 
 .seller-filter-section {
     margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .seller-filter-title {
@@ -197,9 +187,12 @@
 
 .seller-input {
     margin-bottom: 10px;
-    padding: 8px;
+    padding: 10px;
     font-size: 1em;
     width: 100%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .seller-toggle-items-btn {
@@ -207,70 +200,26 @@
     background-color: #007bff;
     color: white;
     border: none;
+    border-radius: 8px;
     cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
 }
 
-.seller-items-list {
-    margin-top: 20px;
-}
-
-.seller-item {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.seller-item-image {
-    max-width: 100px;
-    height: auto;
-}
-
-.seller-item-details {
-    margin-left: 20px;
-}
-
-.seller-edit-btn,
-.seller-delete-btn,
-.seller-bidders-btn,
-.seller-start-live-bid-btn,
-.seller-end-live-bid-btn {
-    margin-right: 10px;
-    padding: 8px;
-    background-color: #007bff;
-    color: rgb(88, 76, 76);
-    border: none;
-    cursor: pointer;
-}
-
-.seller-accept-bid-btn {
-    background-color: #28a745;
-}
-
-.seller-filter-section {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+.seller-toggle-items-btn:hover {
+    background-color: #0056b3;
 }
 
 .seller-filter-button {
     background-color: #ce8989;
     border: 1px solid #ccc;
-    padding: 8px 16px;
+    padding: 10px 20px;
     cursor: pointer;
-    margin-right: 5px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
 }
 
 .seller-filter-button.active {
     background-color: #333;
     color: #fff;
-}
-
-.seller-list-toggle-button {
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    width: 100%;
 }

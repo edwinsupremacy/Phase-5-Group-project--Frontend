@@ -1,0 +1,70 @@
+.recent-bids {
+    padding: 20px;
+    background-color: #d34545c0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recent-bids-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.bids-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.bids-table th,
+.bids-table td {
+    padding: 12px;
+    text-align: left;
+}
+
+.bids-table thead {
+    background-color: #007bff;
+    color: #473b3b;
+}
+
+.bids-table tbody tr:nth-child(even) {
+    background-color: #664b4b;
+}
+
+
+.bids-table th {
+    border-bottom: 2px solid #007bff;
+}
+
+.bids-table td {
+    border-bottom: 1px solid #ddd;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.status.pending {
+    color: #ffc107;
+}
+
+.status.accepted {
+    color: #28a745;
+}
+
+.status.rejected {
+    color: #dc3545;
+}
+
+.loading,
+.error {
+    font-size: 18px;
+    color: #333;
+}
+
+.no-bids {
+    font-size: 18px;
+    color: #888;
+}
