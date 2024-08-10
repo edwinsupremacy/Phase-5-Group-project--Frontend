@@ -158,7 +158,7 @@ const AdminDashboard = () => {
                                             {bids[item.id] && bids[item.id].length > 0 ? (
                                                 <ul>
                                                     {bids[item.id].map(bid => (
-                                                        <li key={bid.id}>{bid.bidder_name} - ksh {bid.amount.toFixed(2)}</li>
+                                                        <li key={bid.id}>{bid.username} - ksh {bid.amount.toFixed(2)}</li>
                                                     ))}
                                                 </ul>
                                             ) : (
