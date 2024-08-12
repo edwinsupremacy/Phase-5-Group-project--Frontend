@@ -4,7 +4,8 @@
   right: 0;
   left: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0);
+  background-color: #a0b8a0;
+  /* Dark beige background color with slight transparency */
   padding: 20px;
   display: flex;
   justify-content: flex-end;
@@ -22,29 +23,25 @@
   display: inline;
 }
 
-.navbar ul li a,
-.logout-link {
-  text-decoration: none; /* Remove underline */
-  color: #A0937D;
+.navbar ul li a {
+  text-decoration: none;
+  color: #7a6a4f;
   font-weight: 600;
   transition: color 0.3s ease, background-color 0.3s ease;
-  padding: 5px 10px; /* Adjust padding for button */
-  border-radius: 5px; /* Match the button to links */
-  background: none; /* Ensure no background */
-  border: none; /* Remove border if any */
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
-.navbar ul li a:hover,
-.logout-link:hover {
+.navbar ul li a:hover {
   color: #fff;
-  background-color: #7e725a; /* Hover background for logout */
+  background-color: #473207;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .nav-link {
   margin: 0 15px;
   text-decoration: none;
-  color: #A0937D;
+  color: #836e4a;
   position: relative;
 }
 
@@ -69,6 +66,15 @@
   transform: scaleX(1);
 }
 
-.logout-link {
-  cursor: pointer; /* Makes it clear it's clickable */
+.nav-link.logout-button {
+  background-color: #473207;
+  color: #a0b8a0;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 15px;
+  font-weight: 600;
+  font-size: 14px;
 }

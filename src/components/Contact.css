@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Merriweather&display=swap');
 
-/* Vintage Theme Overrides */
+/* Vintage Colors */
 :root {
   --vintage-dark: #A0937D;
   --vintage-medium: #E7D4B5;
@@ -15,33 +15,13 @@ body {
   color: var(--vintage-text);
 }
 
-/* Vintage Contact Container */
 .contact-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  padding-bottom: 10rem;
   font-family: 'Montserrat', sans-serif;
-  background-color: var(--vintage-light);
-  color: var(--vintage-text);
-  border-radius: 8px;
-  overflow-y: auto;
-  max-height: 90vh;
-  scrollbar-width: thin;
-  scrollbar-color: var(--vintage-dark) var(--vintage-medium);
-
-}
-
-.contact-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.contact-container::-webkit-scrollbar-track {
-  background: var(--vintage-medium);
-}
-
-.contact-container::-webkit-scrollbar-thumb {
-  background-color: var(--vintage-dark);
-  border-radius: 8px;
+  margin-bottom: 4rem;
 }
 
 .contact-container h1 {
@@ -64,6 +44,7 @@ body {
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  /* Darker box-shadow */
 }
 
 .contact-form h2,
@@ -97,7 +78,7 @@ body {
   resize: vertical;
 }
 
-.submit-btn {
+.submit-btn1 {
   background-color: var(--vintage-dark);
   color: white;
   border: none;
@@ -109,7 +90,7 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-.submit-btn:hover {
+.submit-btn1:hover {
   background-color: var(--vintage-accent);
 }
 
@@ -129,30 +110,13 @@ body {
   }
 }
 
-/* Vintage Reviews Section */
 .reviews-section {
   margin-top: 4rem;
   background-color: var(--vintage-medium);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  overflow-y: auto;
-  max-height: 50vh;
-  scrollbar-width: thin;
-  scrollbar-color: var(--vintage-dark) var(--vintage-medium);
-}
-
-.reviews-section::-webkit-scrollbar {
-  width: 8px;
-}
-
-.reviews-section::-webkit-scrollbar-track {
-  background: var(--vintage-medium);
-}
-
-.reviews-section::-webkit-scrollbar-thumb {
-  background-color: var(--vintage-dark);
-  border-radius: 8px;
+  /* Darker box-shadow */
 }
 
 .reviews-section h2 {
@@ -164,18 +128,15 @@ body {
   margin-top: 2rem;
 }
 
-.review-item {
+.review {
   background-color: var(--vintage-light);
   padding: 1rem;
   border-radius: 4px;
   margin-bottom: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /* Darker box-shadow */
 }
 
-.review-item p {
+.review p {
   margin: 0.5rem 0;
 }
-/* Add this to your existing CSS */
-.review-item .rating svg {
-    color: gold;
-  }

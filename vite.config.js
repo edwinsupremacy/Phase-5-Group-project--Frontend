@@ -8,4 +8,7 @@ export default defineConfig({
       '/api': 'http://localhost:5000',
     },
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+  },
 });

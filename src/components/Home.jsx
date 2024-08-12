@@ -1,8 +1,13 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './styles.css';
+import { FaClock, FaStar, FaGift, FaCog, FaSearch, FaGavel, FaCheck, FaHistory, FaArrowRight } from 'react-icons/fa';
+// import backgroundImage from '../assets/images/VintageBackground.jpeg';
+import vintageAward from '../assets/images/VintageAward.jpeg';
+import antiqueAward from '../assets/images/AntiqueAward.jpeg';
+import Footer from './Footer';
+import './Home.css';
 
-const testimonialsData = [
+const testimonials = [
   {
     text: "Great experience selling my items!",
     author: "Emmanuel Waseth",
@@ -60,107 +65,183 @@ const testimonialsData = [
   },
 ];
 
-const Home = () => {
+const HomePage = () => {
+  const [auctionCount, setAuctionCount] = useState(500);
+  const [greeting, setGreeting] = useState('');
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [itemsSoldCount, setItemsSoldCount] = useState(120); // Initial count of items sold
+
+  // const backgroundImageStyle = {
+  //   content: '',
+  //   position: 'absolute',
+  //   top: '0',
+  //   left: '0',
+  //   width: '100%',
+  //   height: '100%',
+  //   backgroundImage: `url(${backgroundImage})`,
+  //   backgroundSize: 'cover',
+  //   backgroundPosition: 'center',
+  //   zIndex: '-1',
+  // };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setItemsSoldCount((prevCount) => prevCount + 1); // Increase items sold count by 1 every 3 seconds
-    }, 3000);
+    // Simulating auction count increase
+    const auctionInterval = setInterval(() => {
+      setAuctionCount(prevCount => prevCount + 1);
+    }, 5000);
 
-    return () => clearInterval(interval);
-  }, []);
+    // Set greeting based on time of day
+    const updateGreeting = () => {
+      const hour = new Date().getHours();
+      if (hour < 12) setGreeting('Good morning');
+      else if (hour < 18) setGreeting('Good afternoon');
+      else setGreeting('Good evening');
+    };
 
-  useEffect(() => {
+    updateGreeting();
+    const greetingInterval = setInterval(updateGreeting, 60000); // Update greeting every minute
+
+    // Rotate testimonials
     const testimonialInterval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonialsData.length);
-    }, 2000);
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000); // Change testimonial every 5 seconds
 
-    return () => clearInterval(testimonialInterval);
+    return () => {
+      clearInterval(auctionInterval);
+      clearInterval(greetingInterval);
+      clearInterval(testimonialInterval);
+    };
   }, []);
-
-  const homeContainerStyle = {
-    backgroundImage: 'url(https://img.pikbest.com/ai/illus_our/20230422/496433dd6ebc4a5b3e3d36817ff489c5.jpg!w700wp)',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    width: '1000px',
-    minHeight: '80vh',
-    borderRadius: '45px',
-    padding: '20px',
-    color: '#fff',
-    marginTop: '100px',
-    backgroundColor: '#00000059',
-  };
-
-  const itemsSoldStyle = {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    marginBottom: '20px',
-    textAlign: 'center',
-    color: '#fff',
-  };
-
-  const testimonialsContainerStyle = {
-    width: '600px', // Set a specific width for the testimonials container
-    margin: '20px auto', // Center the container
-    padding: '20px',
-    backgroundColor: 'rgba(246, 230, 203, 0.5)', // Increased transparency
-    borderRadius: '45px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-    textAlign: 'center',
-    animation: 'pulse 2s infinite', // Add pulse animation
-  };
-
-  const testimonialStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    marginTop: '10px',
-  };
-
-  const testimonialImageStyle = {
-    borderRadius: '50%', // Make the image circular
-    width: '80px', // Set the width
-    height: '80px', // Set the height
-    objectFit: 'cover', // Cover the image within the circle
-    marginBottom: '10px', // Space between image and text
-  };
 
   return (
-    <Fragment>
-      <div style={homeContainerStyle}>
-        <div className='main-container'>
-          <h2>Welcome to the Vintage Auction House</h2>
-          <p>Where buyers and sellers connect for seamless transactions.</p>
-        </div>
-        <div style={itemsSoldStyle}>
-          {itemsSoldCount} + items sold
-        </div>
-        <div style={testimonialsContainerStyle}>
-          <h3>User Testimonials</h3>
-          <div style={testimonialStyle}>
-            <img
-              src={testimonialsData[currentTestimonial].image}
-              alt={testimonialsData[currentTestimonial].author}
-              style={testimonialImageStyle}
-            />
-            <p>
-              {testimonialsData[currentTestimonial].text} -
-              <strong> {testimonialsData[currentTestimonial].author}</strong>
-            </p>
+    <><div className="home-page">
+      {/* <div style={backgroundImageStyle}></div> */}
+      <div className="hero-section">
+        <div className="hero-grid">
+          <div className="hero-image"></div>
+          <div className="hero-content">
+            <span className="greeting">{greeting}!</span>
+            <h1>Discover Rare Treasures at Vintage Auctions</h1>
+            <h2 className="secondary-headline">Browse, Bid, and Own a Piece of History</h2>
+            <p className="secondary-subheadline">Experience the thrill of auctions from the comfort of your home</p>
+            <Link
+              className="cta-button pulse"
+              to="/auction-items"
+              style={{
+                display: 'inline-block',
+                marginTop: '2rem',
+                fontSize: '1.25rem',
+                textDecoration: 'none',
+                color: '#FFF',
+                backgroundColor: '#A0937D',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '4px',
+                transition: 'background-color 0.3s, color 0.3s',
+                border: '2px solid #A0937D',
+                textAlign: 'center',
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.backgroundColor = '#B6C7AA';
+                e.currentTarget.style.color = '#3C3C3C';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.backgroundColor = '#A0937D';
+                e.currentTarget.style.color = '#FFF';
+              }}
+            >
+              Explore Auctions
+            </Link>
+            <div className="social-proof">
+              <span>{auctionCount.toLocaleString()}+</span>
+              <p className='socialproof-header'>Items Sold</p>
+            </div>
+
+            <div className="hero-benefits">
+              <h3>Why Choose Vintage Auctions?</h3>
+              <div className="benefits">
+                <div className="benefit-item">
+                  <FaClock className="benefit-icon" />
+                  <span id='benefit-header'>Timeless Collections</span>
+                </div>
+                <div className="benefit-item">
+                  <FaStar className="benefit-icon" />
+                  <span id='benefit-header'>Authentic Pieces</span>
+                </div>
+                <div className="benefit-item">
+                  <FaGift className="benefit-icon" />
+                  <span id='benefit-header'>Exclusive Offers</span>
+                </div>
+                <div className="benefit-item">
+                  <FaCog className="benefit-icon" />
+                  <span id='benefit-header'>Easy Bidding</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div className="cta-container" style={{ marginTop: '10px' }}>
-        <span className="cta-background">
-          Are you looking to find your next great acquisition?
-          <Link to="/auction-items" className="cta-link"> Browse here</Link>
-        </span>
-      </div>
-    </Fragment>
+
+      <section className="how-it-works">
+        <h2>How It Works</h2>
+        <ol>
+          <li>
+            <h3><FaSearch /> Discover</h3>
+            <p>Browse our curated selection of vintage items</p>
+          </li>
+          <li>
+            <h3><FaGavel /> Bid</h3>
+            <p>Place your bids on desired items</p>
+          </li>
+          <li>
+            <h3><FaCheck /> Win</h3>
+            <p>Secure your winning bids</p>
+          </li>
+          <li>
+            <h3><FaHistory /> Collect</h3>
+            <p>Own a piece of history</p>
+          </li>
+        </ol>
+      </section>
+
+      <section className="featured-tech-spaces">
+        <div className="featured-card">
+          <FaHistory className="featured-icon" />
+          <h2>Explore Antique Collections</h2>
+          <p>Find unique pieces that tell stories of the past</p>
+          <Link to="/auction-items" className="view-all-btn">
+            View All Items
+            <FaArrowRight className="arrow-icon" />
+          </Link>
+        </div>
+      </section>
+
+      <section className="testimonial">
+        <h2>What Our Collectors Say</h2>
+        {testimonials.map((testimonial, index) => (
+          <div key={index} className={`testimonial-item ${index === currentTestimonial ? 'active' : ''}`}>
+            <div className="testimonial-content">
+              <img className="testimonial-avatar" src={testimonial.image} alt={`${testimonial.author}'s Avatar`} />
+              <p className="testimonial-text">{testimonial.text}</p>
+              <h3 className="testimonial-author">{testimonial.author}</h3>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      <section className="vintage-awards">
+        <h2>Award-Winning Auction House</h2>
+        <div className="awards-grid">
+          <div className="award-item">
+            <img src={vintageAward} alt="Vintage Award" className="award-image" />
+            <p>Best Vintage Auction House 2022</p>
+          </div>
+          <div className="award-item">
+            <img src={antiqueAward} alt="Antique Award" className="award-image" />
+            <p>Excellence in Antique Sales 2021</p>
+          </div>
+        </div>
+      </section>
+    </div><Footer /></>
   );
 };
 
-export default Home;
+export default HomePage;
