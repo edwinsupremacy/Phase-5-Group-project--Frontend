@@ -46,15 +46,17 @@ h6 {
 }
 
 .hero-image {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-  background-image: url('https://img.pikbest.com/wp/202344/old-vintage-paper-texture-design-space-collage-frame-wallpaper-background-with-textured_9922072.jpg!bw700');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
+    width: 100%;
+    height: auto; /* Changed from 100vh to auto for flexible height */
+    min-height: 100vh; /* Ensures it covers at least the full viewport height */
+    position: relative;
+    overflow: hidden;
+    background-image: url('https://cdn.wallpapersafari.com/49/38/kp5ijs.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
 
 .hero-content {
   display: flex;
