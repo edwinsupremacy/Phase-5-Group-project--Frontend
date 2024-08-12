@@ -76,7 +76,7 @@ const Contact = () => {
     };
 
     return (
-        <div style={{ backgroundColor: '#F6E6CB' }}> 
+        <div style={{ backgroundColor: '#F6E6CB' }}>
             <div className="contact-container">
                 <div className="contact-section section1">
                     <h1>Contact Us</h1>
