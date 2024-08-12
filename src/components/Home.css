@@ -55,6 +55,7 @@ h6 {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    margin-top:-37px;
   }
 
 
@@ -186,7 +187,7 @@ h1 {
 .how-it-works {
   text-align: center;
   margin: 3rem auto;
-  background-color: #E7D4B5;
+  background-color: #F6E6CB;
   padding: 2rem;
 }
 
@@ -440,7 +441,7 @@ footer a:hover {
 
 .vintage-awards {
   padding: 4rem 2rem;
-  background-color: #d4d4c7;
+  background-color: #F6E6CB;
   /* Light background to distinguish the section */
   text-align: center;
 }
@@ -450,6 +451,7 @@ footer a:hover {
   font-size: 2rem;
   color: #3c3c3c;
   /* Darker text for contrast */
+
 }
 
 .awards-grid {
@@ -458,6 +460,7 @@ footer a:hover {
   justify-content: center;
   gap: 2rem;
   margin-top: 2rem;
+
 }
 
 .award-item {
