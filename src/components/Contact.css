@@ -28,6 +28,7 @@ body {
   max-height: 90vh;
   scrollbar-width: thin;
   scrollbar-color: var(--vintage-dark) var(--vintage-medium);
+
 }
 
 .contact-container::-webkit-scrollbar {
@@ -174,3 +175,7 @@ body {
 .review-item p {
   margin: 0.5rem 0;
 }
+/* Add this to your existing CSS */
+.review-item .rating svg {
+    color: gold;
+  }

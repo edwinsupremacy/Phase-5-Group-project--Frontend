@@ -143,27 +143,4 @@ body {
     font-size: 0.9em;
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
 
-.contact-container {
-    padding: 2rem;
-    background-color: #F1E3D3;
-    color: #5A4D3A;
-    min-height: calc(100vh - 4rem);
-    box-sizing: border-box;
-    border-radius: 50px;
-    max-height: 90vh;
-    overflow-y: auto;
-    margin-top: 50px;
-    animation: pulse 2s infinite;
-}
