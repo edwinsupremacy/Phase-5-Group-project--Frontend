@@ -11,7 +11,6 @@ const AdminDashboard = () => {
     const [showItems, setShowItems] = useState(false);
     const [showUsers, setShowUsers] = useState(false);
     const [showReviews, setShowReviews] = useState(false);
-    const [showSellers, setShowSellers] = useState(false);
     const [biddersVisibility, setBiddersVisibility] = useState({});
     const [shouldFetchData, setShouldFetchData] = useState(true);
 
@@ -110,10 +109,6 @@ const AdminDashboard = () => {
 
     const toggleReviewsVisibility = () => {
         setShowReviews(!showReviews);
-    };
-
-    const toggleSellersVisibility = () => {
-        setShowSellers(!showSellers);
     };
 
     const toggleBiddersVisibility = (index) => {
@@ -228,29 +223,22 @@ const AdminDashboard = () => {
             </div>
 
             <div className="admin-section">
-                <button onClick={toggleSellersVisibility} className="admin-list-toggle-button">
-                    {showSellers ? 'Hide Sellers' : 'Show Sellers'}
-                </button>
-                {showSellers && (
-                    <div className="admin-sellers-container">
-                        {sellers.length > 0 ? (
-                            sellers.map((seller) => (
-                                <div key={seller.id} className="admin-seller-card">
-                                    <div className="admin-seller-details">
-                                        <h3 className="admin-seller-name">{seller.name}</h3>
-                                        <p className="admin-seller-email">{seller.email}</p>
-                                        <p className="admin-seller-phone">{seller.phone}</p>
-                                    </div>
-                                    <div className="admin-seller-actions">
-                                        <button onClick={() => handleDeleteSeller(seller.id)} className="admin-seller-button">Delete Seller</button>
-                                    </div>
+                <div className="admin-sellers-container">
+                    {sellers.length > 0 && (
+                        sellers.map((seller) => (
+                            <div key={seller.id} className="admin-seller-card">
+                                <div className="admin-seller-details">
+                                    <h3 className="admin-seller-name">{seller.name}</h3>
+                                    <p className="admin-seller-email">{seller.email}</p>
+                                    <p className="admin-seller-phone">{seller.phone}</p>
                                 </div>
-                            ))
-                        ) : (
-                            <p>No sellers found.</p>
-                        )}
-                    </div>
-                )}
+                                <div className="admin-seller-actions">
+                                    <button onClick={() => handleDeleteSeller(seller.id)} className="admin-seller-button">Delete Seller</button>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                </div>
             </div>
         </div>
     );
