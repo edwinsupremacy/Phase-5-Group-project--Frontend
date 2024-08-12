@@ -1,30 +1,35 @@
-/* Container for the entire dashboard */
+/* Container styles */
 .seller-dashboard-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 100%;
+    /* Adjusted to make the container scrollable */
+    margin: 40px auto 0;
+    /* Increased margin-top */
     padding: 40px;
     background-color: #F9F3E0;
     border-radius: 18px;
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
     display: flex;
-    height: 100vh;
-    overflow: hidden;
-    color: black;
+    height: calc(100vh - 80px);
+    /* Adjusted for scroll */
+    overflow: auto;
+    /* Enabled scrolling */
     font-family: 'Garamond', serif;
+    width: 1000px;
 }
 
-/* Flexbox container with scrolling enabled for the item section */
-.seller-dashboard-content {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
+.seller-dashboard-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #8E735B;
+    font-size: 2.5em;
+    font-family: 'Garamond', serif;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Section to add items with scrolling */
 .seller-add-item-section {
     flex: 1;
     margin-right: 30px;
-    overflow-y: auto;
+    overflow: auto;
     background-color: #E1D8C9;
     border-radius: 18px;
     padding: 30px;
@@ -32,17 +37,118 @@
     border: 1px solid #D0BFAE;
 }
 
-/* Items section with scrolling */
+.seller-add-item-title {
+    margin-bottom: 20px;
+    color: #8E735B;
+    font-size: 1.8em;
+    font-family: 'Garamond', serif;
+}
+
+.seller-add-item-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.seller-input {
+    padding: 15px;
+    border: 1px solid #D0BFAE;
+    border-radius: 12px;
+    font-size: 1.1em;
+    background-color: #FFFFFF;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: rgb(0, 0, 0);
+}
+
+
+.seller-buttons {
+    gap: 20px;
+    display: flex;
+}
+
+/* Button styles with vintage theme */
+.seller-submit-button,
+.seller-item-button,
+button {
+    padding: 10px 20px;
+    border: none;
+    /* Removed border */
+    background-color: #a0b8a0;
+    /* Teal green background */
+    color: #000000;
+    /* Black text color */
+    border-radius: 8px;
+    /* Reduced border radius */
+    cursor: pointer;
+    font-size: 1.1em;
+    /* Increased font size */
+    font-weight: bold;
+    /* Bold text */
+    font-family: 'Garamond', serif;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Soft shadow */
+}
+
+.seller-submit-button:hover,
+.seller-item-button:hover,
+button:hover {
+    background-color: #68461a;
+    /* Black background on hover */
+    color: #a0b8a0;
+    /* Teal green text color on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    /* Enhanced shadow on hover */
+}
+
+
+
+
+/* Additional vintage button styles */
+.seller-button-primary,
+button.primary {
+    background-color: #D0BFAE;
+    /* Lighter vintage background for primary buttons */
+    border: 2px solid #B19B7F;
+    /* Matching border color */
+    color: #6E5D4F;
+    /* Text color to contrast with background */
+}
+
+.seller-button-primary:hover,
+button.primary:hover {
+    background-color: #B19B7F;
+    /* Darker shade for hover */
+    border-color: #A0937D;
+    /* Darker border color on hover */
+}
+
+.seller-error {
+    color: #E74C3C;
+    margin-top: 15px;
+    font-size: 1.1em;
+    font-family: 'Garamond', serif;
+}
+
 .seller-items-section {
     flex: 2;
-    overflow-y: auto;
+    position: relative;
+    overflow: auto;
     background-color: #FFFFFF;
     padding: 30px;
     border-radius: 18px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Container for list of items with fixed max height */
+.seller-items-title {
+    margin-bottom: 30px;
+    color: #8E735B;
+    font-size: 1.8em;
+    font-family: 'Garamond', serif;
+}
+
 .seller-items-container {
     width: 100%;
     max-height: 700px;
@@ -53,10 +159,10 @@
     border: 1px solid #D0BFAE;
 }
 
-/* Item card styling */
 .seller-item-card {
     background-color: #FFFFFF;
-    border: 1px solid #D0BFAE;
+    border: 1px solid #8E735B;
+    /* Updated border color */
     border-radius: 16px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
     overflow: hidden;
@@ -71,52 +177,44 @@
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Ensure the seller-item list also gets the correct styling */
-.seller-items-list {
-    margin-top: 20px;
-    overflow-y: auto;
-}
-
-.seller-item {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-}
-
 .seller-item-image {
-    width: 150px;
-    height: auto;
+    width: 100%;
+    height: 200px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 16px 16px 0 0;
 }
 
 .seller-item-details {
-    margin-left: 20px;
-    flex: 1;
+    background-color: #E7D4B5;
+    /* Light vintage background */
+    border: 1px solid #D0BFAE;
+    /* Subtle border */
+    border-radius: 12px;
+    /* Rounded corners for vintage feel */
+    padding: 15px;
+}
+
+.seller-item-name {
+    margin: 10px 0;
+    font-size: 1.4em;
+    color: #6E5D4F;
+    /* Slightly darker vintage color */
+    font-family: 'Garamond', serif;
+}
+
+.seller-item-description,
+.seller-item-price,
+.seller-item-category {
+    color: #555;
+    /* Dark vintage color */
 }
 
 .seller-item-actions {
     display: flex;
-    gap: 10px;
+    gap: 20px;
+    /* Increased gap between buttons */
+    /* Slightly increased gap */
     margin-top: 15px;
-}
-
-.seller-item-button {
-    background-color: #D0BFAE;
-    color: rgb(19, 8, 8);
-    border: none;
-    border-radius: 12px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 1.1em;
-    font-family: 'Garamond', serif;
-    transition: background-color 0.3s ease;
-}
-
-.seller-item-button:hover {
-    background-color: #B19B7F;
 }
 
 .seller-no-items {
@@ -128,98 +226,4 @@
 
 .seller-item-bids {
     color: black;
-}
-
-.seller-bidder-card {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-}
-
-.seller-bidder-card.pending {
-    background-color: #f9f9f9;
-}
-
-.seller-bidder-card.accepted {
-    background-color: #d4edda;
-}
-
-.seller-bidder-status {
-    font-weight: bold;
-    color: #555;
-}
-
-.seller-bidder-amount,
-.seller-bidder-name {
-    margin: 5px 0;
-}
-
-.seller-accept-bid-button {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 5px;
-}
-
-.seller-accept-bid-button:hover {
-    background-color: #218838;
-}
-
-.seller-bidder-card.accepted .seller-accept-bid-button {
-    display: none;
-}
-
-.seller-filter-section {
-    margin-bottom: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.seller-filter-title {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.seller-input {
-    margin-bottom: 10px;
-    padding: 10px;
-    font-size: 1em;
-    width: 100%;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.seller-toggle-items-btn {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-}
-
-.seller-toggle-items-btn:hover {
-    background-color: #0056b3;
-}
-
-.seller-filter-button {
-    background-color: #ce8989;
-    border: 1px solid #ccc;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-}
-
-.seller-filter-button.active {
-    background-color: #333;
-    color: #fff;
 }

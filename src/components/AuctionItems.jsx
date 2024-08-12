@@ -228,57 +228,57 @@ const AuctionItems = () => {
                     ))}
                 </div>
             )}
-           <div className="recent-bids-section">
+            <div className="recent-bids-section">
                 <h3 onClick={toggleRecentBids} className="recent-bids-title">
                     <FaClock /> Recent Bids {showRecentBids ? <FaChevronUp /> : <FaChevronDown />}
                 </h3>
-            <div className="items-grid">
-                {filteredItems.map(item => (
-                    <div key={item.id} className="item-card">
-                        <img
-                            src={item.image_url}
-                            alt={item.name}
-                            className="item-image"
-                            onClick={() => handleImageClick(item.image_url)}
-                        />
-                        <h3 className="item-title">{item.name}</h3>
-                        <p className="item-description">{item.description}</p>
-                        <p className="item-price">Starting Price: ksh {item.starting_price.toLocaleString()}</p>
-                        {placedBids[item.id] ? (
-                            <button
-                                className="cancel-bid-button"
-                                onClick={() => handleBidCancel(item.id)}
-                            >
-                                Cancel Bid
-                            </button>
-                        ) : (
-                            <>
-                               <input
-                                    type="number"
-                                    value={bidAmount[item.id] || ''}
-                                    onChange={(e) => handleBidChange(item.id, e.target.value)}
-                                    placeholder="Enter bid amount"
-                                />
+                <div className="items-grid">
+                    {filteredItems.map(item => (
+                        <div key={item.id} className="item-card">
+                            <img
+                                src={item.image_url}
+                                alt={item.name}
+                                className="item-image"
+                                onClick={() => handleImageClick(item.image_url)}
+                            />
+                            <h3 className="item-title">{item.name}</h3>
+                            <p className="item-description">{item.description}</p>
+                            <p className="item-price">Starting Price: ksh {item.starting_price.toLocaleString()}</p>
+                            {placedBids[item.id] ? (
                                 <button
-                                    className="place-bid-button"
-                                    onClick={() => handleBidSubmit(item.id)}
+                                    className="cancel-bid-button"
+                                    onClick={() => handleBidCancel(item.id)}
                                 >
-                                    Place Bid
+                                    Cancel Bid
                                 </button>
-                            </>
-                        )}
-                    </div>
-                ))}
-            </div>
+                            ) : (
+                                <>
+                                    <input
+                                        type="number"
+                                        value={bidAmount[item.id] || ''}
+                                        onChange={(e) => handleBidChange(item.id, e.target.value)}
+                                        placeholder="Enter bid amount"
+                                    />
+                                    <button
+                                        className="place-bid-button"
+                                        onClick={() => handleBidSubmit(item.id)}
+                                    >
+                                        Place Bid
+                                    </button>
+                                </>
+                            )}
+                        </div>
+                    ))}
+                </div>
 
-            {selectedImage && (
-                <ImageModal
-                    imageUrl={selectedImage}
-                    onClose={handleCloseModal}
-                />
-            )}
+                {selectedImage && (
+                    <ImageModal
+                        imageUrl={selectedImage}
+                        onClose={handleCloseModal}
+                    />
+                )}
 
-           
+
                 {showRecentBids && recentBids.length > 0 && (
                     <ul className="recent-bids-list">
                         {recentBids.map(bid => (
