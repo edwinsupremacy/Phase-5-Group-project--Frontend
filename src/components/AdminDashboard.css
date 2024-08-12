@@ -1,12 +1,25 @@
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(241, 227, 211, 0.8)),
+                url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlvYY_e4IwcTRxuWG7Rx1-BvCoRCuN2gkqMA&s') no-repeat center center fixed;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #5A4D3A;
+}
+
+/* Ensure the container is centered and occupies most of the screen */
 .admin-dashboard-container {
-    padding: 20px;
+    padding: 30px;
     background: linear-gradient(135deg, #F6E6CB, #E7D4B5);
     max-width: 1200px;
-    margin: 0 auto;
-    height: calc(100vh - 40px);
+    margin: 20px auto;
+    height: calc(100vh - 60px);
     overflow-y: auto;
     border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
 }
 
 .admin-dashboard-title {
@@ -15,12 +28,14 @@
     color: #A0937D;
     text-align: center;
     font-weight: bold;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 .admin-section {
     margin-bottom: 30px;
 }
 
+/* Ensure buttons are visually appealing */
 .admin-list-toggle-button {
     padding: 12px 24px;
     margin-bottom: 15px;
@@ -38,6 +53,7 @@
     transform: scale(1.05);
 }
 
+/* Flexbox layout for admin items */
 .admin-items-container, .admin-users-container, .admin-reviews-container, .admin-sellers-container {
     display: flex;
     flex-wrap: wrap;
@@ -149,5 +165,5 @@
     max-height: 90vh;
     overflow-y: auto;
     margin-top: 50px;
-    animation: pulse 2s infinite; /* Apply the pulse animation */
+    animation: pulse 2s infinite;
 }
