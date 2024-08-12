@@ -28,7 +28,7 @@ function App() {
       location.pathname.startsWith('/login/seller') ||
       location.pathname.startsWith('/seller-dashboard') ||
       location.pathname.startsWith('/forgot-password') ||
-      location.pathname.startsWith('/reset-password')
+      location.pathname.startsWith('/reset-password')  
     );
   };
 
