@@ -1,90 +1,119 @@
 .admin-dashboard-container {
     padding: 20px;
-    background-color: #F6E6CB;
+    background: linear-gradient(135deg, #F6E6CB, #E7D4B5);
     max-width: 1200px;
     margin: 0 auto;
     height: calc(100vh - 40px);
     overflow-y: auto;
     border-radius: 30px;
-
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .admin-dashboard-title {
-    font-size: 2em;
+    font-size: 2.5em;
     margin-bottom: 20px;
     color: #A0937D;
+    text-align: center;
+    font-weight: bold;
 }
 
 .admin-section {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .admin-list-toggle-button {
-    padding: 10px 20px;
-    margin-bottom: 10px;
+    padding: 12px 24px;
+    margin-bottom: 15px;
     cursor: pointer;
     background-color: #B6C7AA;
-    color: #A0937D;
+    color: #FFF;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
+    font-size: 1em;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-.admin-items-container, .admin-users-container {
+.admin-list-toggle-button:hover {
+    background-color: #A0937D;
+    transform: scale(1.05);
+}
+
+.admin-items-container, .admin-users-container, .admin-reviews-container, .admin-sellers-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
 }
 
-.admin-item-card, .admin-user-card {
+.admin-item-card, .admin-user-card, .admin-review-card, .admin-seller-card {
     border: 1px solid #E7D4B5;
-    border-radius: 5px;
-    padding: 15px;
-    background-color: #FFF;
-    width: 300px;
+    border-radius: 15px;
+    padding: 20px;
+    background: linear-gradient(135deg, #FFF, #F1E3D3);
+    width: 320px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.admin-item-card:hover, .admin-user-card:hover, .admin-review-card:hover, .admin-seller-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .admin-item-image {
     width: 100%;
     height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
 }
 
-.admin-item-details, .admin-user-details {
+.admin-item-details, .admin-user-details, .admin-review-details, .admin-seller-details {
     margin-top: 10px;
-    color: #A0937D;
+    color: #5A4D3A;
 }
 
-.admin-item-name, .admin-user-name {
-    font-size: 1.2em;
-    margin-bottom: 5px;
+.admin-item-name, .admin-user-name, .admin-review-name, .admin-seller-name {
+    font-size: 1.5em;
+    margin-bottom: 10px;
     color: #A0937D;
+    font-weight: bold;
 }
 
-.admin-item-description, .admin-user-email {
-    margin-bottom: 5px;
+.admin-item-description, .admin-user-email, .admin-review-rating, .admin-seller-email {
+    margin-bottom: 10px;
     color: #B6C7AA;
 }
 
-.admin-item-price, .admin-item-category {
-    margin-bottom: 10px;
-    color: #A0937D;
+.admin-item-price, .admin-item-category, .admin-user-phone, .admin-review-message, .admin-seller-phone {
+    margin-bottom: 15px;
+    color: #5A4D3A;
 }
 
-.admin-item-actions, .admin-user-actions {
+.admin-item-actions, .admin-user-actions, .admin-review-actions, .admin-seller-actions {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.admin-item-button, .admin-user-button {
-    padding: 5px 10px;
+.admin-item-button, .admin-user-button, .admin-review-button, .admin-seller-button {
+    padding: 8px 16px;
     cursor: pointer;
     background-color: #E7D4B5;
     color: #FFF;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.admin-item-button:hover, .admin-user-button:hover, .admin-review-button:hover, .admin-seller-button:hover {
+    background-color: #A0937D;
+    transform: scale(1.1);
 }
 
 .admin-item-bids {
-    margin-top: 10px;
+    margin-top: 15px;
+    border-top: 1px solid #E7D4B5;
+    padding-top: 10px;
 }
 
 .admin-item-bids ul {
@@ -95,7 +124,9 @@
 .admin-item-bids li {
     padding: 5px 0;
     color: #A0937D;
+    font-size: 0.9em;
 }
+
 @keyframes pulse {
     0% {
         transform: scale(1);
