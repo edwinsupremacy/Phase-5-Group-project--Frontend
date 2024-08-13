@@ -70,6 +70,10 @@ const SellerDashboard = ({ sellerId }) => {
             (!formData.subCategory || item.sub_category === formData.subCategory)
         ));
     };
+     const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/login');
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -293,6 +297,9 @@ const SellerDashboard = ({ sellerId }) => {
         <button onClick={toggleItemsVisibility} className="seller-list-toggle-button">
             {showItems ? 'Hide Items' : 'Show Items'}
         </button>
+        <button onClick={handleLogout} className="logout-button">
+                Logout
+            </button>
 
         {showItems && (
             <div className="items-list">

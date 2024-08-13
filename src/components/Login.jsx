@@ -20,61 +20,73 @@ function Login({ setIsAuthenticated }) {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const { email, password, confirmPassword, username, phoneNumber } = formData;
-
+  const validateForm = () => {
     if (isSignUp) {
-      if (!username || !email || !phoneNumber || !password || password !== confirmPassword) {
+      if (!formData.username || !formData.email || !formData.phoneNumber || !formData.password || formData.password !== formData.confirmPassword) {
         setError('Please fill in all fields and ensure passwords match.');
-        return;
-      }
-
-      try {
-        const response = await fetch('http://localhost:5000/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, email, phone_number: phoneNumber, password, confirm_password: confirmPassword }),
-        });
-        if (response.status === 409) {
-          setError('Username already exists.');
-        } else if (!response.ok) {
-          setError('Registration failed.');
-        } else {
-          setIsAuthenticated(true);
-          navigate('/');
-        }
-      } catch (error) {
-        setServerError('Server is currently unavailable. Please try again later.');
+        return false;
       }
     } else {
-      if (!email || !password) {
+      if (!formData.email || !formData.password) {
         setError('Please fill in all fields.');
-        return;
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError('');
+    setServerError('');
+
+    if (!validateForm()) return;
+
+    try {
+      let response;
+      if (isSignUp) {
+        response = await fetch('http://localhost:5000/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: formData.username,
+            email: formData.email,
+            phone_number: formData.phoneNumber,
+            password: formData.password,
+            confirm_password: formData.confirmPassword,
+          }),
+        });
+      } else {
+        response = await fetch('http://localhost:5000/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+          }),
+        });
       }
 
-      try {
-        const response = await fetch('http://localhost:5000/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password }),
-        });
-        if (response.status === 401) {
-          setError('Invalid email or password.');
-        } else if (!response.ok) {
-          setError('Login failed.');
+      if (response.status === 409) {
+        setError('Username already exists.');
+      } else if (response.status === 401) {
+        setError('Invalid email or password.');
+      } else if (!response.ok) {
+        setError('Request failed.');
+      } else {
+        const data = await response.json();
+        if (isSignUp) {
+          setIsAuthenticated(true);
+          navigate('/');
         } else {
-          const data = await response.json();
           localStorage.setItem('token', data.access_token);
-          localStorage.setItem('userId', data.user_id); 
+          localStorage.setItem('userId', data.user_id);
           setIsAuthenticated(true);
           navigate('/');
         }
-      } catch (error) {
-        setServerError('Server is currently unavailable. Please try again later.');
       }
+    } catch (error) {
+      setServerError('Server is currently unavailable. Please try again later.');
     }
   };
 
@@ -145,7 +157,7 @@ function Login({ setIsAuthenticated }) {
           <button type="submit">Log In</button>
           {error && <p className="error">{error}</p>}
           {serverError && <p className="error">{serverError}</p>}
-          <p className="register-link">
+                  <p className="register-link">
             Don't have an account?{' '}
             <Link to="#" onClick={() => setIsSignUp(true)}>
               Sign Up

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './AdminDashboard.css';
 import axiosInstance from "./utils/axiosConfig";
 
@@ -14,6 +15,8 @@ const AdminDashboard = () => {
     const [showSellers, setShowSellers] = useState(false);
     const [biddersVisibility, setBiddersVisibility] = useState({});
     const [shouldFetchData, setShouldFetchData] = useState(true);
+
+    const navigate = useNavigate(); // Initialize navigate
 
     useEffect(() => {
         if (shouldFetchData) {
@@ -71,6 +74,11 @@ const AdminDashboard = () => {
         } catch (err) {
             console.error('Error fetching bids:', err);
         }
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/login'); // Navigate to login page
     };
 
     const handleDeleteUser = async (userId) => {
@@ -230,6 +238,9 @@ const AdminDashboard = () => {
             <div className="admin-section">
                 <button onClick={toggleSellersVisibility} className="admin-list-toggle-button">
                     {showSellers ? 'Hide Sellers' : 'Show Sellers'}
+                </button>
+                <button onClick={handleLogout} className="logout-button">
+                    Logout
                 </button>
                 {showSellers && (
                     <div className="admin-sellers-container">

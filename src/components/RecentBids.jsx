@@ -20,6 +20,8 @@ const RecentBids = () => {
           }
         });
         setBids(response.data.bids);
+        // Store bids data in local storage
+        localStorage.setItem('bids', JSON.stringify(response.data.bids));
       } catch (err) {
         setError('Failed to fetch bids');
       } finally {
@@ -27,7 +29,14 @@ const RecentBids = () => {
       }
     };
 
-    fetchBids();
+    // Check if bids data is already stored in local storage
+    const storedBids = localStorage.getItem('bids');
+    if (storedBids) {
+      setBids(JSON.parse(storedBids));
+      setLoading(false);
+    } else {
+      fetchBids();
+    }
   }, []);
 
   const handleCheckout = (bidId, bidAmount) => {
