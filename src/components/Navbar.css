@@ -4,7 +4,8 @@
   right: 0;
   left: 0;
   z-index: 1000;
-  background-color: #a0b8a0;
+  background-color: rgba(160, 184, 160, 0.8);
+  /* Adjusted to 80% opacity */
   /* Dark beige background color with slight transparency */
   padding: 20px;
   display: flex;

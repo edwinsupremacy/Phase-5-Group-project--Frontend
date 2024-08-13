@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home';
@@ -13,6 +13,8 @@ import Navbar from './components/Navbar';
 import AdminDashboard from './components/AdminDashboard';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
+import RecentBids from './components/RecentBids';
+import Checkout from './components/Checkout';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,7 +30,7 @@ function App() {
       location.pathname.startsWith('/login/seller') ||
       location.pathname.startsWith('/seller-dashboard') ||
       location.pathname.startsWith('/forgot-password') ||
-      location.pathname.startsWith('/reset-password')  
+      location.pathname.startsWith('/reset-password')
     );
   };
 
@@ -53,9 +55,11 @@ function App() {
             <>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/recent-bids" element={<RecentBids />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/auction-items" element={<AuctionItems />} />
               <Route path="/seller-dashboard" element={<SellerDashboard />} />
+              <Route path="/checkout/:bidId" element={<Checkout />} />
               <Route path="/admin-dashboard" element={<AdminDashboard setIsAuthenticated={setIsAuthenticated} />} />
             </>
           )}

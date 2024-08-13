@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SellerLogin.css';
@@ -6,11 +6,11 @@ import './SellerLogin.css';
 function SellerLogin({ setIsAuthenticated }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState(''); 
-    const [username, setUsername] = useState(''); 
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [username, setUsername] = useState('');
     const [phone, setPhone] = useState('');
     const [error, setError] = useState('');
-    const [isRegister, setIsRegister] = useState(true); 
+    const [isRegister, setIsRegister] = useState(true);
     const navigate = useNavigate();
 
     const validateEmail = (email) => {
@@ -50,7 +50,7 @@ function SellerLogin({ setIsAuthenticated }) {
                 throw new Error('Registration failed.');
             }
 
-            setIsRegister(false); 
+            setIsRegister(false);
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 setError('Email or username already exists.');
@@ -85,8 +85,8 @@ function SellerLogin({ setIsAuthenticated }) {
                 throw new Error('Login failed.');
             }
 
-            setIsAuthenticated(true); 
-            navigate('/seller-dashboard'); 
+            setIsAuthenticated(true);
+            navigate('/seller-dashboard');
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 setError('Invalid credentials.');
@@ -99,6 +99,12 @@ function SellerLogin({ setIsAuthenticated }) {
     return (
         <div className="seller-login-container">
             <div className="seller-login-form">
+                {bidStatus && (
+                    <div>
+                        <p>Bid Accepted: {bidStatus}</p>
+                        {canCheckout && <button onClick={handleCheckout}>Checkout Now</button>}
+                    </div>
+                )}
                 {isRegister ? (
                     <form onSubmit={handleRegisterSubmit}>
                         <h1>Seller Registration</h1>
