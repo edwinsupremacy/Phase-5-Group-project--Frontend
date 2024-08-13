@@ -1,7 +1,6 @@
-// src/App.jsx
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -16,12 +15,33 @@ import AdminDashboard from './components/AdminDashboard';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import RecentBids from './components/RecentBids';
-import Checkout from './components/Checkout'; // Import Checkout component
+import Checkout from './components/Checkout';
+import Profile from './components/Profile';
+import EditProfile from './components/EditProfile';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
+  const [currentUser, setCurrentUser] = useState(null);
   const location = useLocation();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/user/profile', {
+          // Assuming an endpoint that returns the currently logged-in user's details
+        });
+        setCurrentUser(response.data);
+        setIsAuthenticated(true);
+      } catch (error) {
+        console.error('Error fetching user', error);
+      }
+    };
+
+    if (isAuthenticated) {
+      fetchUser();
+    }
+  }, [isAuthenticated]);
 
   const determineNavbarVisibility = () => {
     return !(
@@ -47,7 +67,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+              <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setCurrentUser={setCurrentUser} />} />
               <Route path="/login/admin" element={<AdminLogin setIsAuthenticated={setIsAuthenticated} />} />
               <Route path="/login/seller" element={<SellerLogin setIsAuthenticated={setIsAuthenticated} />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -64,7 +84,10 @@ function App() {
               <Route path="/seller-dashboard" element={<SellerDashboard />} />
               <Route path="/admin-dashboard" element={<AdminDashboard setIsAuthenticated={setIsAuthenticated} />} />
               <Route path="/recent-bids" element={<RecentBids />} />
-              <Route path="/checkout/:bidId" element={<Checkout />} /> {/* Add route for Checkout */}
+              <Route path="/checkout/:bidId" element={<Checkout />} />
+              <Route path="/profile" element={<Profile user={currentUser} />} />
+              <Route path="/edit-profile" element={<EditProfile user={currentUser} setUser={setCurrentUser} />} />
+              <Route path="*" element={<Navigate to="/" replace />} /> {/* Redirect any unmatched routes */}
             </>
           )}
         </Routes>
