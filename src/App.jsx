@@ -8,11 +8,11 @@ import SellerLogin from './components/SellerLogin';
 import SellerDashboard from './components/SellerDashboard';
 import About from './components/About';
 import Contact from './components/Contact';
+import AuctionItems from './components/AuctionItems';
 import Navbar from './components/Navbar';
 import AdminDashboard from './components/AdminDashboard';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
-import AuctionItems from './components/AuctionItems';
 import RecentBids from './components/RecentBids';
 import Checkout from './components/Checkout';
 
@@ -49,6 +49,7 @@ function App() {
       )}
       <div className="content">
         <Routes>
+          {/* Unauthenticated Routes */}
           {!isAuthenticated ? (
             <>
               <Route path="/" element={<Home />} />
@@ -63,10 +64,13 @@ function App() {
             </>
           ) : (
             <>
+              {/* Authenticated Routes */}
               <Route path="/" element={<Home />} />
-              <Route path="/auction-items" element={<AuctionItems />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/auction-items" element={<AuctionItems setShowNavbar={setShowNavbar} />} />
+              <Route path="/seller-dashboard" element={<SellerDashboard />} />
+              <Route path="/admin-dashboard" element={<AdminDashboard setIsAuthenticated={setIsAuthenticated} />} />
               <Route path="/recent-bids" element={<RecentBids />} />
               <Route path="/checkout/:bidId" element={<Checkout />} />
               <Route path="*" element={<Navigate to="/" replace />} /> {/* Redirect unmatched routes */}

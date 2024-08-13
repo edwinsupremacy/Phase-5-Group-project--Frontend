@@ -131,7 +131,7 @@ const SellerDashboard = ({ sellerId }) => {
 
         try {
             const url = editIndex !== null
-                ? `http://localhost:5000/items/${items[editIndex].id}`
+                ? `http ://localhost:5000/items/${items[editIndex].id}`
                 : 'http://localhost:5000/items';
 
             const method = editIndex !== null ? 'PUT' : 'POST';
@@ -151,7 +151,7 @@ const SellerDashboard = ({ sellerId }) => {
     };
     const handleBidAction = async (bidId, action) => {
         try {
-            await axiosInstance.put(`http://localhost:5000/bids/${bidId}/action`, { status: action });
+            await axiosInstance.put(`http://localhost:5000/bids/${bidId}/action, { status: action }`);
 
             fetchItems(); // Re-fetch items after bid action
         } catch (err) {
@@ -287,16 +287,12 @@ const SellerDashboard = ({ sellerId }) => {
                         <button
                             key={category}
                             onClick={() => handleCategoryFilter(category)}
-                            className={`seller-filter-button ${selectedCategory === category ? 'active' : ''}`}
+                            className={seller - filter - button`${selectedCategory === category ? 'active' : ''}`}
                         >
                             {category}
                         </button>
                     ))}
                 </div>
-
-                <button onClick={toggleItemsVisibility} className="seller-list-toggle-button">
-                    {showItems ? 'Hide Items' : 'Show Items'}
-                </button>
 
                 <button onClick={toggleItemsVisibility} className="seller-list-toggle-button">
                     {showItems ? 'Hide Items' : 'Show Items'}
@@ -341,7 +337,7 @@ const SellerDashboard = ({ sellerId }) => {
                     </div>
                 )}
             </div>
-        </div>
+        </div >
 
     );
 };

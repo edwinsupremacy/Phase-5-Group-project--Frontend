@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SellerLogin.css';
@@ -99,12 +99,6 @@ function SellerLogin({ setIsAuthenticated }) {
     return (
         <div className="seller-login-container">
             <div className="seller-login-form">
-                {bidStatus && (
-                    <div>
-                        <p>Bid Accepted: {bidStatus}</p>
-                        {canCheckout && <button onClick={handleCheckout}>Checkout Now</button>}
-                    </div>
-                )}
                 {isRegister ? (
                     <form onSubmit={handleRegisterSubmit}>
                         <h1>Seller Registration</h1>
