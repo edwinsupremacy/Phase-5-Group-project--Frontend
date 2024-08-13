@@ -333,9 +333,9 @@ const SellerDashboard = ({ sellerId }) => {
                     ))
                 ) : (
                     <p>No items found.</p>
-                )}
+                )};
             </div>
-        )}
+        )};
     </div>
 </div>
 
