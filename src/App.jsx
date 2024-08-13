@@ -8,35 +8,45 @@ import SellerLogin from './components/SellerLogin';
 import SellerDashboard from './components/SellerDashboard';
 import About from './components/About';
 import Contact from './components/Contact';
-import AuctionItems from './components/AuctionItems';
 import Navbar from './components/Navbar';
 import AdminDashboard from './components/AdminDashboard';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
+import AuctionItems from './components/AuctionItems';
 import RecentBids from './components/RecentBids';
 import Checkout from './components/Checkout';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [currentUser, setCurrentUser] = useState(null);
   const location = useLocation();
 
-  // Determine if Navbar should be shown
-  const showNavbar = () => {
-    // Show Navbar on all pages except login pages and admin dashboard
-    return !(
-      location.pathname.startsWith('/login') ||
-      location.pathname.startsWith('/admin-dashboard') ||
-      location.pathname.startsWith('/login/admin') ||
-      location.pathname.startsWith('/login/seller') ||
-      location.pathname.startsWith('/seller-dashboard') ||
-      location.pathname.startsWith('/forgot-password') ||
-      location.pathname.startsWith('/reset-password')
-    );
+  useEffect(() => {
+    // Check if there's a token in localStorage to set authentication status
+    const token = localStorage.getItem('token');
+    setIsAuthenticated(!!token);
+  }, []);
+
+  // Determine whether to show the Navbar based on the current route
+  const determineNavbarVisibility = () => {
+    const hideRoutes = [
+      '/login',
+      '/admin-dashboard',
+      '/login/admin',
+      '/login/seller',
+      '/seller-dashboard',
+      '/forgot-password',
+      '/reset-password',
+    ];
+    return !hideRoutes.some(path => location.pathname.startsWith(path)) && showNavbar;
   };
 
   return (
     <div className="App">
-      {showNavbar() && <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
+      {determineNavbarVisibility() && (
+        <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+      )}
       <div className="content">
         <Routes>
           {!isAuthenticated ? (
@@ -44,7 +54,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+              <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setCurrentUser={setCurrentUser} />} />
               <Route path="/login/admin" element={<AdminLogin setIsAuthenticated={setIsAuthenticated} />} />
               <Route path="/login/seller" element={<SellerLogin setIsAuthenticated={setIsAuthenticated} />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -54,13 +64,12 @@ function App() {
           ) : (
             <>
               <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/recent-bids" element={<RecentBids />} />
-              <Route path="/contact" element={<Contact />} />
               <Route path="/auction-items" element={<AuctionItems />} />
-              <Route path="/seller-dashboard" element={<SellerDashboard />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/recent-bids" element={<RecentBids />} />
               <Route path="/checkout/:bidId" element={<Checkout />} />
-              <Route path="/admin-dashboard" element={<AdminDashboard setIsAuthenticated={setIsAuthenticated} />} />
+              <Route path="*" element={<Navigate to="/" replace />} /> {/* Redirect unmatched routes */}
             </>
           )}
         </Routes>

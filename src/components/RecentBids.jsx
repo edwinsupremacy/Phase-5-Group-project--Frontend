@@ -18,6 +18,8 @@ const RecentBids = () => {
                     }
                 });
                 setBids(response.data.bids);
+                // Store bids data in local storage
+                localStorage.setItem('bids', JSON.stringify(response.data.bids));
             } catch (err) {
                 setError('Failed to fetch bids');
             } finally {
@@ -25,16 +27,15 @@ const RecentBids = () => {
             }
         };
 
-        fetchBids();
+        // Check if bids data is already stored in local storage
+        const storedBids = localStorage.getItem('bids');
+        if (storedBids) {
+            setBids(JSON.parse(storedBids));
+            setLoading(false);
+        } else {
+            fetchBids();
+        }
     }, []);
-
-    const handleCheckout = (bidId, bidAmount) => {
-        // Redirect to the checkout page with the bid amount as state
-        navigate(`/checkout/${bidId}`, { state: { amount: bidAmount, bidId: bidId } });
-    };
-
-    if (loading) return <p className="loading">Loading...</p>;
-    if (error) return <p className="error">{error}</p>;
 
     return (
         <div className="recent-bids">

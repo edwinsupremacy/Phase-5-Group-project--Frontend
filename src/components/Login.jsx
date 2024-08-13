@@ -20,79 +20,67 @@ function Login({ setIsAuthenticated }) {
         setFormData({ ...formData, [name]: value });
     };
 
-    const validateForm = () => {
-        if (isSignUp) {
-            if (!formData.username || !formData.email || !formData.phoneNumber || !formData.password || formData.password !== formData.confirmPassword) {
-                setError('Please fill in all fields and ensure passwords match.');
-                return false;
-            }
-        } else {
-            if (!formData.email || !formData.password) {
-                setError('Please fill in all fields.');
-                return false;
-            }
-        }
-        return true;
-    };
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setError('');
-        setServerError('');
+        const { email, password, confirmPassword, username, phoneNumber } = formData;
 
-        if (!validateForm()) return;
-
-        try {
-            let response;
-            if (isSignUp) {
-                response = await fetch('http://localhost:5000/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        username: formData.username,
-                        email: formData.email,
-                        phone_number: formData.phoneNumber,
-                        password: formData.password,
-                        confirm_password: formData.confirmPassword,
-                    }),
-                });
-            } else {
-                response = await fetch('http://localhost:5000/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        email: formData.email,
-                        password: formData.password,
-                    }),
-                });
+        if (isSignUp) {
+            if (!username || !email || !phoneNumber || !password || password !== confirmPassword) {
+                setError('Please fill in all fields and ensure passwords match.');
+                return;
             }
 
-            if (response.status === 409) {
-                setError('Username already exists.');
-            } else if (response.status === 401) {
-                setError('Invalid email or password.');
-            } else if (!response.ok) {
-                setError('Request failed.');
-            } else {
-                const data = await response.json();
-                if (isSignUp) {
+            try {
+                const response = await fetch('http://localhost:5000/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, phone_number: phoneNumber, password, confirm_password: confirmPassword }),
+                });
+                if (response.status === 409) {
+                    setError('Username already exists.');
+                } else if (!response.ok) {
+                    setError('Registration failed.');
+                } else {
                     setIsAuthenticated(true);
                     navigate('/');
+                }
+            } catch (error) {
+                setServerError('Server is currently unavailable. Please try again later.');
+            }
+        } else {
+            if (!email || !password) {
+                setError('Please fill in all fields.');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+                });
+                if (response.status === 401) {
+                    setError('Invalid email or password.');
+                } else if (!response.ok) {
+                    setError('Login failed.');
                 } else {
+                    const data = await response.json();
                     localStorage.setItem('token', data.access_token);
                     localStorage.setItem('userId', data.user_id);
                     setIsAuthenticated(true);
                     navigate('/');
                 }
+            } catch (error) {
+                setServerError('Server is currently unavailable. Please try again later.');
             }
-        } catch (error) {
-            setServerError('Server is currently unavailable. Please try again later.');
         }
     };
 
     return (
         <div className={`container ${isSignUp ? 'active' : ''}`}>
-            <div className={`form-container sign-up ${isSignUp ? 'active' : ''}`}>
+            <div className="form-container sign-up">
                 <form onSubmit={handleSubmit}>
                     <h1>Create Account</h1>
                     <span>Please fill in the fields to create an account</span>
@@ -136,7 +124,7 @@ function Login({ setIsAuthenticated }) {
                     {serverError && <p className="error">{serverError}</p>}
                 </form>
             </div>
-            <div className={`form-container sign-in ${!isSignUp ? 'active' : ''}`}>
+            <div className="form-container sign-in">
                 <form onSubmit={handleSubmit}>
                     <h1>Log In</h1>
                     <span>or use your email and password</span>
@@ -178,14 +166,14 @@ function Login({ setIsAuthenticated }) {
             </div>
             <div className="toggle-container">
                 <div className="toggle">
-                    <div className={`toggle-panel toggle-left ${!isSignUp ? 'active' : ''}`}>
+                    <div className="toggle-panel toggle-left">
                         <h1>Welcome Back!</h1>
                         <p>Enter your details to log in if you already have an account. Thank you!</p>
                         <button className={`hidden ${!isSignUp ? 'active' : ''}`} onClick={() => setIsSignUp(false)}>
                             Sign In
                         </button>
                     </div>
-                    <div className={`toggle-panel toggle-right ${isSignUp ? 'active' : ''}`}>
+                    <div className="toggle-panel toggle-right">
                         <h1>Hello!</h1>
                         <p>Register with your personal details to use all of the site's features</p>
                         <button className={`hidden ${isSignUp ? 'active' : ''}`} onClick={() => setIsSignUp(true)}>

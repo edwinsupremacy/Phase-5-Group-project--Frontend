@@ -2,15 +2,13 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
+const Navbar = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    // Clear authentication details
+  const handleLogout = (e) => {
+    e.preventDefault(); // Prevent the default link behavior
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
-
-    // Update authentication state
     setIsAuthenticated(false);
 
     // Redirect to login page
@@ -20,15 +18,16 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
   return (
     <nav className="navbar">
       <Link to="/" className="nav-link">Home</Link>
-      {isAuthenticated && <Link to="/auction-items" className="nav-link">Auction Items</Link>}
+      {localStorage.getItem('token') && (
+        <>
+          <Link to="/auction-items" className="nav-link">Auction Items</Link>
+          <Link to="/recent-bids" className="nav-link">Recent Bids</Link>
+        </>
+      )}
       <Link to="/about" className="nav-link">About</Link>
       <Link to="/contact" className="nav-link">Contact</Link>
-      {isAuthenticated ? (
-        <>
-          <Link to="/profile" className="nav-link">Profile</Link>
-          <Link to="/recent-bids" className="nav-link">Recent Bids</Link>
-          <button onClick={handleLogout} className="nav-link logout-button">Logout</button>
-        </>
+      {localStorage.getItem('token') ? (
+        <Link to="/login" onClick={handleLogout} className="nav-link">Logout</Link>
       ) : (
         <Link to="/login" className="nav-link">Login</Link>
       )}

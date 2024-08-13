@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './AdminDashboard.css';
 import axiosInstance from "./utils/axiosConfig";
 
@@ -13,12 +14,14 @@ const AdminDashboard = () => {
     const [biddersVisibility, setBiddersVisibility] = useState({});
     const [shouldFetchData, setShouldFetchData] = useState(true);
 
+    const navigate = useNavigate(); // Initialize navigate
+
     useEffect(() => {
         if (shouldFetchData) {
             fetchItems();
             fetchUsers();
             fetchReviews();
-            setShouldFetchData(false); 
+            setShouldFetchData(false);
         }
     }, [shouldFetchData]);
 
@@ -61,6 +64,11 @@ const AdminDashboard = () => {
         }
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/login'); // Navigate to login page
+    };
+
     const handleDeleteUser = async (userId) => {
         try {
             const response = await fetch(`http://localhost:5000/users/delete/${userId}`, {
@@ -85,27 +93,27 @@ const AdminDashboard = () => {
             const response = await fetch(`http://localhost:5000/reviews/${reviewId}`, {
                 method: 'DELETE',
             });
-    
+
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-    
-       
+
+
             let result;
             try {
                 result = await response.json();
             } catch (e) {
-                result = {}; 
+                result = {};
             }
-    
+
             console.log(result.message || 'Review deleted successfully');
-    
+
             fetchReviews();
         } catch (err) {
             console.error('Error deleting review:', err);
         }
     };
-    
+
 
     const toggleItemsVisibility = () => {
         setShowItems(!showItems);
@@ -228,6 +236,25 @@ const AdminDashboard = () => {
                         )}
                     </div>
                 )}
+            </div>
+
+            <div className="admin-section">
+                <div className="admin-sellers-container">
+                    {sellers.length > 0 && (
+                        sellers.map((seller) => (
+                            <div key={seller.id} className="admin-seller-card">
+                                <div className="admin-seller-details">
+                                    <h3 className="admin-seller-name">{seller.name}</h3>
+                                    <p className="admin-seller-email">{seller.email}</p>
+                                    <p className="admin-seller-phone">{seller.phone}</p>
+                                </div>
+                                <div className="admin-seller-actions">
+                                    <button onClick={() => handleDeleteSeller(seller.id)} className="admin-seller-button">Delete Seller</button>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                </div>
             </div>
         </div>
     );
