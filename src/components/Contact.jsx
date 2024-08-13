@@ -50,7 +50,8 @@ const Contact = () => {
         const whatsappNumber = '254707499607';
         const whatsappMessage = `Hello, my name is ${name}. ${message}`;
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-        window.open(whatsappLink, '_blank'); 
+
+        window.open(whatsappLink, '_blank');
         setMessageSent(true);
         setLoading(false);
     };
@@ -100,7 +101,7 @@ const Contact = () => {
                                         required
                                     />
                                 </div>
-                                
+
                                 <div className="form-group">
                                     <label htmlFor="message" className={formData.message ? 'filled' : ''}>Message</label>
                                     <textarea

@@ -1,122 +1,148 @@
+/* AdminDashboard.css */
+
 .admin-dashboard-container {
-    padding: 20px;
-    background-color: #F6E6CB;
+    background-color: #f9f3e5;
+    /* Light vintage background */
+    padding: 30px;
+    font-family: 'Georgia', serif;
+    /* Vintage font */
     max-width: 1200px;
     margin: 0 auto;
-    height: calc(100vh - 40px);
-    overflow-y: auto;
-    border-radius: 30px;
-
+    margin-top: 200px;
 }
 
 .admin-dashboard-title {
-    font-size: 2em;
-    margin-bottom: 20px;
-    color: #A0937D;
+    text-align: center;
+    color: #6b4f28;
+    /* Darker vintage color */
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #8a5d3b;
+    padding-bottom: 10px;
 }
 
 .admin-section {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .admin-list-toggle-button {
-    padding: 10px 20px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    background-color: #B6C7AA;
-    color: #A0937D;
+    background-color: #8a5d3b;
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: block;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.admin-items-container, .admin-users-container {
+.admin-list-toggle-button:hover {
+    background-color: #7a4c2a;
+    transform: scale(1.05);
+}
+
+.admin-items-container,
+.admin-users-container,
+.admin-reviews-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    justify-content: center;
 }
 
-.admin-item-card, .admin-user-card {
-    border: 1px solid #E7D4B5;
-    border-radius: 5px;
-    padding: 15px;
-    background-color: #FFF;
-    width: 300px;
+.admin-item-card,
+.admin-user-card,
+.admin-review-card {
+    background-color: #ffffff;
+    border: 1px solid #d3bfa5;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    /* Adjust to fit horizontally */
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.admin-item-card:hover,
+.admin-user-card:hover,
+.admin-review-card:hover {
+    transform: translateY(-5px);
 }
 
 .admin-item-image {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
 }
 
-.admin-item-details, .admin-user-details {
-    margin-top: 10px;
-    color: #A0937D;
-}
-
-.admin-item-name, .admin-user-name {
-    font-size: 1.2em;
-    margin-bottom: 5px;
-    color: #A0937D;
-}
-
-.admin-item-description, .admin-user-email {
-    margin-bottom: 5px;
-    color: #B6C7AA;
-}
-
-.admin-item-price, .admin-item-category {
+.admin-item-name,
+.admin-user-name,
+.admin-review-name {
+    color: #6b4f28;
+    /* Vintage color */
+    font-size: 1.5rem;
+    font-weight: bold;
     margin-bottom: 10px;
-    color: #A0937D;
 }
 
-.admin-item-actions, .admin-user-actions {
-    display: flex;
-    justify-content: space-between;
+.admin-item-price,
+.admin-item-category,
+.admin-review-rating {
+    color: #8a5d3b;
+    /* Vintage color */
+    margin-bottom: 5px;
+    font-size: 1.1rem;
 }
 
-.admin-item-button, .admin-user-button {
-    padding: 5px 10px;
-    cursor: pointer;
-    background-color: #E7D4B5;
-    color: #FFF;
+.admin-item-description,
+.admin-review-message {
+    color: #5f4b3a;
+    /* Dark vintage text color */
+    font-size: 1rem;
+}
+
+.admin-item-actions,
+.admin-user-actions,
+.admin-review-actions {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.admin-item-button,
+.admin-user-button,
+.admin-review-button {
+    background-color: #8a5d3b;
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
 }
 
-.admin-item-bids {
-    margin-top: 10px;
+.admin-item-button:hover,
+.admin-user-button:hover,
+.admin-review-button:hover {
+    background-color: #7a4c2a;
+    transform: scale(1.05);
 }
 
 .admin-item-bids ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 .admin-item-bids li {
-    padding: 5px 0;
-    color: #A0937D;
-}
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.contact-container {
-    padding: 2rem;
-    background-color: #F1E3D3;
-    color: #5A4D3A;
-    min-height: calc(100vh - 4rem);
-    box-sizing: border-box;
-    border-radius: 50px;
-    max-height: 90vh;
-    overflow-y: auto;
-    margin-top: 50px;
-    animation: pulse 2s infinite; /* Apply the pulse animation */
+    padding: 10px 0;
+    border-bottom: 1px solid #d3bfa5;
+    color: #5f4b3a;
+    font-size: 1rem;
 }

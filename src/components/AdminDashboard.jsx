@@ -6,7 +6,6 @@ import axiosInstance from "./utils/axiosConfig";
 const AdminDashboard = () => {
     const [items, setItems] = useState([]);
     const [users, setUsers] = useState([]);
-    const [sellers, setSellers] = useState([]);
     const [bids, setBids] = useState({});
     const [reviews, setReviews] = useState([]);
     const [showItems, setShowItems] = useState(false);
@@ -22,8 +21,7 @@ const AdminDashboard = () => {
             fetchItems();
             fetchUsers();
             fetchReviews();
-            fetchSellers(); // Fetch sellers data
-            setShouldFetchData(false); 
+            setShouldFetchData(false);
         }
     }, [shouldFetchData]);
 
@@ -54,15 +52,6 @@ const AdminDashboard = () => {
         }
     };
 
-    const fetchSellers = async () => {
-        try {
-            const response = await axiosInstance.get('http://localhost:5000/sellers');
-            setSellers(response.data);
-        } catch (err) {
-            console.error('Error fetching sellers:', err);
-        }
-    };
-
     const fetchBids = async (itemId) => {
         try {
             const response = await axiosInstance.get(`http://localhost:5000/items/${itemId}/bids`);
@@ -82,8 +71,18 @@ const AdminDashboard = () => {
 
     const handleDeleteUser = async (userId) => {
         try {
-            await axiosInstance.delete(`http://localhost:5000/users/delete/${userId}`);
-            fetchUsers(); // Refresh the user list after deletion
+            const response = await fetch(`http://localhost:5000/users/delete/${userId}`, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            console.log(result.message);
+
+            fetchUsers();
         } catch (err) {
             console.error('Error deleting user:', err);
         }
@@ -91,21 +90,30 @@ const AdminDashboard = () => {
 
     const handleDeleteReview = async (reviewId) => {
         try {
-            await axiosInstance.delete(`http://localhost:5000/reviews/${reviewId}`);
-            fetchReviews(); // Refresh the review list after deletion
+            const response = await fetch(`http://localhost:5000/reviews/${reviewId}`, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+
+            let result;
+            try {
+                result = await response.json();
+            } catch (e) {
+                result = {};
+            }
+
+            console.log(result.message || 'Review deleted successfully');
+
+            fetchReviews();
         } catch (err) {
             console.error('Error deleting review:', err);
         }
     };
 
-    const handleDeleteSeller = async (sellerId) => {
-        try {
-            await axiosInstance.delete(`http://localhost:5000/sellers/${sellerId}`);
-            fetchSellers(); // Refresh the seller list after deletion
-        } catch (err) {
-            console.error('Error deleting seller:', err);
-        }
-    };
 
     const toggleItemsVisibility = () => {
         setShowItems(!showItems);
@@ -161,7 +169,7 @@ const AdminDashboard = () => {
                                             {bids[item.id] && bids[item.id].length > 0 ? (
                                                 <ul>
                                                     {bids[item.id].map(bid => (
-                                                        <li key={bid.id}>{bid.username} - ksh {bid.amount.toFixed(2)}</li>
+                                                        <li key={bid.id}>{bid.bidder_name} - ksh {bid.amount.toFixed(2)}</li>
                                                     ))}
                                                 </ul>
                                             ) : (

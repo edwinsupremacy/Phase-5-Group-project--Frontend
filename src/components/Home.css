@@ -1,254 +1,599 @@
-html,
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: 'Montserrat', sans-serif;
-    background-color: #F5F5DC;
-    /* Beige background color */
-    background-image: url('https://img.pikbest.com/ai/illus_our/20230422/496433dd6ebc4a5b3e3d36817ff489c5.jpg!w700wp');
-    /* Replace with your image path */
-    background-repeat: no-repeat;
-    background-position: center;
+  font-family: 'Roboto', sans-serif;
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: #F6E6CB;
+}
+
+/* Heading Styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Main Container Styles */
+.home-page {
+  
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* Hero Section */
+.hero-section {
+  padding-top: 6rem;
+  background-color: #F6E6CB;
+  margin-bottom: 4rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  width: 100%;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto; /* Changed from 100vh to auto for flexible height */
+    min-height: 100vh; /* Ensures it covers at least the full viewport height */
+    position: relative;
+    overflow: hidden;
+    background-image: url('https://cdn.wallpapersafari.com/49/38/kp5ijs.jpg');
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top:-37px;
+  }
+
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  background-color: rgba(246, 230, 203, 0.9);
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+@media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-image {
+    height: 300px;
+  }
 }
 
-.home-container {
-    background-color: #F6E6CB;
-    color: #4F4F4F;
-    border-radius: 30px;
-    box-shadow: 0 5px 15px #00000059;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex: 1;
-    padding: 40px;
-    max-width: 768px;
-    width: 100%;
-    margin: 20px;
-    margin-top: 100px;
+/* Heading Styles */
+.greeting {
+  font-size: 2rem;
+  color: #A0937D;
 }
 
+h1 {
+  font-size: 3.5rem;
+  color: #A0937D;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.secondary-headline {
+  font-size: 2rem;
+  color: #B6C7AA;
+}
+
+.secondary-subheadline {
+  font-size: 1.25rem;
+  color: #3C3C3C;
+  margin-bottom: 2rem;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Social Proof */
+.social-proof {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.social-proof span {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #A0937D;
+  margin-right: 1rem;
+}
+
+.socialproof-header {
+  font-size: 1.5rem;
+  color: #3C3C3C;
+}
+
+/* Hero Benefits */
+.hero-benefits {
+  margin-top: 2rem;
+}
+
+.hero-benefits h3 {
+  font-size: 1.75rem;
+  color: #A0937D;
+  margin-bottom: 1rem;
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Two columns */
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  /* Center align */
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  /* Increase spacing between items */
+}
+
+.benefit-icon {
+  font-size: 2.5rem;
+  /* Increase font size of the icon */
+  margin-right: 1rem;
+  /* Increase spacing between icon and text */
+  color: #B6C7AA;
+}
+
+#benefit-header {
+  font-size: 1.5rem;
+  /* Increase font size for benefit header */
+  color: #3C3C3C;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .benefits {
+    grid-template-columns: 1fr;
+    /* Single column on smaller screens */
+  }
+}
+
+/* How It Works Section */
 .how-it-works {
-    background-color: #B6C7AA;
-    padding: 40px 20px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin-top: 20px;
-    width: 100%;
-    max-width: 2000px;
+  text-align: center;
+  margin: 3rem auto;
+  background-color: #F6E6CB;
+  padding: 2rem;
 }
 
 .how-it-works h2 {
-    color: #A0937D;
-    margin-bottom: 20px;
-    text-align: center;
-    width: 100%;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #A0937D;
 }
 
 .how-it-works ol {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 600px;
 }
 
 .how-it-works li {
-    background-color: #F6E6CB;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 23%;
-    margin-bottom: 20px;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
-.how-it-works li h3 {
-    color: #3f2e11;
-    font-size: 1.9rem;
-    margin-bottom: 1rem;
-    font-weight: bold;
+.how-it-works h3 {
+  font-size: 1.5rem;
+  color: #B6C7AA;
 }
 
-.how-it-works li p {
-    font-weight: 600;
-    color: #4F4F4F;
-    font-size: 1.5rem;
+.how-it-works p {
+  font-size: 1.25rem;
+  color: #3C3C3C;
 }
 
-.how-it-works li h3 svg {
-    color: #887252;
-    margin-bottom: 0.5rem;
-    font-size: 2.8rem;
+/* Featured Tech Spaces Section */
+.featured-tech-spaces {
+  background-color: #F6E6CB;
+  padding: 3rem 1rem;
+  text-align: center;
 }
 
-.images-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 40px 0;
+.featured-card {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #FFF;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.images-container img {
-    max-width: 200px;
-    max-height: 200px;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    object-fit: cover;
+.featured-card h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #A0937D;
+}
+
+.featured-card p {
+  font-size: 1.25rem;
+  color: #3C3C3C;
+}
+
+.featured-icon {
+  font-size: 3rem;
+  color: #A0937D;
+}
+
+.view-all-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: #FFF;
+  background-color: #A0937D;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.view-all-btn:hover {
+  background-color: #B6C7AA;
+}
+
+.arrow-icon {
+  margin-left: 0.5rem;
+}
+
+/* Testimonials Section */
+.testimonial {
+  text-align: center;
+  padding: 2rem;
+  background-color: #F6E6CB;
+}
+
+.testimonial h2 {
+  font-size: 2rem;
+  color: #A0937D;
+  margin-bottom: 2rem;
+}
+
+.testimonial-item {
+  display: none;
+}
+
+.testimonial-item.active {
+  display: block;
+}
+
+.testimonial blockquote {
+  font-size: 1.5rem;
+  color: #3C3C3C;
+  margin: 0;
+  font-style: italic;
+}
+
+.testimonial cite {
+  display: block;
+  font-size: 1.25rem;
+  color: #B6C7AA;
+  margin-top: 1rem;
+}
+
+/* Special Offer Section */
+.special-offer {
+  background-color: #FFFFFF;
+  /* White background */
+  color: #F6E6CB;
+  /* Beige text color */
+  padding: 3rem;
+  text-align: center;
+}
+
+.special-offer h2 {
+  font-size: 2rem;
+  color: #A0937D;
+  /* Darker beige for heading */
+  margin-bottom: 1rem;
 }
 
 .special-offer p {
-    margin-bottom: 1.5rem;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-weight: bold;
-    font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
+/* Trust Indicators Section */
 .trust-indicators {
-    background-color: #f8f8f8;
-    padding: 4rem 0;
-    text-align: center;
+  background-color: #FFFFFF;
+  /* White background */
+  color: #F6E6CB;
+  /* Beige text color */
+  padding: 3rem;
+  text-align: center;
 }
 
 .trust-indicators-heading {
-    font-size: 2.8rem;
-    color: #000000;
-    margin-bottom: 3rem;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #A0937D;
+  /* Darker beige for heading */
 }
 
 .awards-container {
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
-    margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .award {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 300px;
-    background-color: white;
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  color: #3C3C3C;
 }
 
-.award:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.award-badge {
-    width: 200px;
-    height: 200px;
-    object-fit: contain;
-    margin-bottom: 1.5rem;
-}
-
-.award p {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #000000;
-    margin-bottom: 0.75rem;
-}
-
-.award-year {
-    font-size: 1.2rem;
-    color: #000000;
-    font-weight: 600;
+.award img {
+  width: 80px;
+  height: auto;
 }
 
 .additional-trust {
-    margin-top: 3rem;
+  color: #3C3C3C;
 }
 
-.additional-trust p {
-    font-size: 1.4rem;
-    color: #003366;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-}
 
 .final-cta {
-    margin-top: 1.5rem;
-    background-color: rgb(190, 190, 230);
+  background-color: #FFFFFF;
+  /* White background */
+  color: #F6E6CB;
+  /* Beige text color */
+  text-align: center;
+  padding: 3rem 1rem;
 }
 
-.special-offer {
-    background-color: rgb(190, 190, 230);
+.final-cta h2 {
+  font-size: 2rem;
+  color: #A0937D;
+  /* Slightly darker beige for heading */
+  margin-bottom: 1.5rem;
 }
 
-.trust-indicators {
-    background-color: #F4F4F4;
+.final-cta p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.final-cta {
-    background-color: #FFF5E6;
+.final-cta .cta-button {
+  background-color: #A0937D;
+  /* Vintage beige button */
+  color: #FFF;
+  /* White text */
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+  border: 2px solid #A0937D;
+  display: inline-block;
+  text-align: center;
 }
 
-.cta-container {
-    text-align: center;
-    margin: 2rem 0;
-    padding-bottom: 60px;
+.final-cta .cta-button:hover {
+  background-color: #B6C7AA;
+  /* Light vintage green on hover */
+  color: #3C3C3C;
+  /* Darker text color for contrast */
 }
 
-.cta-background {
-    background-color: #f6e6cb;
-    color: #3f2e11;
-    padding: 10px 20px;
-    border-radius: 10px;
-    display: inline-block;
+/* Footer Styles */
+footer {
+  background-color: #F6E6CB;
+  color: #3C3C3C;
+  padding: 2rem;
+  text-align: center;
 }
 
-.cta-link {
-    color: #3f2e11;
-    text-decoration: none;
-    font-weight: bold;
+footer h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.cta-link:hover {
-    text-decoration: underline;
-    color: #a0937d;
+footer p {
+  font-size: 1rem;
 }
 
-.testimonials-container {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #f6e6cb;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
+footer a {
+  color: #A0937D;
+  text-decoration: none;
 }
 
-.testimonials-container h3 {
-    font-size: 1.8rem;
-    color: #4f4f4f;
-    margin-bottom: 10px;
+footer a:hover {
+  text-decoration: underline;
 }
 
-.testimonials-container p {
-    font-size: 1.2rem;
-    color: #4f4f4f;
-    font-style: italic;
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vintage-awards {
+  padding: 4rem 2rem;
+  background-color: white;
+  /* Light background to distinguish the section */
+  text-align: center;
+}
+
+.vintage-awards h2 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #3c3c3c;
+  /* Darker text for contrast */
+
+}
+
+.awards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+
+}
+
+.award-item {
+  text-align: center;
+  background-color: #e9e9e9;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.award-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.award-image {
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.award-item p {
+  font-size: 1.25rem;
+  color: #3c3c3c;
+}
+
+.testimonial {
+  padding: 4rem 2rem;
+  background-color:white;
+  /* Beige with transparency */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  /* Ensure pulsing effect doesn’t overflow */
+  border-radius: 8px;
+  /* Optional: for rounded corners */
+}
+
+.testimonial h2 {
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  color: #3c3c3c;
+  /* Darker text for contrast */
+}
+
+.testimonial-container {
+  position: relative;
+  display: inline-block;
+  /* Ensure container fits content */
+  animation: pulse 2s infinite;
+  /* Faster pulsing effect */
+  padding: 2rem;
+  /* Optional: Padding to ensure content spacing */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+
+}
+
+.testimonial-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+
+}
+
+.testimonial-item.active {
+  opacity: 1;
+  position: relative;
+}
+
+.testimonial-content {
+  background-color: rgba(231, 212, 181, 0.3);
+  /* More transparent beige */
+  padding: 2rem;
+  border-radius: 18px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: inline-block;
+  width: 900px;
+  margin: 0 auto;
+  animation: pulse 2s infinite;
+  /* Pulsing effect for content */
+}
+
+
+.testimonial-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 2px solid #A0937D;
+  /* Match with theme colors */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  animation: pulse 2s infinite;
+  /* Pulsing effect for image */
+}
+
+.testimonial-text {
+  font-size: 1.25rem;
+  color: #3c3c3c;
+  margin-bottom: 1rem;
+  animation: pulse 2s infinite;
+  /* Pulsing effect for text */
+}
+
+.testimonial-author {
+  font-size: 1.1rem;
+  color: #7a7a7a;
+  animation: pulse 2s infinite;
+  /* Pulsing effect for author */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+}
+
+.cta-button.pulse {
+  animation: pulse 1.5s infinite;
 }

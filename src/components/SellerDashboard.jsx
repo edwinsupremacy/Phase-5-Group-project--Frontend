@@ -62,7 +62,7 @@ const SellerDashboard = ({ sellerId }) => {
             setError('Failed to fetch bids');
         }
     };
-    
+
     const filterItems = () => {
         setFilteredItems(items.filter(item =>
             (!categoryFilter || item.category === categoryFilter) &&
@@ -70,7 +70,8 @@ const SellerDashboard = ({ sellerId }) => {
             (!formData.subCategory || item.sub_category === formData.subCategory)
         ));
     };
-     const handleLogout = () => {
+
+    const handleLogout = () => {
         localStorage.removeItem('token');
         navigate('/login');
     };
@@ -149,9 +150,10 @@ const SellerDashboard = ({ sellerId }) => {
             console.error(err);
         }
     };
+
     const handleBidAction = async (bidId, action) => {
         try {
-           await axiosInstance.put(`http://localhost:5000/bids/${bidId}/action`, { status: action });
+            await axiosInstance.put(`http://localhost:5000/bids/${bidId}/action`, { status: action });
 
             fetchItems(); // Re-fetch items after bid action
         } catch (err) {
@@ -202,143 +204,150 @@ const SellerDashboard = ({ sellerId }) => {
 
     return (
         <div className="seller-dashboard-container">
-    <div className="seller-add-item-section">
-        <h1 className="seller-dashboard-title">Seller Dashboard</h1>
-        <h2 className="seller-add-item-title">{editIndex !== null ? 'Update Item' : 'Add New Item'}</h2>
-        <form onSubmit={handleSubmit} className="seller-add-item-form">
-            <input
-                type="text"
-                name="name"
-                placeholder="Item Name"
-                value={formData.name}
-                onChange={handleChange}
-                className="seller-input"
-                autoComplete="off"
-            />
-            <input
-                type="text"
-                name="description"
-                placeholder="Item Description"
-                value={formData.description}
-                onChange={handleChange}
-                className="seller-input"
-                autoComplete="off"
-            />
-            <input
-                type="number"
-                name="startingPrice"
-                placeholder="Starting Price"
-                value={formData.startingPrice}
-                onChange={handleChange}
-                className="seller-input"
-                autoComplete="off"
-            />
-            <input
-                type="text"
-                name="sellerId"
-                placeholder="Seller ID"
-                value={formData.sellerId}
-                onChange={handleChange}
-                className="seller-input"
-                autoComplete="off"
-            />
-            <select
-                name="category"
-                value={formData.category}
-                onChange={handleCategoryChange}
-                className="seller-input"
-            >
-                <option value="">Select Category</option>
-                {Object.keys(categoryData).map(category => (
-                    <option key={category} value={category}>{category}</option>
-                ))}
-            </select>
-            <select
-                name="subCategory"
-                value={formData.subCategory}
-                onChange={handleChange}
-                className="seller-input"
-                disabled={!selectedCategory}
-            >
-                <option value="">Select Sub-Category</option>
-                {subCategories.map(sub => (
-                    <option key={sub} value={sub}>{sub}</option>
-                ))}
-            </select>
-            <input
-                type="text"
-                name="imageUrl"
-                placeholder="Image URL"
-                value={formData.imageUrl}
-                onChange={handleChange}
-                className="seller-input"
-                autoComplete="off"
-            />
-            <button type="submit" className="seller-submit-button">
-                {editIndex !== null ? 'Update Item' : 'Add Item'}
-            </button>
-        </form>
-        {error && <p className="error-message">{error}</p>}
-    </div>
-
-    <div className="seller-items-section">
-        <div className="seller-filter-section">
-            {Object.keys(categoryData).map((category) => (
-                <button 
-                    key={category} 
-                    onClick={() => handleCategoryFilter(category)} 
-                    className={`seller-filter-button ${selectedCategory === category ? 'active' : ''}`}
-                >
-                    {category}
-                </button>
-            ))}
-        </div>
-
-        <button onClick={toggleItemsVisibility} className="seller-list-toggle-button">
-            {showItems ? 'Hide Items' : 'Show Items'}
-        </button>
-        <button onClick={handleLogout} className="logout-button">
-                Logout
-            </button>
-
-        {showItems && (
-            <div className="items-list">
-                {filteredItems.length > 0 ? (
-                    filteredItems.map((item, index) => (
-                        <div key={item.id} className="item-card">
-                            <h3>{item.name}</h3>
-                            <p>{item.description}</p>
-                            <p>Starting Price: ksh {item.starting_price}</p>
-                            <p>Category: {item.category}</p>
-                            <p>Sub-Category: {item.sub_category}</p>
-                            <img src={item.image_url} alt={item.name} className="item-image" />
-                            <button onClick={() => handleEdit(index)} className="edit-button">Edit</button>
-                            <button onClick={() => handleDelete(index)} className="delete-button">Delete</button>
-                            <button onClick={() => toggleBiddersVisibility(index)} className="toggle-bidders-button">
-                                {biddersVisibility[index] ? 'Hide Bidders' : 'Show Bidders'}
-                            </button>
-                            {biddersVisibility[index] && bids[item.id] && (
-                                        <div className="seller-bidders-list">
-                                            {bids[item.id].map(bid => (
-                                                <div key={bid.id} className="seller-bid">
-                                                   <p className="seller-bid-amount">Bided Amount: ksh {bid.amount.toLocaleString()}</p>
-                                                    <p className="seller-bid-user">bidder: {bid.username}</p>
-                                               <button onClick={() => handleBidAction(bid.id, 'Accepted')}>Accept</button>
-                                            <button onClick={() => handleBidAction(bid.id, 'Rejected')}>Reject</button>
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    ))
-                ) : (
-                    <p>No items found.</p>
-                )};
+            <div className="seller-add-item-section">
+                <h1 className="seller-dashboard-title">Seller Dashboard</h1>
+                <h2 className="seller-add-item-title">{editIndex !== null ? 'Update Item' : 'Add New Item'}</h2>
+                <form onSubmit={handleSubmit} className="seller-add-item-form">
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Item Name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="seller-input"
+                        autoComplete="off"
+                    />
+                    <input
+                        type="text"
+                        name="description"
+                        placeholder="Item Description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        className="seller-input"
+                        autoComplete="off"
+                    />
+                    <input
+                        type="number"
+                        name="startingPrice"
+                        placeholder="Starting Price"
+                        value={formData.startingPrice}
+                        onChange={handleChange}
+                        className="seller-input"
+                        autoComplete="off"
+                    />
+                    <input
+                        type="text"
+                        name="sellerId"
+                        placeholder="Seller ID"
+                        value={formData.sellerId}
+                        onChange={handleChange}
+                        className="seller-input"
+                        autoComplete="off"
+                    />
+                    <select
+                        name="category"
+                        value={formData.category}
+                        onChange={handleCategoryChange}
+                        className="seller-input"
+                    >
+                        <option value="">Select Category</option>
+                        {Object.keys(categoryData).map(category => (
+                            <option key={category} value={category}>{category}</option>
+                        ))}
+                    </select>
+                    <select
+                        name="subCategory"
+                        value={formData.subCategory}
+                        onChange={handleChange}
+                        className="seller-input"
+                        disabled={!selectedCategory}
+                    >
+                        <option value="">Select Sub-Category</option>
+                        {subCategories.map(sub => (
+                            <option key={sub} value={sub}>{sub}</option>
+                        ))}
+                    </select>
+                    <input
+                        type="text"
+                        name="imageUrl"
+                        placeholder="Image URL"
+                        value={formData.imageUrl}
+                        onChange={handleChange}
+                        className="seller-input"
+                        autoComplete="off"
+                    />
+                    <button type="submit" className="seller-submit-button">
+                        {editIndex !== null ? 'Update Item' : 'Add Item'}
+                    </button>
+                </form>
+                {error && <p className="seller-error">{error}</p>}
             </div>
-        )};
-    </div>
-</div>
 
+            <div className="seller-filter-section">
+                <input
+                    type="text"
+                    placeholder="Filter by category"
+                    value={categoryFilter}
+                    onChange={handleCategoryFilterChange}  // Update category filter on change
+                    className="filter-input"
+                />
+                {Object.keys(categoryData).map((category) => (
+                    <button
+                        key={category}
+                        onClick={() => handleCategoryFilter(category)}
+                        className={`filter-button ${selectedCategory === category ? 'active' : ''}`}
+                    >
+                        {category}
+                    </button>
+                ))}
+            </div>
+
+            {showItems && (
+                <div className="seller-item-list">
+                    <h2 className="seller-item-list-title">Your Items</h2>
+                    {filteredItems.length === 0 ? (
+                        <p>No items found</p>
+                    ) : (
+                        filteredItems.map((item, index) => (
+                            <div key={item.id} className="seller-item-card">
+                                <h3 className="seller-item-name">{item.name}</h3>
+                                <p className="seller-item-description">{item.description}</p>
+                                <p className="seller-item-price">${item.starting_price}</p>
+                                <p className="seller-item-category">Category: {item.category}</p>
+                                <p className="seller-item-subcategory">Sub-Category: {item.sub_category}</p>
+                                <img src={item.image_url} alt={item.name} className="seller-item-image" />
+                                <button onClick={() => handleEdit(index)} className="seller-edit-button">Edit</button>
+                                <button onClick={() => handleDelete(index)} className="seller-delete-button">Delete</button>
+                                <button onClick={() => toggleBiddersVisibility(index)} className="seller-bidders-button">
+                                    {biddersVisibility[index] ? 'Hide Bidders' : 'Show Bidders'}
+                                </button>
+                                {biddersVisibility[index] && (
+                                    <div className="seller-bidders-list">
+                                        {bids[item.id] ? (
+                                            bids[item.id].map(bid => (
+                                                <div key={bid.id} className="seller-bid-card">
+                                                    <p>Bidder: {bid.bidder_name}</p>
+                                                    <p>Bid Amount: ${bid.amount}</p>
+                                                    <button onClick={() => handleBidAction(bid.id, 'accept')} className="seller-bid-accept-button">Accept</button>
+                                                    <button onClick={() => handleBidAction(bid.id, 'reject')} className="seller-bid-reject-button">Reject</button>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p>No bids</p>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                        ))
+                    )}
+                </div>
+            )}
+
+            <button onClick={toggleItemsVisibility} className="seller-toggle-items-button">
+                {showItems ? 'Hide Items' : 'Show Items'}
+            </button>
+            <button onClick={handleLogout} className="seller-logout-button">Logout</button>
+        </div>
     );
 };
 
