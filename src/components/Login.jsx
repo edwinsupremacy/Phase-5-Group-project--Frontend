@@ -127,7 +127,7 @@ function Login({ setIsAuthenticated }) {
             <div className="form-container sign-in">
                 <form onSubmit={handleSubmit}>
                     <h1>Log In</h1>
-                    <span>or use your email and password</span>
+                    <span>Please use your email and password</span>
                     <input
                         type="email"
                         name="email"

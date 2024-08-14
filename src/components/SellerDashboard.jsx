@@ -152,15 +152,14 @@ const SellerDashboard = ({ sellerId }) => {
     };
 
     const handleBidAction = async (bidId, action) => {
-        try {
-            await axiosInstance.put(`http://localhost:5000/bids/${bidId}/action`, { status: action });
-
-            fetchItems(); // Re-fetch items after bid action
-        } catch (err) {
-            console.error('Error updating bid status:', err);
-            setError('Failed to update bid status');
-        }
-    };
+    try {
+        const response = await axiosInstance.put(`http://localhost:5000/bids/${bidId}/action`, { status: action });
+        fetchItems(); 
+    } catch (err) {
+        console.error('Error updating bid status:', err.response ? err.response.data : err.message);
+        setError('Failed to update bid status');
+    }
+};
 
     const handleDelete = async (index) => {
         const itemId = items[index].id;
@@ -326,10 +325,10 @@ const SellerDashboard = ({ sellerId }) => {
                                         {bids[item.id] ? (
                                             bids[item.id].map(bid => (
                                                 <div key={bid.id} className="seller-bid-card">
-                                                    <p>Bidder: {bid.bidder_name}</p>
-                                                    <p>Bid Amount: ${bid.amount}</p>
-                                                    <button onClick={() => handleBidAction(bid.id, 'accept')} className="seller-bid-accept-button">Accept</button>
-                                                    <button onClick={() => handleBidAction(bid.id, 'reject')} className="seller-bid-reject-button">Reject</button>
+                                                    <p>Bidder: {bid.username}</p>
+                                                    <p>Bid Amount: ksh{bid.amount}</p>
+                                                    <button onClick={() => handleBidAction(bid.id, 'Accepted')} className="seller-bid-accept-button">Accept</button>
+                                                    <button onClick={() => handleBidAction(bid.id, 'Rejected')} className="seller-bid-reject-button">Reject</button>
                                                 </div>
                                             ))
                                         ) : (

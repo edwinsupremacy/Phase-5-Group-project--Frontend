@@ -17,6 +17,7 @@
     text-align: center;
 }
 
+/* Add item form title */
 .seller-add-item-title {
     font-size: 1.75rem;
     margin-bottom: 15px;
@@ -60,6 +61,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* Error message */
 .seller-error {
     color: red;
     font-size: 0.9rem;
