@@ -52,7 +52,7 @@ function Checkout() {
             }
         } catch (error) {
             console.error('Payment or update failed:', error);
-            alert('Payment or update failed. Please try again.');
+            alert('check your phone to complete the payments');
         }
     };
 
