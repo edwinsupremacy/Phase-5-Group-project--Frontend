@@ -125,7 +125,7 @@ const AuctionItems = () => {
             }
         } catch (err) {
             console.error('Error placing bid:', err);
-            setMessage('Error placing bid. Please try again.');
+            setMessage('Error placing bid please try to log in again.');
         }
     };
 
