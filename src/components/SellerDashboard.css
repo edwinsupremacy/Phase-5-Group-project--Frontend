@@ -1,23 +1,36 @@
 /* Container styles */
 .seller-dashboard-container {
     max-width: 100%;
-    /* Adjusted to make the container scrollable */
-    margin: 40px auto 0;
-    /* Increased margin-top */
+    margin: 40px auto;
     padding: 40px;
     background-color: #F9F3E0;
     border-radius: 18px;
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
     display: flex;
+    grid-gap: 30px;
     height: calc(100vh - 80px);
-    /* Adjusted for scroll */
     overflow: auto;
-    /* Enabled scrolling */
     font-family: 'Garamond', serif;
     width: 1000px;
+    justify-content: flex-start;
 }
 
+/* Seller buttons at the top, arranged horizontally */
+.seller-buttons {
+    grid-area: buttons;
+    display: flex;
+    justify-content: flex-start;
+    /* Align buttons to the start */
+    align-items: center;
+    /* Center buttons vertically within the container */
+    gap: 20px;
+    margin-bottom: 30px;
+    /* Adjust as needed for spacing below */
+}
+
+/* Title styles */
 .seller-dashboard-title {
+    grid-column: 1 / -1;
     text-align: center;
     margin-bottom: 30px;
     color: #8E735B;
@@ -26,17 +39,19 @@
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+/* Add item section */
 .seller-add-item-section {
-    flex: 1;
-    margin-right: 30px;
-    overflow: auto;
+    grid-area: add-item;
     background-color: #E1D8C9;
     border-radius: 18px;
     padding: 30px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-    border: 1px solid #D0BFAE;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
+/* Add item form title */
 .seller-add-item-title {
     margin-bottom: 20px;
     color: #8E735B;
@@ -44,6 +59,7 @@
     font-family: 'Garamond', serif;
 }
 
+/* Add item form */
 .seller-add-item-form {
     display: flex;
     flex-direction: column;
@@ -52,7 +68,6 @@
 
 .seller-input {
     padding: 15px;
-    border: 1px solid #D0BFAE;
     border-radius: 12px;
     font-size: 1.1em;
     background-color: #FFFFFF;
@@ -60,71 +75,51 @@
     color: rgb(0, 0, 0);
 }
 
-
-.seller-buttons {
-    gap: 20px;
-    display: flex;
-}
-
-/* Button styles with vintage theme */
+/* Button styles */
 .seller-submit-button,
 .seller-item-button,
 button {
     padding: 10px 20px;
-    border: none;
-    /* Removed border */
     background-color: #a0b8a0;
-    /* Teal green background */
-    color: #000000;
-    /* Black text color */
+    justify-content: flex-start;
+    color: #7a603a;
     border-radius: 8px;
-    /* Reduced border radius */
     cursor: pointer;
     font-size: 1.1em;
-    /* Increased font size */
     font-weight: bold;
-    /* Bold text */
     font-family: 'Garamond', serif;
     transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
     text-decoration: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* Soft shadow */
+    border: none;
 }
 
 .seller-submit-button:hover,
 .seller-item-button:hover,
 button:hover {
     background-color: #68461a;
-    /* Black background on hover */
     color: #a0b8a0;
-    /* Teal green text color on hover */
+    border: none;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    /* Enhanced shadow on hover */
 }
 
-
-
-
-/* Additional vintage button styles */
+/* Vintage button styles */
 .seller-button-primary,
 button.primary {
     background-color: #D0BFAE;
-    /* Lighter vintage background for primary buttons */
-    border: 2px solid #B19B7F;
-    /* Matching border color */
     color: #6E5D4F;
-    /* Text color to contrast with background */
+    justify-content: flex-start;
+    border: none;
 }
 
 .seller-button-primary:hover,
 button.primary:hover {
     background-color: #B19B7F;
-    /* Darker shade for hover */
-    border-color: #A0937D;
-    /* Darker border color on hover */
+    border: none;
 }
 
+/* Error message */
 .seller-error {
     color: #E74C3C;
     margin-top: 15px;
@@ -132,14 +127,16 @@ button.primary:hover {
     font-family: 'Garamond', serif;
 }
 
+/* Items section */
 .seller-items-section {
-    flex: 2;
-    position: relative;
-    overflow: auto;
+    grid-area: items;
     background-color: #FFFFFF;
     padding: 30px;
     border-radius: 18px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .seller-items-title {
@@ -149,6 +146,7 @@ button.primary:hover {
     font-family: 'Garamond', serif;
 }
 
+/* Items container */
 .seller-items-container {
     width: 100%;
     max-height: 700px;
@@ -156,13 +154,10 @@ button.primary:hover {
     background-color: #FFFFFF;
     padding: 15px;
     border-radius: 12px;
-    border: 1px solid #D0BFAE;
 }
 
 .seller-item-card {
     background-color: #FFFFFF;
-    border: 1px solid #8E735B;
-    /* Updated border color */
     border-radius: 16px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
     overflow: hidden;
@@ -184,13 +179,10 @@ button.primary:hover {
     border-radius: 16px 16px 0 0;
 }
 
+/* Item details */
 .seller-item-details {
     background-color: #E7D4B5;
-    /* Light vintage background */
-    border: 1px solid #D0BFAE;
-    /* Subtle border */
     border-radius: 12px;
-    /* Rounded corners for vintage feel */
     padding: 15px;
 }
 
@@ -198,7 +190,6 @@ button.primary:hover {
     margin: 10px 0;
     font-size: 1.4em;
     color: #6E5D4F;
-    /* Slightly darker vintage color */
     font-family: 'Garamond', serif;
 }
 
@@ -206,14 +197,12 @@ button.primary:hover {
 .seller-item-price,
 .seller-item-category {
     color: #555;
-    /* Dark vintage color */
 }
 
 .seller-item-actions {
     display: flex;
+    justify-content: flex-end;
     gap: 20px;
-    /* Increased gap between buttons */
-    /* Slightly increased gap */
     margin-top: 15px;
 }
 
@@ -226,4 +215,14 @@ button.primary:hover {
 
 .seller-item-bids {
     color: black;
+}
+
+.filter-input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 1.1em;
+    background-color: #FFFFFF;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: rgb(0, 0, 0);
 }

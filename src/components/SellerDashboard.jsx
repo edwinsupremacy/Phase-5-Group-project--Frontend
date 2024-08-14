@@ -13,7 +13,7 @@ const SellerDashboard = ({ sellerId }) => {
         category: '',
         subCategory: '',
         imageUrl: '',
-        sellerId: sellerId || ''  // Add sellerId to formData
+        sellerId: sellerId || ''
     });
     const [error, setError] = useState('');
     const [editIndex, setEditIndex] = useState(null);
@@ -21,7 +21,7 @@ const SellerDashboard = ({ sellerId }) => {
     const [biddersVisibility, setBiddersVisibility] = useState({});
     const [bids, setBids] = useState({});
     const [selectedCategory, setSelectedCategory] = useState('');
-    const [categoryFilter, setCategoryFilter] = useState('');  // State for category filter
+    const [categoryFilter, setCategoryFilter] = useState('');
 
     const categoryData = {
         Vehicle: ["Car", "Motorcycle", "Truck"],
@@ -38,7 +38,7 @@ const SellerDashboard = ({ sellerId }) => {
 
     useEffect(() => {
         filterItems();
-    }, [items, selectedCategory, formData.subCategory, categoryFilter]);  // Add categoryFilter to dependencies
+    }, [items, selectedCategory, formData.subCategory, categoryFilter]);
 
     const fetchItems = async () => {
         try {
@@ -93,7 +93,7 @@ const SellerDashboard = ({ sellerId }) => {
     };
 
     const handleCategoryFilterChange = (e) => {
-        setCategoryFilter(e.target.value);  // Update category filter
+        setCategoryFilter(e.target.value);
     };
 
     const handleCategoryFilter = (category) => {
@@ -125,7 +125,7 @@ const SellerDashboard = ({ sellerId }) => {
             category,
             sub_category: subCategory,
             image_url: imageUrl,
-            seller_id: sellerId  // Include sellerId in new item
+            seller_id: sellerId
         };
 
         console.log('Submitting Item:', newItem);
@@ -144,7 +144,7 @@ const SellerDashboard = ({ sellerId }) => {
 
             setFormData({ name: '', description: '', startingPrice: '', category: '', subCategory: '', imageUrl: '', sellerId: sellerId || '' });
             setEditIndex(null);
-            fetchItems();  // Re-fetch items after submission
+            fetchItems();
         } catch (err) {
             setError('Error adding/updating item');
             console.error(err);
@@ -155,7 +155,7 @@ const SellerDashboard = ({ sellerId }) => {
         try {
             await axiosInstance.put(`http://localhost:5000/bids/${bidId}/action`, { status: action });
 
-            fetchItems(); // Re-fetch items after bid action
+            fetchItems();
         } catch (err) {
             console.error('Error updating bid status:', err);
             setError('Failed to update bid status');
@@ -166,7 +166,7 @@ const SellerDashboard = ({ sellerId }) => {
         const itemId = items[index].id;
         try {
             await axiosInstance.delete(`http://localhost:5000/items/${itemId}`);
-            fetchItems();  // Re-fetch items after deletion
+            fetchItems();
         } catch (err) {
             setError('Error deleting item');
             console.error(err);
@@ -182,7 +182,7 @@ const SellerDashboard = ({ sellerId }) => {
             category: itemToEdit.category,
             subCategory: itemToEdit.sub_category || '',
             imageUrl: itemToEdit.image_url,
-            sellerId: itemToEdit.seller_id || ''  // Set sellerId for editing
+            sellerId: itemToEdit.seller_id || ''
         });
         setEditIndex(index);
     };
@@ -288,65 +288,78 @@ const SellerDashboard = ({ sellerId }) => {
                     type="text"
                     placeholder="Filter by category"
                     value={categoryFilter}
-                    onChange={handleCategoryFilterChange}  // Update category filter on change
+                    onChange={handleCategoryFilterChange}
                     className="filter-input"
                 />
                 {Object.keys(categoryData).map((category) => (
                     <button
                         key={category}
                         onClick={() => handleCategoryFilter(category)}
-                        className={`filter-button ${selectedCategory === category ? 'active' : ''}`}
+                        className={`filter-button seller-buttons ${selectedCategory === category ? 'active' : ''}`}
                     >
                         {category}
                     </button>
                 ))}
             </div>
 
-            {showItems && (
-                <div className="seller-item-list">
-                    <h2 className="seller-item-list-title">Your Items</h2>
-                    {filteredItems.length === 0 ? (
-                        <p>No items found</p>
-                    ) : (
-                        filteredItems.map((item, index) => (
-                            <div key={item.id} className="seller-item-card">
-                                <h3 className="seller-item-name">{item.name}</h3>
-                                <p className="seller-item-description">{item.description}</p>
-                                <p className="seller-item-price">${item.starting_price}</p>
-                                <p className="seller-item-category">Category: {item.category}</p>
-                                <p className="seller-item-subcategory">Sub-Category: {item.sub_category}</p>
-                                <img src={item.image_url} alt={item.name} className="seller-item-image" />
-                                <button onClick={() => handleEdit(index)} className="seller-edit-button">Edit</button>
-                                <button onClick={() => handleDelete(index)} className="seller-delete-button">Delete</button>
-                                <button onClick={() => toggleBiddersVisibility(index)} className="seller-bidders-button">
-                                    {biddersVisibility[index] ? 'Hide Bidders' : 'Show Bidders'}
-                                </button>
-                                {biddersVisibility[index] && (
-                                    <div className="seller-bidders-list">
-                                        {bids[item.id] ? (
-                                            bids[item.id].map(bid => (
-                                                <div key={bid.id} className="seller-bid-card">
-                                                    <p>Bidder: {bid.bidder_name}</p>
-                                                    <p>Bid Amount: ${bid.amount}</p>
-                                                    <button onClick={() => handleBidAction(bid.id, 'accept')} className="seller-bid-accept-button">Accept</button>
-                                                    <button onClick={() => handleBidAction(bid.id, 'reject')} className="seller-bid-reject-button">Reject</button>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <p>No bids</p>
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-                        ))
-                    )}
-                </div>
-            )}
-
-            <button onClick={toggleItemsVisibility} className="seller-toggle-items-button">
-                {showItems ? 'Hide Items' : 'Show Items'}
-            </button>
-            <button onClick={handleLogout} className="seller-logout-button">Logout</button>
+            <div className="seller-items-section">
+                <button onClick={toggleItemsVisibility} className="toggle-items-button">
+                    {showItems ? 'Hide Items' : 'Show Items'}
+                </button>
+                {showItems && (
+                    <div className="seller-items-list">
+                        {filteredItems.length === 0 ? (
+                            <p>No items available for this category.</p>
+                        ) : (
+                            filteredItems.map((item, index) => (
+                                <div key={item.id} className="seller-item-card">
+                                    <h3 className="seller-item-name">{item.name}</h3>
+                                    <p className="seller-item-description">{item.description}</p>
+                                    <p className="seller-item-price">Starting Price: ${item.starting_price}</p>
+                                    <p className="seller-item-category">Category: {item.category}</p>
+                                    <p className="seller-item-subcategory">Sub-Category: {item.sub_category}</p>
+                                    <img src={item.image_url} alt={item.name} className="seller-item-image" />
+                                    <button onClick={() => handleEdit(index)} className="edit-button">Edit</button>
+                                    <button onClick={() => handleDelete(index)} className="delete-button">Delete</button>
+                                    <button
+                                        onClick={() => toggleBiddersVisibility(index)}
+                                        className="view-bidders-button"
+                                    >
+                                        {biddersVisibility[index] ? 'Hide Bids' : 'View Bids'}
+                                    </button>
+                                    {biddersVisibility[index] && bids[item.id] && (
+                                        <ul className="bidders-list">
+                                            {bids[item.id].map((bid) => (
+                                                <li key={bid.id} className="bidder-item">
+                                                    <p>Bidder: {bid.bidder_id}</p>
+                                                    <p>Bid Amount: ${bid.bid_amount}</p>
+                                                    <p>Status: {bid.status}</p>
+                                                    {bid.status === 'pending' && (
+                                                        <>
+                                                            <button
+                                                                onClick={() => handleBidAction(bid.id, 'accepted')}
+                                                                className="accept-bid-button"
+                                                            >
+                                                                Accept
+                                                            </button>
+                                                            <button
+                                                                onClick={() => handleBidAction(bid.id, 'rejected')}
+                                                                className="reject-bid-button"
+                                                            >
+                                                                Reject
+                                                            </button>
+                                                        </>
+                                                    )}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+                            ))
+                        )}
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
