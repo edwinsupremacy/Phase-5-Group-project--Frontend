@@ -19,7 +19,7 @@ const RecentBids = () => {
                 });
                 setBids(response.data.bids);
             } catch (err) {
-                setError('Failed to fetch bids');
+                setError('Failed to fetch recent bids try logging in again');
             } finally {
                 setLoading(false);
             }
