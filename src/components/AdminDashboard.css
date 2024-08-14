@@ -1,20 +1,17 @@
 /* AdminDashboard.css */
 
 .admin-dashboard-container {
-    background-color: #f9f3e5;
-    /* Light vintage background */
+    background-color: #ade2d7;
     padding: 30px;
     font-family: 'Georgia', serif;
-    /* Vintage font */
-    max-width: 1200px;
+    max-width: auto;
     margin: 0 auto;
-    margin-top: 200px;
+    margin-top: 10px;
 }
 
 .admin-dashboard-title {
     text-align: center;
     color: #6b4f28;
-    /* Darker vintage color */
     font-size: 2.8rem;
     font-weight: bold;
     margin-bottom: 30px;
@@ -27,7 +24,6 @@
 }
 
 .admin-list-toggle-button {
-    background-color: #8a5d3b;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -52,6 +48,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: auto;
 }
 
 .admin-item-card,
@@ -63,7 +60,7 @@
     padding: 20px;
     margin: 15px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    max-width: 300px;
+    max-width: auto;
     /* Adjust to fit horizontally */
     width: 100%;
     transition: transform 0.3s ease;

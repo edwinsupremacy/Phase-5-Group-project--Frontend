@@ -4,7 +4,7 @@
   right: 0;
   left: 0;
   z-index: 1000;
-  background-color: #9bbc9b; 
+  background-color: #9bbc9b;
   padding: 20px;
   display: flex;
   justify-content: flex-end;
@@ -40,7 +40,7 @@
 .nav-link {
   margin: 0 15px;
   text-decoration: none;
-  color: #836e4a;
+  color: #f7f7f7;
   position: relative;
 }
 

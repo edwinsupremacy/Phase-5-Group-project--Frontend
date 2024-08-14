@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './AuctionItems.css';
-import { FaSearch, FaClock, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaSearch, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import ImageModal from './ImageModal';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,33 +12,36 @@ const AuctionItems = () => {
     const [userId, setUserId] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState('All Categories');
     const [selectedSubCategory, setSelectedSubCategory] = useState('');
-    const [categories] = useState(['All Categories', 'Vehicle', 'Jewelry', 'Electronic', 'Watch', 'House', 'Art']);
     const [subCategories, setSubCategories] = useState([]);
     const [placedBids, setPlacedBids] = useState({});
     const [recentBids, setRecentBids] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
-    const [showRecentBids, setShowRecentBids] = useState(true); // State to control collapsible section
+    const [showRecentBids, setShowRecentBids] = useState(true);
 
     const navigate = useNavigate();
 
+    const categories = ['All Categories', 'Vehicle', 'Jewelry', 'Electronic', 'Watch', 'House', 'Art'];
     const categoryData = {
-        Vehicle: ["Car", "Motorcycle", "Truck"],
-        Jewelry: ["Ring", "Necklace", "Bracelet"],
-        Electronic: ["Phone", "Laptop", "Tablet"],
-        Watch: ["Analog", "Digital", "Smart"],
-        House: ["Apartment", "Villa", "Cottage"],
-        Art: ["Painting", "Sculpture", "Photography"]
+        Vehicle: ['Car', 'Motorcycle', 'Truck'],
+        Jewelry: ['Ring', 'Necklace', 'Bracelet'],
+        Electronic: ['Phone', 'Laptop', 'Tablet'],
+        Watch: ['Analog', 'Digital', 'Smart'],
+        House: ['Apartment', 'Villa', 'Cottage'],
+        Art: ['Painting', 'Sculpture', 'Photography']
     };
 
     useEffect(() => {
         fetchUserId();
         fetchItems();
-        fetchRecentBids();
     }, []);
 
     useEffect(() => {
         filterItems();
     }, [items, selectedCategory, selectedSubCategory]);
+
+    useEffect(() => {
+        fetchRecentBids();
+    }, [userId]);
 
     const fetchUserId = () => {
         const storedUserId = localStorage.getItem('userId');
@@ -193,13 +196,11 @@ const AuctionItems = () => {
     };
 
     const toggleRecentBids = () => {
-        navigate('/recent-bids');
+        setShowRecentBids(!showRecentBids);
     };
 
     return (
         <div className="auction-items-container">
-            <h2>Available Auction Items</h2>
-
             <div className="category-filter">
                 <FaSearch className="search-icon" />
                 <div className="category-buttons">
@@ -213,71 +214,73 @@ const AuctionItems = () => {
                         </button>
                     ))}
                 </div>
+
+                {selectedCategory !== 'All Categories' && subCategories.length > 0 && (
+                    <div className="subcategory-container">
+                        {subCategories.map(subCategory => (
+                            <button
+                                key={subCategory}
+                                className={`subcategory-button ${selectedSubCategory === subCategory ? 'active' : ''}`}
+                                onClick={() => handleSubCategoryChange(subCategory)}
+                            >
+                                {subCategory}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
 
-            {selectedCategory !== 'All Categories' && subCategories.length > 0 && (
-                <div className="subcategory-container">
-                    {subCategories.map(subCategory => (
-                        <button
-                            key={subCategory}
-                            className={`subcategory-button ${selectedSubCategory === subCategory ? 'active' : ''}`}
-                            onClick={() => handleSubCategoryChange(subCategory)}
-                        >
-                            {subCategory}
-                        </button>
-                    ))}
-                </div>
-            )}
-            <div className="recent-bids-section">
-                <h3 onClick={toggleRecentBids} className="recent-bids-title">
-                    <FaClock /> Recent Bids {showRecentBids ? <FaChevronUp /> : <FaChevronDown />}
-                </h3>
-                <div className="items-grid">
-                    {filteredItems.map(item => (
-                        <div key={item.id} className="item-card">
-                            <img
-                                src={item.image_url}
-                                alt={item.name}
-                                className="item-image"
-                                onClick={() => handleImageClick(item.image_url)}
-                            />
-                            <h3 className="item-title">{item.name}</h3>
-                            <p className="item-description">{item.description}</p>
-                            <p className="item-price">Starting Price: ksh {item.starting_price.toLocaleString()}</p>
-                            {placedBids[item.id] ? (
+            <div className="items-grid">
+                {filteredItems.map(item => (
+                    <div key={item.id} className="item-card">
+                        <img
+                            src={item.image_url}
+                            alt={item.name}
+                            className="item-image"
+                            onClick={() => handleImageClick(item.image_url)}
+                        />
+                        <h3 className="item-title">{item.name}</h3>
+                        <p className="item-description">{item.description}</p>
+                        <p className="item-price">Starting Price: ksh {item.starting_price.toLocaleString()}</p>
+                        {placedBids[item.id] ? (
+                            <button
+                                className="cancel-bid-button"
+                                onClick={() => handleBidCancel(item.id)}
+                            >
+                                Cancel Bid
+                            </button>
+                        ) : (
+                            <>
+                                <input
+                                    type="number"
+                                    value={bidAmount[item.id] || ''}
+                                    onChange={(e) => handleBidChange(item.id, e.target.value)}
+                                    placeholder="Enter bid amount"
+                                />
                                 <button
-                                    className="cancel-bid-button"
-                                    onClick={() => handleBidCancel(item.id)}
+                                    className="place-bid-button"
+                                    onClick={() => handleBidSubmit(item.id)}
                                 >
-                                    Cancel Bid
+                                    Place Bid
                                 </button>
-                            ) : (
-                                <>
-                                    <input
-                                        type="number"
-                                        value={bidAmount[item.id] || ''}
-                                        onChange={(e) => handleBidChange(item.id, e.target.value)}
-                                        placeholder="Enter bid amount"
-                                    />
-                                    <button
-                                        className="place-bid-button"
-                                        onClick={() => handleBidSubmit(item.id)}
-                                    >
-                                        Place Bid
-                                    </button>
-                                </>
-                            )}
-                        </div>
-                    ))}
+                            </>
+                        )}
+                    </div>
+                ))}
+            </div>
+
+            {selectedImage && (
+                <ImageModal
+                    imageUrl={selectedImage}
+                    onClose={handleCloseModal}
+                />
+            )}
+
+            <div className="recent-bids-section">
+                <div className="recent-bids-header" onClick={toggleRecentBids}>
+                    <h3>Recent Bids</h3>
+                    {showRecentBids ? <FaChevronUp /> : <FaChevronDown />}
                 </div>
-
-                {selectedImage && (
-                    <ImageModal
-                        imageUrl={selectedImage}
-                        onClose={handleCloseModal}
-                    />
-                )}
-
 
                 {showRecentBids && recentBids.length > 0 && (
                     <ul className="recent-bids-list">
@@ -292,7 +295,7 @@ const AuctionItems = () => {
                 )}
             </div>
 
-            {message && <p className="message">{message}</p>}
+            {message && <div className="message">{message}</div>}
         </div>
     );
 };

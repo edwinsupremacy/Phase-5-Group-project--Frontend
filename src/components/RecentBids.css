@@ -1,32 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Merriweather&display=swap');
 
-/* Vintage Theme Overrides */
+/* Vibrant Theme Colors */
 :root {
-    --vintage-dark: #A0937D;
-    --vintage-medium: #E7D4B5;
-    --vintage-light: #F6E6CB;
-    --vintage-accent: #B6C7AA;
-    --vintage-text: #333;
+    --vibrant-primary: #4CAF50;
+    /* Green */
+    --vibrant-secondary: #FF5722;
+    /* Orange */
+    --vibrant-light: #FFF3E0;
+    /* Light Orange */
+    --vibrant-accent: #FFC107;
+    /* Amber */
+    --vibrant-text: #333;
+    --vibrant-background: #E3F2FD;
+    /* Light Blue */
 }
 
 body {
     font-family: 'Merriweather', serif;
-    background-color: var(--vintage-light);
-    color: var(--vintage-text);
+    color: var(--vibrant-text);
 }
 
 .recent-bids {
     padding: 20px;
-    background-color: var(--vintage-medium);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recent-bids:hover {
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
 .recent-bids-title {
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 28px;
+    font-weight: 700;
     margin-bottom: 20px;
-    color: var(--vintage-dark);
+    color: var(--vibrant-primary);
 }
 
 .bids-table {
@@ -37,52 +47,64 @@ body {
 
 .bids-table th,
 .bids-table td {
-    padding: 12px;
+    padding: 14px;
     text-align: left;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .bids-table thead {
-    background-color: var(--vintage-dark);
-    color: var(--vintage-light);
+    background-color: var(--vibrant-primary);
+    color: var(--vibrant-light);
 }
 
 .bids-table tbody tr:nth-child(even) {
-    background-color: var(--vintage-light);
+    background-color: #F1F8E9;
+    /* Very Light Green */
 }
 
 .bids-table th {
-    border-bottom: 2px solid var(--vintage-dark);
+    border-bottom: 2px solid var(--vibrant-primary);
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .bids-table td {
     border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    color: var(--vibrant-text);
 }
 
 .status {
     font-weight: bold;
+    text-transform: capitalize;
 }
 
 .status.pending {
-    color: #ffc107; /* Keeping existing color for pending status */
+    color: var(--vibrant-accent);
 }
 
 .status.accepted {
-    color: #28a745; /* Keeping existing color for accepted status */
+    color: var(--vibrant-primary);
 }
 
 .status.rejected {
-    color: #dc3545; /* Keeping existing color for rejected status */
+    color: #F44336;
+    /* Red for rejected */
 }
 
 .loading,
 .error {
     font-size: 18px;
-    color: var(--vintage-text);
+    color: var(--vibrant-secondary);
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
 }
 
 .no-bids {
     font-size: 18px;
     color: #888;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
 }
 
 /* Scrollbar Styling */
@@ -91,10 +113,32 @@ body {
 }
 
 .recent-bids::-webkit-scrollbar-track {
-    background: var(--vintage-medium);
+    background: var(--vibrant-light);
 }
 
 .recent-bids::-webkit-scrollbar-thumb {
-    background-color: var(--vintage-dark);
+    background-color: var(--vibrant-primary);
     border-radius: 8px;
+}
+
+/* Checkout Button Styling */
+.checkout-button {
+    background-color: var(--vibrant-secondary);
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.checkout-button:hover {
+    background-color: #FF7043;
+    transform: translateY(-2px);
+}
+
+.paid-status {
+    color: var(--vibrant-primary);
+    font-weight: bold;
 }

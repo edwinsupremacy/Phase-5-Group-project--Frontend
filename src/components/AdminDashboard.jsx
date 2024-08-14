@@ -238,24 +238,6 @@ const AdminDashboard = () => {
                 )}
             </div>
 
-            <div className="admin-section">
-                <div className="admin-sellers-container">
-                    {sellers.length > 0 && (
-                        sellers.map((seller) => (
-                            <div key={seller.id} className="admin-seller-card">
-                                <div className="admin-seller-details">
-                                    <h3 className="admin-seller-name">{seller.name}</h3>
-                                    <p className="admin-seller-email">{seller.email}</p>
-                                    <p className="admin-seller-phone">{seller.phone}</p>
-                                </div>
-                                <div className="admin-seller-actions">
-                                    <button onClick={() => handleDeleteSeller(seller.id)} className="admin-seller-button">Delete Seller</button>
-                                </div>
-                            </div>
-                        ))
-                    )}
-                </div>
-            </div>
         </div>
     );
 };

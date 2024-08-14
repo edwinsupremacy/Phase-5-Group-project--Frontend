@@ -1,17 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Merriweather&display=swap');
 
-/* Vintage Colors */
+/* Vibrant Vintage Colors */
 :root {
-  --vintage-dark: #A0937D;
-  --vintage-medium: #E7D4B5;
-  --vintage-light: #F6E6CB;
-  --vintage-accent: #B6C7AA;
-  --vintage-text: #333;
+  --vintage-dark: #7B4B00;
+  /* Rich dark brown */
+  --vintage-medium: #FFDAB9;
+  /* Soft peach */
+  --vintage-light: #FFF5EE;
+  /* Linen */
+  --vintage-accent: #FF8C42;
+  /* Bright tangerine */
+  --vintage-accent-light: #FFE5B4;
+  /* Light peach */
+  --vintage-text: #4B2E00;
+  /* Darker brown */
 }
 
 body {
   font-family: 'Merriweather', serif;
-  background-color: var(--vintage-light);
   color: var(--vintage-text);
 }
 
@@ -29,6 +35,9 @@ body {
   text-align: center;
   color: var(--vintage-dark);
   margin-bottom: 2rem;
+  font-size: 2.5rem;
+
+  -webkit-text-fill-color: transparent;
 }
 
 .contact-content {
@@ -40,17 +49,18 @@ body {
 .contact-form,
 .contact-info {
   flex: 1;
-  background-color: var(--vintage-medium);
+
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  /* Darker box-shadow */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  /* Lighter box-shadow */
 }
 
 .contact-form h2,
 .contact-info h2 {
   color: var(--vintage-dark);
   margin-bottom: 1.5rem;
+  font-size: 1.8rem;
 }
 
 .form-group {
@@ -66,11 +76,11 @@ body {
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid var(--vintage-dark);
-  border-radius: 4px;
+  padding: 0.75rem;
+  border: 2px solid var(--vintage-accent);
+  border-radius: 6px;
   font-size: 1rem;
-  background-color: var(--vintage-light);
+
 }
 
 .form-group textarea {
@@ -79,19 +89,18 @@ body {
 }
 
 .submit-btn1 {
-  background-color: var(--vintage-dark);
-  color: white;
+  color: rgb(116, 111, 111);
   border: none;
   padding: 0.75rem 1.5rem;
-  font-size: 1.5rem;
-  border-radius: 4px;
+  font-size: 1.2rem;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
   font-family: 'Montserrat', sans-serif;
 }
 
 .submit-btn1:hover {
-  background-color: var(--vintage-accent);
+  transform: translateY(-3px);
 }
 
 .contact-info p {
@@ -100,8 +109,9 @@ body {
 }
 
 .contact-headers {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: var(--vintage-dark);
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 768px) {
@@ -112,16 +122,17 @@ body {
 
 .reviews-section {
   margin-top: 4rem;
-  background-color: var(--vintage-medium);
+
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  /* Darker box-shadow */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  /* Lighter box-shadow */
 }
 
 .reviews-section h2 {
   color: var(--vintage-dark);
   margin-bottom: 1.5rem;
+  font-size: 1.8rem;
 }
 
 .reviews-list {
@@ -129,14 +140,15 @@ body {
 }
 
 .review {
-  background-color: var(--vintage-light);
-  padding: 1rem;
-  border-radius: 4px;
+
+  padding: 1.2rem;
+  border-radius: 8px;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  /* Darker box-shadow */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  /* Lighter box-shadow */
 }
 
 .review p {
   margin: 0.5rem 0;
+  color: var(--vintage-text);
 }

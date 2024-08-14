@@ -1,18 +1,17 @@
-body {
-  background-color: #f6e6cb;
-}
-
+/* Container for auction items */
 .auction-items-container {
   padding: 2rem;
-  background-color: #f6e6cb;
-  color: #a0937d;
-  max-width: 1200px;
+  background: linear-gradient(135deg, #f7f9f9, #e3e8e9);
+  color: #4a4a4a;
+  max-width: 1500px;
   margin: 0 auto;
   margin-top: 120px;
   height: 600px;
-  overflow-y: scroll;
-  border-radius: 30px;
-  margin-bottom: 30px;
+  overflow-y: auto;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s ease-in-out;
 }
 
 .category-filter {
@@ -51,18 +50,14 @@ body {
   font-weight: bold;
 }
 
-.items-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  color: #a0937d;
-  justify-content: center;
-  list-style-type: none;
-  padding: 0;
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 .item-card {
-  background-color: #f6e6cb;
+  background: linear-gradient(135deg, #f7f9f9, #e3e8e9);
   color: #a0937d;
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -91,113 +86,50 @@ body {
   font-size: 1rem;
 }
 
-/* .item-card:hover {
-  transform: scale(1.1); /* Increased scale for hover effect */
-
-*/ .message {
+.message {
   color: red;
   font-weight: bold;
 }
 
-@media (max-width: 768px) {
-  .item-card {
-    width: 100%;
-  }
+.recent-bids-section {
+  margin-top: 20px;
 }
 
-.subcategory-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-left: 20px;
-  /* Adjust this to align the subcategory buttons under the categories */
-  margin-top: 10px;
-  /* Add some space between category and subcategory buttons */
-}
-
-.subcategory-button {
-  padding: 8px 16px;
-  border: none;
-  background-color: #a0b8a0;
-  color: rgb(90, 62, 10);
-  cursor: pointer;
-  border-radius: 12px;
-  /* Rounded corners */
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.subcategory-button:hover {
-  background-color: rgb(113, 160, 134);
-  color: black;
-}
-
-.subcategory-button.active {
-  background-color: #a0937d;
-  color: #f6e6cb;
-  font-weight: bold;
-}
-
-.search-icon {
+.recent-bids-title {
   cursor: pointer;
 }
 
-.search-icon :hover {
-  color: #583c0b;
+.recent-bids-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
-.search-bar {
-  padding: 8px 12px;
-  margin-left: 10px;
-  border: 1px solid #a0937d;
-  border-radius: 20px;
+.recent-bid-card {
   background-color: #f6e6cb;
   color: #a0937d;
-  width: 300px;
-  transition: all 0.3s;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.search-bar:focus {
-  outline: none;
-  border-color: #b6c7aa;
+.recent-bid-card p {
+  margin: 0.5rem 0;
 }
 
-/* Input field styles for bid amount */
-.bid-input {
-  padding: 10px;
-  border: 2px solid #a0b8a0;
-  /* Teal green border */
-  background-color: #ffffff;
-  /* White background */
-  color: #000000;
-  /* Black text color */
-  border-radius: 2px;
-  /* Reduced border radius */
-  font-size: 1em;
-  /* Font size */
+.bid-status {
   font-weight: bold;
-  /* Bold text */
-  font-family: 'Garamond', serif;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Soft shadow */
-  width: 100%;
-  /* Full width of the parent container */
-  margin-right: 10px;
-  /* Space between input and button */
 }
 
-.bid-input::placeholder {
-  color: #6e6e6e;
-  /* Darker gray placeholder text */
-  font-weight: normal;
-  /* Regular weight for placeholder text */
+.bid-status.approved {
+  color: green;
 }
 
-.bid-input:focus {
-  border-color: #000000;
-  /* Black border on focus */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  /* Enhanced shadow on focus */
-  outline: none;
-  /* Remove default outline */
+.bid-status.rejected {
+  color: red;
+}
+
+.bid-status.pending {
+  color: orange;
 }

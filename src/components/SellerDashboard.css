@@ -1,229 +1,277 @@
 /* Container styles */
 .seller-dashboard-container {
-    max-width: 100%;
-    /* Adjusted to make the container scrollable */
-    margin: 40px auto 0;
-    /* Increased margin-top */
-    padding: 40px;
-    background-color: #F9F3E0;
-    border-radius: 18px;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
-    display: flex;
-    height: calc(100vh - 80px);
-    /* Adjusted for scroll */
-    overflow: auto;
-    /* Enabled scrolling */
-    font-family: 'Garamond', serif;
-    width: 1000px;
+    font-family: 'Georgia', serif;
+    color: #333;
+    padding: 20px;
+    background-color: #f4f1eb;
+    /* Light vintage background */
+    border: 1px solid #ddd;
+    border-radius: 10px;
 }
 
+/* Title styles */
 .seller-dashboard-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #6e4f28;
     text-align: center;
-    margin-bottom: 30px;
-    color: #8E735B;
-    font-size: 2.5em;
-    font-family: 'Garamond', serif;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.seller-add-item-section {
-    flex: 1;
-    margin-right: 30px;
-    overflow: auto;
-    background-color: #E1D8C9;
-    border-radius: 18px;
-    padding: 30px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-    border: 1px solid #D0BFAE;
 }
 
 .seller-add-item-title {
-    margin-bottom: 20px;
-    color: #8E735B;
-    font-size: 1.8em;
-    font-family: 'Garamond', serif;
+    font-size: 1.75rem;
+    margin-bottom: 15px;
+    color: #4f3a2e;
 }
 
+/* Form styles */
 .seller-add-item-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
 }
 
 .seller-input {
-    padding: 15px;
-    border: 1px solid #D0BFAE;
-    border-radius: 12px;
-    font-size: 1.1em;
-    background-color: #FFFFFF;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-    color: rgb(0, 0, 0);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
-.seller-buttons {
-    gap: 20px;
-    display: flex;
-}
-
-/* Button styles with vintage theme */
-.seller-submit-button,
-.seller-item-button,
-button {
-    padding: 10px 20px;
+.seller-submit-button {
+    padding: 12px 20px;
+    background-color: #6e4f28;
+    color: white;
     border: none;
-    /* Removed border */
-    background-color: #a0b8a0;
-    /* Teal green background */
-    color: #000000;
-    /* Black text color */
-    border-radius: 8px;
-    /* Reduced border radius */
+    border-radius: 5px;
+    font-size: 1.1rem;
     cursor: pointer;
-    font-size: 1.1em;
-    /* Increased font size */
-    font-weight: bold;
-    /* Bold text */
-    font-family: 'Garamond', serif;
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-    text-decoration: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* Soft shadow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.seller-submit-button:hover,
-.seller-item-button:hover,
-button:hover {
-    background-color: #68461a;
-    /* Black background on hover */
-    color: #a0b8a0;
-    /* Teal green text color on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    /* Enhanced shadow on hover */
-}
-
-
-
-
-/* Additional vintage button styles */
-.seller-button-primary,
-button.primary {
-    background-color: #D0BFAE;
-    /* Lighter vintage background for primary buttons */
-    border: 2px solid #B19B7F;
-    /* Matching border color */
-    color: #6E5D4F;
-    /* Text color to contrast with background */
-}
-
-.seller-button-primary:hover,
-button.primary:hover {
-    background-color: #B19B7F;
-    /* Darker shade for hover */
-    border-color: #A0937D;
-    /* Darker border color on hover */
+.seller-submit-button:hover {
+    background-color: #5a3c1c;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .seller-error {
-    color: #E74C3C;
-    margin-top: 15px;
-    font-size: 1.1em;
-    font-family: 'Garamond', serif;
+    color: red;
+    font-size: 0.9rem;
+    font-style: italic;
 }
 
-.seller-items-section {
-    flex: 2;
-    position: relative;
-    overflow: auto;
-    background-color: #FFFFFF;
-    padding: 30px;
-    border-radius: 18px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-}
-
-.seller-items-title {
-    margin-bottom: 30px;
-    color: #8E735B;
-    font-size: 1.8em;
-    font-family: 'Garamond', serif;
-}
-
-.seller-items-container {
-    width: 100%;
-    max-height: 700px;
-    overflow-y: auto;
-    background-color: #FFFFFF;
-    padding: 15px;
-    border-radius: 12px;
-    border: 1px solid #D0BFAE;
-}
-
-.seller-item-card {
-    background-color: #FFFFFF;
-    border: 1px solid #8E735B;
-    /* Updated border color */
-    border-radius: 16px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    width: 100%;
+/* Filter section styles */
+.seller-filter-section {
     margin-bottom: 20px;
-    padding: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.seller-item-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+.filter-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.seller-item-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 16px 16px 0 0;
+.filter-button {
+    background-color: #e8dcb4;
+    border: 1px solid #bfa68f;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.seller-item-details {
-    background-color: #E7D4B5;
-    /* Light vintage background */
-    border: 1px solid #D0BFAE;
-    /* Subtle border */
-    border-radius: 12px;
-    /* Rounded corners for vintage feel */
-    padding: 15px;
+.filter-button.active {
+    background-color: #bfa68f;
+    color: white;
 }
 
-.seller-item-name {
-    margin: 10px 0;
-    font-size: 1.4em;
-    color: #6E5D4F;
-    /* Slightly darker vintage color */
-    font-family: 'Garamond', serif;
+.filter-button:hover {
+    background-color: #d0c4a6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.seller-item-description,
-.seller-item-price,
-.seller-item-category {
-    color: #555;
-    /* Dark vintage color */
+/* Items section styles */
+.seller-items-section {
+    margin-top: 20px;
 }
 
-.seller-item-actions {
+.toggle-items-button {
+    padding: 12px 20px;
+    background-color: #6e4f28;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.toggle-items-button:hover {
+    background-color: #5a3c1c;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.item-card {
     display: flex;
-    gap: 20px;
-    /* Increased gap between buttons */
-    /* Slightly increased gap */
-    margin-top: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.seller-no-items {
-    text-align: center;
-    color: #777;
-    font-size: 1.3em;
-    font-family: 'Garamond', serif;
+.item-image {
+    width: 150px;
+    height: auto;
+    border-radius: 5px;
+    margin-right: 15px;
 }
 
-.seller-item-bids {
-    color: black;
+.item-details {
+    flex: 1;
+}
+
+.item-name {
+    font-size: 1.5rem;
+    color: #4f3a2e;
+    margin-bottom: 10px;
+}
+
+.item-description {
+    margin: 10px 0;
+    font-size: 1rem;
+}
+
+.item-price,
+.item-category,
+.item-sub-category {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.item-edit-button,
+.item-delete-button,
+.item-bids-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.item-edit-button {
+    background-color: #4a7f40;
+    color: white;
+}
+
+.item-edit-button:hover {
+    background-color: #3e6c34;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.item-delete-button {
+    background-color: #d9534f;
+    color: white;
+}
+
+.item-delete-button:hover {
+    background-color: #c9302c;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.item-bids-button {
+    background-color: #5bc0de;
+    color: white;
+}
+
+.item-bids-button:hover {
+    background-color: #31b0d5;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Bidders list styles */
+.bidders-list {
+    margin-top: 10px;
+}
+
+.bid-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bidder-name,
+.bid-amount {
+    margin: 5px 0;
+}
+
+.bid-accept-button,
+.bid-reject-button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.bid-accept-button {
+    background-color: #5bc0de;
+    color: white;
+}
+
+.bid-accept-button:hover {
+    background-color: #31b0d5;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.bid-reject-button {
+    background-color: #d9534f;
+    color: white;
+}
+
+.bid-reject-button:hover {
+    background-color: #c9302c;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Logout button styles */
+.logout-button {
+    padding: 12px 20px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #c9302c;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }

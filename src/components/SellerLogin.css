@@ -1,66 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
 .seller-login-container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #E7D4B5;
-
+    background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
+    animation: backgroundChange 10s infinite alternate ease-in-out;
 }
 
 .seller-login-form {
-    background-color: #F6E6CB;
+    background-color: #FFFFFF;
     border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-    padding: 20px 40px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    padding: 30px 50px;
     max-width: 400px;
     width: 100%;
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
 }
 
 .seller-login-form h1 {
-    font-size: 24px;
-    color: #A0937D;
+    font-size: 26px;
+    color: #FF6347;
+    margin-bottom: 20px;
+    animation: textGlow 2s infinite alternate;
 }
 
 .seller-login-form span {
     display: block;
     margin-bottom: 15px;
-    color: #000000;
-
+    color: #333;
+    font-size: 14px;
 }
 
 .seller-login-form input {
-    background-color: #EEE;
+    background-color: #F0F8FF;
     color: #333;
-    border: none;
-    margin: 8px 0;
-    padding: 10px 15px;
-    font-size: 13px;
+    border: 2px solid #FF4500;
+    margin: 10px 0;
+    padding: 12px 18px;
+    font-size: 14px;
     border-radius: 8px;
     width: 100%;
     outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.seller-login-form input:focus {
+    border-color: #FF6347;
+    box-shadow: 0 0 8px rgba(255, 99, 71, 0.3);
 }
 
 .seller-login-form button {
-    background-color: #A0937D;
-    color: #fff;
-    font-size: 12px;
-    padding: 10px 20px;
-    border: 1px solid transparent;
+    background-color: #FF4500;
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 12px 25px;
+    border: none;
     border-radius: 8px;
     font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    margin-top: 10px;
+    margin-top: 15px;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .seller-login-form button:hover {
-    background-color: #8c7b5a;
-   
+    background-color: #FF6347;
+    transform: translateY(-3px);
+}
+
+.seller-login-form .toggle-link {
+    color: #FF4500;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.seller-login-form .toggle-link:hover {
+    color: #FF6347;
 }
 
 .error {
-    color: red;
+    color: #FF6347;
     font-size: 12px;
     margin-top: 10px;
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 0 0 5px #FF4500, 0 0 10px #FF4500, 0 0 15px #FF4500, 0 0 20px #FF4500;
+    }
+
+    to {
+        text-shadow: 0 0 20px #FF6347, 0 0 30px #FF6347, 0 0 40px #FF6347, 0 0 50px #FF6347;
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+}
+
+@keyframes backgroundChange {
+    from {
+        background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
+    }
+
+    to {
+        background: linear-gradient(135deg, #B5FFFC 0%, #FFDEE9 100%);
+    }
 }

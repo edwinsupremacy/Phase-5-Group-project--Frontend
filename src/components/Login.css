@@ -1,15 +1,7 @@
-/* Login.module.css */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-} */
-
 body {
-    background-color: #E7D4B5;
+    background-color: #F2F6FC;
 }
 
 .login-page {
@@ -19,13 +11,12 @@ body {
     width: 100%;
     height: 100vh;
     overflow-y: auto;
-    /* Allow vertical scrolling */
 }
 
 .container {
-    background-color: #F6E6CB;
+    background-color: #FFFFFF;
     border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     position: relative;
     overflow: hidden;
     width: 768px;
@@ -37,18 +28,17 @@ body {
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    /* Center container horizontally */
 }
 
 .container p,
 .container span,
 .container input,
 .profile-info p {
-    color: #A0937D;
+    color: #4A4A4A;
 }
 
 .container a {
-    color: #A0937D;
+    color: #4A90E2;
     font-size: 13px;
     text-decoration: none;
     margin: 15px 0 10px;
@@ -56,12 +46,11 @@ body {
 }
 
 .container a:hover {
-    color: #003366;
-    /* Dark blue color on hover */
+    color: #D94F70;
 }
 
 .container button {
-    background-color: #A0937D;
+    background-color: #4A90E2;
     color: #fff;
     font-size: 12px;
     padding: 10px 45px;
@@ -76,11 +65,11 @@ body {
 
 .container button.hidden {
     background-color: transparent;
-    border-color: #fff;
+    border-color: #4A90E2;
 }
 
 .container form {
-    background-color: #F6E6CB;
+    background-color: #FFFFFF;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -90,7 +79,7 @@ body {
 }
 
 .container input {
-    background-color: #c5b89b;
+    background-color: #E9F1F7;
     border: none;
     margin: 8px 0;
     padding: 10px 15px;
@@ -151,8 +140,8 @@ body {
 }
 
 .social-icons a {
-    border: 1px solid #ccc;
-    border-radius: 20%;
+    border: 1px solid #DADADA;
+    border-radius: 50%;
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -179,9 +168,9 @@ body {
 }
 
 .toggle {
-    background-color: #A0937D;
+    background-color: #4A90E2;
     height: 100%;
-    background: linear-gradient(to right, #B6C7AA, #A0937D);
+    background: linear-gradient(to right, #F26A6A, #F0C27B);
     color: #fff;
     position: relative;
     left: -100%;
@@ -278,20 +267,20 @@ body {
 .role-links p {
     margin-bottom: 10px;
     font-size: 14px;
-    color: #A0937D;
+    color: #4A4A4A;
 }
 
 .role-links a {
     display: block;
     font-size: 14px;
-    color: #A0937D;
+    color: #4A4A4A;
     text-decoration: none;
     margin: 5px 0;
     transition: color 0.3s ease;
 }
 
 .role-links a:hover {
-    color: #4b2f06;
+    color: #D94F70;
 }
 
 @media (max-width: 768px) {
