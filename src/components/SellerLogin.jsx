@@ -39,7 +39,7 @@ function SellerLogin({ setIsAuthenticated }) {
         setError('');
 
         try {
-            const response = await axios.post('http://localhost:5000/register/seller', {
+            const response = await axios.post('https://phase-5-group-project-backend-1.onrender.com/register/seller', {
                 username,
                 email,
                 password,
@@ -76,7 +76,7 @@ function SellerLogin({ setIsAuthenticated }) {
         setError('');
 
         try {
-            const response = await axios.post('http://localhost:5000/login/seller', {
+            const response = await axios.post('https://phase-5-group-project-backend-1.onrender.com/login/seller', {
                 email,
                 password
             });
