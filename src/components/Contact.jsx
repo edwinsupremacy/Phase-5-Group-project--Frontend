@@ -20,7 +20,7 @@ const Contact = () => {
     useEffect(() => {
         const fetchReviews = async () => {
             try {
-                const response = await fetch('http://localhost:5000/reviews');
+                const response = await fetch('https://phase-5-group-project-backend-1.onrender.com/reviews');
                 if (response.ok) {
                     const result = await response.json();
                     setReviews(result);
@@ -58,7 +58,7 @@ const Contact = () => {
 
     const handleReviewSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch('http://localhost:5000/reviews', {
+        const response = await fetch('https://phase-5-group-project-backend-1.onrender.com/reviews', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

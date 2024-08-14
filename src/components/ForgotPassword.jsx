@@ -13,7 +13,7 @@ function ForgotPassword() {
         event.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:5000/verify-user', {
+            const response = await fetch('https://phase-5-group-project-backend-1.onrender.com/verify-user', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, phone_number: phoneNumber }),

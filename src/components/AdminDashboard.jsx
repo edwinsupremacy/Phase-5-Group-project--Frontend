@@ -27,7 +27,7 @@ const AdminDashboard = () => {
 
     const fetchItems = async () => {
         try {
-            const response = await axiosInstance.get('http://localhost:5000/items');
+            const response = await axiosInstance.get('https://phase-5-group-project-backend-1.onrender.com/items');
             setItems(response.data);
         } catch (err) {
             console.error('Error fetching items:', err);
@@ -36,7 +36,7 @@ const AdminDashboard = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axiosInstance.get('http://localhost:5000/users');
+            const response = await axiosInstance.get('https://phase-5-group-project-backend-1.onrender.com/users');
             setUsers(response.data);
         } catch (err) {
             console.error('Error fetching users:', err);
@@ -45,7 +45,7 @@ const AdminDashboard = () => {
 
     const fetchReviews = async () => {
         try {
-            const response = await axiosInstance.get('http://localhost:5000/reviews');
+            const response = await axiosInstance.get('https://phase-5-group-project-backend-1.onrender.com/reviews');
             setReviews(response.data);
         } catch (err) {
             console.error('Error fetching reviews:', err);
@@ -54,7 +54,7 @@ const AdminDashboard = () => {
 
     const fetchBids = async (itemId) => {
         try {
-            const response = await axiosInstance.get(`http://localhost:5000/items/${itemId}/bids`);
+            const response = await axiosInstance.get(`https://phase-5-group-project-backend-1.onrender.com/items/${itemId}/bids`);
             setBids(prev => ({
                 ...prev,
                 [itemId]: response.data.bids
@@ -71,7 +71,7 @@ const AdminDashboard = () => {
 
     const handleDeleteUser = async (userId) => {
         try {
-            const response = await fetch(`http://localhost:5000/users/delete/${userId}`, {
+            const response = await fetch(`https://phase-5-group-project-backend-1.onrender.com/users/delete/${userId}`, {
                 method: 'DELETE',
             });
 
@@ -90,7 +90,7 @@ const AdminDashboard = () => {
 
     const handleDeleteReview = async (reviewId) => {
         try {
-            const response = await fetch(`http://localhost:5000/reviews/${reviewId}`, {
+            const response = await fetch(`https://phase-5-group-project-backend-1.onrender.com/reviews/${reviewId}`, {
                 method: 'DELETE',
             });
 

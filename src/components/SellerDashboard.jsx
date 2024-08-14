@@ -42,7 +42,7 @@ const SellerDashboard = ({ sellerId }) => {
 
     const fetchItems = async () => {
         try {
-            const response = await axiosInstance.get('http://localhost:5000/items');
+            const response = await axiosInstance.get('https://phase-5-group-project-backend-1.onrender.com/items');
             setItems(response.data);
         } catch (err) {
             console.error('Error fetching items:', err.response ? err.response.data : err.message);
@@ -52,7 +52,7 @@ const SellerDashboard = ({ sellerId }) => {
 
     const fetchBids = async (itemId) => {
         try {
-            const response = await axiosInstance.get(`http://localhost:5000/items/${itemId}/bids`);
+            const response = await axiosInstance.get(`https://phase-5-group-project-backend-1.onrender.com/items/${itemId}/bids`);
             setBids(prev => ({
                 ...prev,
                 [itemId]: response.data.bids
@@ -132,8 +132,8 @@ const SellerDashboard = ({ sellerId }) => {
 
         try {
             const url = editIndex !== null
-                ? `http://localhost:5000/items/${items[editIndex].id}`
-                : 'http://localhost:5000/items';
+                ? `https://phase-5-group-project-backend-1.onrender.com/items/${items[editIndex].id}`
+                : 'https://phase-5-group-project-backend-1.onrender.com/items';
 
             const method = editIndex !== null ? 'PUT' : 'POST';
             await axiosInstance.request({
@@ -153,7 +153,7 @@ const SellerDashboard = ({ sellerId }) => {
 
     const handleBidAction = async (bidId, action) => {
     try {
-        const response = await axiosInstance.put(`http://localhost:5000/bids/${bidId}/action`, { status: action });
+        const response = await axiosInstance.put(`https://phase-5-group-project-backend-1.onrender.com/bids/${bidId}/action`, { status: action });
         fetchItems(); 
     } catch (err) {
         console.error('Error updating bid status:', err.response ? err.response.data : err.message);
@@ -164,7 +164,7 @@ const SellerDashboard = ({ sellerId }) => {
     const handleDelete = async (index) => {
         const itemId = items[index].id;
         try {
-            await axiosInstance.delete(`http://localhost:5000/items/${itemId}`);
+            await axiosInstance.delete(`https://phase-5-group-project-backend-1.onrender.com/items/${itemId}`);
             fetchItems();  // Re-fetch items after deletion
         } catch (err) {
             setError('Error deleting item');

@@ -35,7 +35,7 @@ function Checkout() {
             // Assuming payment was successful, update the bid status to 'Paid Successfully'
             const bidId = location.state?.bidId; // Assuming the bid ID is passed in location.state
             if (bidId) {
-                await axios.patch(`http://localhost:5000/bids/${bidId}`, { status: 'Paid Successfully' });
+                await axios.patch(`https://phase-5-group-project-backend-1.onrender.com/bids/${bidId}`, { status: 'Paid Successfully' });
             }
 
             // Display success message and navigate to home page

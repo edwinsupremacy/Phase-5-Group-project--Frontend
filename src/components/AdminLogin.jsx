@@ -17,7 +17,7 @@ function AdminLogin({ setIsAuthenticated }) {
         setError('');
 
         try {
-            const response = await fetch('http://localhost:5000/admin/login', {
+            const response = await fetch('https://phase-5-group-project-backend-1.onrender.com/admin/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
