@@ -19,7 +19,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
       {isAuthenticated && (
         <>
           <Link to="/auction-items" className="nav-link">Auction Items</Link>
-          <Link to="/recent-bids" className="nav-link">Recent Bids</Link>
+          <Link to="/recent-bids" className="nav-link">pending Bids</Link>
         </>
       )}
       <Link to="/about" className="nav-link">About</Link>
