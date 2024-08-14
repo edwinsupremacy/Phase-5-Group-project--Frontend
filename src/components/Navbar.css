@@ -4,9 +4,7 @@
   right: 0;
   left: 0;
   z-index: 1000;
-  background-color: rgba(179, 207, 179, 0.8);
-  /* Adjusted to 80% opacity */
-  /* Dark beige background color with slight transparency */
+  background-color: #9bbc9b; 
   padding: 20px;
   display: flex;
   justify-content: flex-end;

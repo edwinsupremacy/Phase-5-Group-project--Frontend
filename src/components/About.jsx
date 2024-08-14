@@ -3,7 +3,7 @@ import './About.css';
 import seamlessTransactions from '../assets/images/seamless-transactions.jpeg';
 import admin from '../assets/images/admin.jpg';
 import onlineSelling from '../assets/images/online-selling.jpg';
-import Footer from './Footer';
+
 
 const About = () => {
   return (
@@ -38,7 +38,7 @@ const About = () => {
           </div>
         </div>
       </div>
-      <Footer />
+
     </>
   );
 };
