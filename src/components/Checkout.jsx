@@ -1,5 +1,3 @@
-// src/components/Checkout.jsx
-
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -29,18 +27,29 @@ function Checkout() {
         event.preventDefault();
 
         try {
-            // Simulate M-Pesa payment processing
-            alert(`Processing M-Pesa payment of ${amount}.\nPhone Number: ${phoneNumber}`);
+            // Send payment data to the backend
+            const paymentResponse = await axios.post('https://phase-5-group-project-backend-1.onrender.com/pay', {
+                phone_number: phoneNumber,
+                amount: amount,
+                user_id: location.state?.userId // Assuming userId is passed in location.state
+            });
 
-            // Assuming payment was successful, update the bid status to 'Paid Successfully'
-            const bidId = location.state?.bidId; // Assuming the bid ID is passed in location.state
-            if (bidId) {
-                await axios.patch(`https://phase-5-group-project-backend-1.onrender.com/bids/${bidId}`, { status: 'Paid Successfully' });
+            // Check if payment was successfully initiated
+            if (paymentResponse.status === 200 && paymentResponse.data.CheckoutRequestID) {
+                alert(`Payment initiated successfully with CheckoutRequestID: ${paymentResponse.data.CheckoutRequestID}`);
+
+                // Update the bid status to 'Paid Successfully' if bidId is available
+                const bidId = location.state?.bidId;
+                if (bidId) {
+                    await axios.patch(`https://phase-5-group-project-backend-1.onrender.com/bids/${bidId}`, { status: 'Paid Successfully' });
+                }
+
+                // Redirect to the home page
+                alert('Payment successful. Redirecting to the home page...');
+                navigate('/');
+            } else {
+                throw new Error('Failed to initiate payment.');
             }
-
-            // Display success message and navigate to home page
-            alert('Payment successful. Redirecting to the home page...');
-            navigate('/');
         } catch (error) {
             console.error('Payment or update failed:', error);
             alert('Payment or update failed. Please try again.');
