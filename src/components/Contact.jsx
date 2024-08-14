@@ -192,7 +192,7 @@ const Contact = () => {
                         reviews.map((review, index) => (
                             <div key={index} className="review-item">
                                 <h4>{review.reviewName}</h4>
-                                <p className="rating">{[...Array(Number(review.rating))].map((_, i) => <FaStar key={i} />)}</p>
+                                <p className="rating">{[...Array(Number(review.rating))].map((_, i) => <FaStar className='starr' key={i} />)}</p>
                                 <p>{review.reviewMessage}</p>
                             </div>
                         ))

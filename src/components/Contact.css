@@ -129,6 +129,10 @@ body {
   /* Lighter box-shadow */
 }
 
+.starr {
+  color: gold;
+}
+
 .reviews-section h2 {
   color: var(--vintage-dark);
   margin-bottom: 1.5rem;
