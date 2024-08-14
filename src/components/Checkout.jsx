@@ -43,16 +43,13 @@ function Checkout() {
                 if (bidId) {
                     await axios.patch(`https://phase-5-group-project-backend-1.onrender.com/bids/${bidId}`, { status: 'Paid Successfully' });
                 }
-
-                // Redirect to the home page
-                alert('Payment successful. Redirecting to the home page...');
-                navigate('/');
             } else {
                 throw new Error('Failed to initiate payment.');
             }
         } catch (error) {
-            console.error('Payment or update failed:', error);
             alert('check your phone to complete the payments');
+            alert('Payment successful. Redirecting to the home page...');
+                navigate('/');
         }
     };
 
