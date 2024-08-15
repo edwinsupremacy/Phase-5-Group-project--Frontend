@@ -13,7 +13,7 @@ const SellerDashboard = ({ sellerId }) => {
         category: '',
         subCategory: '',
         imageUrl: '',
-        sellerId: sellerId || ''  // Add sellerId to formData
+        sellerId: sellerId || ''  
     });
     const [error, setError] = useState('');
     const [editIndex, setEditIndex] = useState(null);
@@ -21,7 +21,7 @@ const SellerDashboard = ({ sellerId }) => {
     const [biddersVisibility, setBiddersVisibility] = useState({});
     const [bids, setBids] = useState({});
     const [selectedCategory, setSelectedCategory] = useState('');
-    const [categoryFilter, setCategoryFilter] = useState('');  // State for category filter
+    const [categoryFilter, setCategoryFilter] = useState(''); 
 
     const categoryData = {
         Vehicle: ["Car", "Motorcycle", "Truck"],
@@ -38,8 +38,7 @@ const SellerDashboard = ({ sellerId }) => {
 
     useEffect(() => {
         filterItems();
-    }, [items, selectedCategory, formData.subCategory, categoryFilter]);  // Add categoryFilter to dependencies
-
+    }, [items, selectedCategory, formData.subCategory, categoryFilter]);  
     const fetchItems = async () => {
         try {
             const response = await axiosInstance.get('https://phase-5-group-project-backend-1.onrender.com/items');
@@ -93,7 +92,7 @@ const SellerDashboard = ({ sellerId }) => {
     };
 
     const handleCategoryFilterChange = (e) => {
-        setCategoryFilter(e.target.value);  // Update category filter
+        setCategoryFilter(e.target.value); 
     };
 
     const handleCategoryFilter = (category) => {
@@ -125,7 +124,7 @@ const SellerDashboard = ({ sellerId }) => {
             category,
             sub_category: subCategory,
             image_url: imageUrl,
-            seller_id: sellerId  // Include sellerId in new item
+            seller_id: sellerId  
         };
 
         console.log('Submitting Item:', newItem);
@@ -144,7 +143,7 @@ const SellerDashboard = ({ sellerId }) => {
 
             setFormData({ name: '', description: '', startingPrice: '', category: '', subCategory: '', imageUrl: '', sellerId: sellerId || '' });
             setEditIndex(null);
-            fetchItems();  // Re-fetch items after submission
+            fetchItems(); 
         } catch (err) {
             setError('Error adding/updating item');
             console.error(err);
@@ -165,7 +164,7 @@ const SellerDashboard = ({ sellerId }) => {
         const itemId = items[index].id;
         try {
             await axiosInstance.delete(`https://phase-5-group-project-backend-1.onrender.com/items/${itemId}`);
-            fetchItems();  // Re-fetch items after deletion
+            fetchItems();  
         } catch (err) {
             setError('Error deleting item');
             console.error(err);
@@ -181,7 +180,7 @@ const SellerDashboard = ({ sellerId }) => {
             category: itemToEdit.category,
             subCategory: itemToEdit.sub_category || '',
             imageUrl: itemToEdit.image_url,
-            sellerId: itemToEdit.seller_id || ''  // Set sellerId for editing
+            sellerId: itemToEdit.seller_id || ''  
         });
         setEditIndex(index);
     };
@@ -287,7 +286,7 @@ const SellerDashboard = ({ sellerId }) => {
                     type="text"
                     placeholder="Filter by category"
                     value={categoryFilter}
-                    onChange={handleCategoryFilterChange}  // Update category filter on change
+                    onChange={handleCategoryFilterChange}  
                     className="filter-input"
                 />
                 {Object.keys(categoryData).map((category) => (
