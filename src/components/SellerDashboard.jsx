@@ -125,7 +125,6 @@ const SellerDashboard = ({ sellerId }) => {
             category,
             sub_category: subCategory,
             image_url: imageUrl,
-            seller_id: sellerId  // Include sellerId in new item
         };
 
         console.log('Submitting Item:', newItem);
@@ -152,14 +151,14 @@ const SellerDashboard = ({ sellerId }) => {
     };
 
     const handleBidAction = async (bidId, action) => {
-    try {
-        const response = await axiosInstance.put(`https://phase-5-group-project-backend-1.onrender.com/bids/${bidId}/action`, { status: action });
-        fetchItems(); 
-    } catch (err) {
-        console.error('Error updating bid status:', err.response ? err.response.data : err.message);
-        setError('Failed to update bid status');
-    }
-};
+        try {
+            const response = await axiosInstance.put(`https://phase-5-group-project-backend-1.onrender.com/bids/${bidId}/action`, { status: action });
+            fetchItems(); 
+        } catch (err) {
+            console.error('Error updating bid status:', err.response ? err.response.data : err.message);
+            setError('Failed to update bid status');
+        }
+    };
 
     const handleDelete = async (index) => {
         const itemId = items[index].id;
@@ -181,7 +180,6 @@ const SellerDashboard = ({ sellerId }) => {
             category: itemToEdit.category,
             subCategory: itemToEdit.sub_category || '',
             imageUrl: itemToEdit.image_url,
-            sellerId: itemToEdit.seller_id || ''  // Set sellerId for editing
         });
         setEditIndex(index);
     };
@@ -234,7 +232,6 @@ const SellerDashboard = ({ sellerId }) => {
                         className="seller-input"
                         autoComplete="off"
                     />
-                   
                     <select
                         name="category"
                         value={formData.category}
@@ -275,68 +272,82 @@ const SellerDashboard = ({ sellerId }) => {
             </div>
 
             <div className="seller-filter-section">
-                <input
-                    type="text"
-                    placeholder="Filter by category"
-                    value={categoryFilter}
-                    onChange={handleCategoryFilterChange}  // Update category filter on change
-                    className="filter-input"
-                />
-                {Object.keys(categoryData).map((category) => (
-                    <button
-                        key={category}
-                        onClick={() => handleCategoryFilter(category)}
-                        className={`filter-button ${selectedCategory === category ? 'active' : ''}`}
-                    >
-                        {category}
-                    </button>
-                ))}
+                <h2 className="seller-filter-title">Filter by Category</h2>
+                <div className="seller-filter-buttons">
+                    {Object.keys(categoryData).map(category => (
+                        <button
+                            key={category}
+                            className={`seller-filter-button ${categoryFilter === category ? 'active' : ''}`}
+                            onClick={() => handleCategoryFilter(category)}
+                        >
+                            {category}
+                        </button>
+                    ))}
+                </div>
             </div>
 
-            {showItems && (
-                <div className="seller-item-list">
-                    <h2 className="seller-item-list-title">Your Items</h2>
-                    {filteredItems.length === 0 ? (
-                        <p>No items found</p>
-                    ) : (
-                        filteredItems.map((item, index) => (
-                            <div key={item.id} className="seller-item-card">
-                                <h3 className="seller-item-name">{item.name}</h3>
+            <div className="seller-items-section">
+                <button onClick={toggleItemsVisibility} className="seller-toggle-items-button">
+                    {showItems ? 'Hide Items' : 'Show Items'}
+                </button>
+                {showItems && (
+                    <div className="seller-items-list">
+                        <h2 className="seller-items-title">Items</h2>
+                        {filteredItems.map((item, index) => (
+                            <div key={index} className="seller-item">
+                                <h3 className="seller-item-title">{item.name}</h3>
                                 <p className="seller-item-description">{item.description}</p>
-                                <p className="seller-item-price">${item.starting_price}</p>
+                                <p className="seller-item-price">Starting Price: ${item.starting_price.toFixed(2)}</p>
                                 <p className="seller-item-category">Category: {item.category}</p>
-                                <p className="seller-item-subcategory">Sub-Category: {item.sub_category}</p>
+                                <p className="seller-item-sub-category">Sub-Category: {item.sub_category}</p>
                                 <img src={item.image_url} alt={item.name} className="seller-item-image" />
-                                <button onClick={() => handleEdit(index)} className="seller-edit-button">Edit</button>
-                                <button onClick={() => handleDelete(index)} className="seller-delete-button">Delete</button>
-                                <button onClick={() => toggleBiddersVisibility(index)} className="seller-bidders-button">
-                                    {biddersVisibility[index] ? 'Hide Bidders' : 'Show Bidders'}
-                                </button>
-                                {biddersVisibility[index] && (
-                                    <div className="seller-bidders-list">
-                                        {bids[item.id] ? (
-                                            bids[item.id].map(bid => (
-                                                <div key={bid.id} className="seller-bid-card">
-                                                    <p>Bidder: {bid.username}</p>
-                                                    <p>Bid Amount: ksh{bid.amount}</p>
-                                                    <button onClick={() => handleBidAction(bid.id, 'Accepted')} className="seller-bid-accept-button">Accept</button>
-                                                    <button onClick={() => handleBidAction(bid.id, 'Rejected')} className="seller-bid-reject-button">Reject</button>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <p>No bids</p>
-                                        )}
-                                    </div>
-                                )}
+                                <div className="seller-item-actions">
+                                    <button onClick={() => handleEdit(index)} className="seller-edit-button">Edit</button>
+                                    <button onClick={() => handleDelete(index)} className="seller-delete-button">Delete</button>
+                                </div>
+                                <div className="seller-bidders-section">
+                                    <button
+                                        onClick={() => toggleBiddersVisibility(index)}
+                                        className="seller-toggle-bidders-button"
+                                    >
+                                        {biddersVisibility[index] ? 'Hide Bidders' : 'Show Bidders'}
+                                    </button>
+                                    {biddersVisibility[index] && (
+                                        <div className="seller-bidders-list">
+                                            {bids[item.id]?.length > 0 ? (
+                                                bids[item.id].map(bid => (
+                                                    <div key={bid.id} className="seller-bidder">
+                                                        <p className="seller-bidder-info">Bidder: {bid.user.name}</p>
+                                                        <p className="seller-bidder-amount">Bid Amount: ${bid.amount.toFixed(2)}</p>
+                                                        <p className="seller-bidder-status">Status: {bid.status}</p>
+                                                        <div className="seller-bid-actions">
+                                                            <button
+                                                                onClick={() => handleBidAction(bid.id, 'accept')}
+                                                                className="seller-accept-bid-button"
+                                                            >
+                                                                Accept
+                                                            </button>
+                                                            <button
+                                                                onClick={() => handleBidAction(bid.id, 'reject')}
+                                                                className="seller-reject-bid-button"
+                                                            >
+                                                                Reject
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <p>No bids available.</p>
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
                             </div>
-                        ))
-                    )}
-                </div>
-            )}
+                        ))}
+                    </div>
+                )}
+            </div>
 
-            <button onClick={toggleItemsVisibility} className="seller-toggle-items-button">
-                {showItems ? 'Hide Items' : 'Show Items'}
-            </button>
             <button onClick={handleLogout} className="seller-logout-button">Logout</button>
         </div>
     );
