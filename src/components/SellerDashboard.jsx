@@ -234,15 +234,7 @@ const SellerDashboard = ({ sellerId }) => {
                         className="seller-input"
                         autoComplete="off"
                     />
-                    <input
-                        type="text"
-                        name="sellerId"
-                        placeholder="Seller ID"
-                        value={formData.sellerId}
-                        onChange={handleChange}
-                        className="seller-input"
-                        autoComplete="off"
-                    />
+                   
                     <select
                         name="category"
                         value={formData.category}
