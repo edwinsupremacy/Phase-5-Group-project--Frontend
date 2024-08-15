@@ -1,5 +1,3 @@
-// src/components/Checkout.jsx
-
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -10,8 +8,13 @@ function Checkout() {
     const navigate = useNavigate();
     const [amount, setAmount] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [userId, setUserId] = useState(null);
 
     useEffect(() => {
+        // Retrieve user ID from localStorage
+        const storedUserId = localStorage.getItem('userId');
+        setUserId(storedUserId);
+
         if (location.state && location.state.amount) {
             setAmount(location.state.amount);
         }
@@ -28,22 +31,34 @@ function Checkout() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        if (!userId) {
+            alert('User ID is not available. Please log in again.');
+            return;
+        }
+
         try {
-            // Simulate M-Pesa payment processing
-            alert(`Processing M-Pesa payment of ${amount}.\nPhone Number: ${phoneNumber}`);
+            const paymentResponse = await axios.post('https://phase-5-group-project-backend-1.onrender.com/pay', {
+                phone_number: phoneNumber,
+                amount: amount,
+                user_id: userId 
+            });
 
-            // Assuming payment was successful, update the bid status to 'Paid Successfully'
-            const bidId = location.state?.bidId; // Assuming the bid ID is passed in location.state
-            if (bidId) {
-                await axios.patch(`https://phase-5-group-project-backend-1.onrender.com/bids/${bidId}`, { status: 'Paid Successfully' });
+            
+            if (paymentResponse.status === 200 && paymentResponse.data.CheckoutRequestID) {
+                alert(`Payment initiated successfully with CheckoutRequestID: ${paymentResponse.data.CheckoutRequestID}`);
+
+               
+                const bidId = location.state?.bidId;
+                if (bidId) {
+                    await axios.patch(`https://phase-5-group-project-backend-1.onrender.com/bids/${bidId}`, { status: 'Paid Successfully' });
+                }
+            } else {
+                throw new Error('Failed to initiate payment.');
             }
-
-            // Display success message and navigate to home page
-            alert('Payment successful. Redirecting to the home page...');
-            navigate('/');
         } catch (error) {
-            console.error('Payment or update failed:', error);
-            alert('Payment or update failed. Please try again.');
+            alert('Payment failed. Please try again.');
+        } finally {
+            navigate('/');
         }
     };
 
@@ -53,7 +68,7 @@ function Checkout() {
 
             {/* Display the suggested amount to pay at the top */}
             <div className="amount-display">
-                <p>Suggested Amount to Pay: <strong>{location.state?.amount?.toLocaleString()} KES</strong></p>
+                <p>Suggested Amount to Pay: <strong>{amount?.toLocaleString()} KES</strong></p>
             </div>
 
             <form className="checkout-form" onSubmit={handleSubmit}>

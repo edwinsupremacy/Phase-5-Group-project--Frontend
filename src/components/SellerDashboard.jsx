@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './SellerDashboard.css';
 import axiosInstance from "./utils/axiosConfig";
 
-const SellerDashboard = ({ sellerId }) => {
+const SellerDashboard = () => {
     const [items, setItems] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
@@ -12,8 +12,7 @@ const SellerDashboard = ({ sellerId }) => {
         startingPrice: '',
         category: '',
         subCategory: '',
-        imageUrl: '',
-        sellerId: sellerId || ''  
+        imageUrl: ''
     });
     const [error, setError] = useState('');
     const [editIndex, setEditIndex] = useState(null);
@@ -21,7 +20,9 @@ const SellerDashboard = ({ sellerId }) => {
     const [biddersVisibility, setBiddersVisibility] = useState({});
     const [bids, setBids] = useState({});
     const [selectedCategory, setSelectedCategory] = useState('');
-    const [categoryFilter, setCategoryFilter] = useState(''); 
+    const [categoryFilter, setCategoryFilter] = useState('');
+    const [payments, setPayments] = useState({});
+    const [selectedItemId, setSelectedItemId] = useState(null);
 
     const categoryData = {
         Vehicle: ["Car", "Motorcycle", "Truck"],
@@ -38,7 +39,14 @@ const SellerDashboard = ({ sellerId }) => {
 
     useEffect(() => {
         filterItems();
-    }, [items, selectedCategory, formData.subCategory, categoryFilter]);  
+    }, [items, selectedCategory, formData.subCategory, categoryFilter]);
+
+    useEffect(() => {
+        if (selectedItemId) {
+            fetchPayments(selectedItemId);
+        }
+    }, [selectedItemId]);
+
     const fetchItems = async () => {
         try {
             const response = await axiosInstance.get('https://phase-5-group-project-backend-1.onrender.com/items');
@@ -59,6 +67,19 @@ const SellerDashboard = ({ sellerId }) => {
         } catch (err) {
             console.error('Error fetching bids:', err);
             setError('Failed to fetch bids');
+        }
+    };
+
+    const fetchPayments = async (itemId) => {
+        try {
+            const response = await axiosInstance.get(`http://phase-5-group-project-backend-1.onrender.com/items/${itemId}/payments`);
+            setPayments(prev => ({
+                ...prev,
+                [itemId]: response.data
+            }));
+        } catch (err) {
+            console.error('Error fetching payments:', err);
+            setError('Failed to fetch payments');
         }
     };
 
@@ -92,7 +113,7 @@ const SellerDashboard = ({ sellerId }) => {
     };
 
     const handleCategoryFilterChange = (e) => {
-        setCategoryFilter(e.target.value); 
+        setCategoryFilter(e.target.value);
     };
 
     const handleCategoryFilter = (category) => {
@@ -108,9 +129,9 @@ const SellerDashboard = ({ sellerId }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { name, description, startingPrice, category, subCategory, imageUrl, sellerId } = formData;
+        const { name, description, startingPrice, category, subCategory, imageUrl } = formData;
 
-        if (!name || !description || !startingPrice || !category || !subCategory || !imageUrl || !sellerId) {
+        if (!name || !description || !startingPrice || !category || !subCategory || !imageUrl) {
             setError('Please fill in all fields.');
             return;
         }
@@ -123,16 +144,15 @@ const SellerDashboard = ({ sellerId }) => {
             starting_price: parseFloat(startingPrice),
             category,
             sub_category: subCategory,
-            image_url: imageUrl,
-            seller_id: sellerId  
+            image_url: imageUrl
         };
 
         console.log('Submitting Item:', newItem);
 
         try {
             const url = editIndex !== null
-                ? `https://phase-5-group-project-backend-1.onrender.com/items/${items[editIndex].id}`
-                : 'https://phase-5-group-project-backend-1.onrender.com/items';
+            ? `https://phase-5-group-project-backend-1.onrender.com/items/${items[editIndex].id}`
+            : 'https://phase-5-group-project-backend-1.onrender.com/items';
 
             const method = editIndex !== null ? 'PUT' : 'POST';
             await axiosInstance.request({
@@ -141,30 +161,30 @@ const SellerDashboard = ({ sellerId }) => {
                 data: newItem
             });
 
-            setFormData({ name: '', description: '', startingPrice: '', category: '', subCategory: '', imageUrl: '', sellerId: sellerId || '' });
+            setFormData({ name: '', description: '', startingPrice: '', category: '', subCategory: '', imageUrl: '' });
             setEditIndex(null);
-            fetchItems(); 
+            fetchItems();
         } catch (err) {
-            setError('Error adding/updating item');
+            setError('Error adding/updating item')  ;
             console.error(err);
         }
     };
 
     const handleBidAction = async (bidId, action) => {
-    try {
-        const response = await axiosInstance.put(`https://phase-5-group-project-backend-1.onrender.com/bids/${bidId}/action`, { status: action });
-        fetchItems(); 
-    } catch (err) {
-        console.error('Error updating bid status:', err.response ? err.response.data : err.message);
-        setError('Failed to update bid status');
-    }
-};
+        try {
+            await axiosInstance.put(`http://localhost:5000/bids/${bidId}/action`, { status: action });
+            fetchItems();
+        } catch (err) {
+            console.error('Error updating bid status:', err.response ? err.response.data : err.message);
+            setError('Failed to update bid status');
+        }
+    };
 
     const handleDelete = async (index) => {
         const itemId = items[index].id;
         try {
-            await axiosInstance.delete(`https://phase-5-group-project-backend-1.onrender.com/items/${itemId}`);
-            fetchItems();  
+            await axiosInstance.delete(`http://localhost:5000/items/${itemId}`);
+            fetchItems();
         } catch (err) {
             setError('Error deleting item');
             console.error(err);
@@ -179,8 +199,7 @@ const SellerDashboard = ({ sellerId }) => {
             startingPrice: itemToEdit.starting_price,
             category: itemToEdit.category,
             subCategory: itemToEdit.sub_category || '',
-            imageUrl: itemToEdit.image_url,
-            sellerId: itemToEdit.seller_id || ''  
+            imageUrl: itemToEdit.image_url
         });
         setEditIndex(index);
     };
@@ -198,6 +217,12 @@ const SellerDashboard = ({ sellerId }) => {
             ...prev,
             [index]: !prev[index]
         }));
+    };
+
+    const handleItemChange = (e) => {
+        const itemId = e.target.value;
+        setSelectedItemId(itemId);
+        fetchPayments(itemId);
     };
 
     return (
@@ -229,15 +254,6 @@ const SellerDashboard = ({ sellerId }) => {
                         name="startingPrice"
                         placeholder="Starting Price"
                         value={formData.startingPrice}
-                        onChange={handleChange}
-                        className="seller-input"
-                        autoComplete="off"
-                    />
-                    <input
-                        type="text"
-                        name="sellerId"
-                        placeholder="Seller ID"
-                        value={formData.sellerId}
                         onChange={handleChange}
                         className="seller-input"
                         autoComplete="off"
@@ -286,7 +302,7 @@ const SellerDashboard = ({ sellerId }) => {
                     type="text"
                     placeholder="Filter by category"
                     value={categoryFilter}
-                    onChange={handleCategoryFilterChange}  
+                    onChange={handleCategoryFilterChange}
                     className="filter-input"
                 />
                 {Object.keys(categoryData).map((category) => (
@@ -340,6 +356,41 @@ const SellerDashboard = ({ sellerId }) => {
                     )}
                 </div>
             )}
+
+            <div className="seller-item-payment-section">
+                <h2 className="seller-item-payment-title">Item Payments</h2>
+                <select
+                    name="item"
+                    value={selectedItemId || ''}
+                    onChange={handleItemChange}
+                    className="seller-input"
+                >
+                    <option value="">Select Item</option>
+                    {items.map(item => (
+                        <option key={item.id} value={item.id}>{item.name}</option>
+                    ))}
+                </select>
+
+                {selectedItemId && payments[selectedItemId] && (
+                    <div className="seller-payment-list">
+                        {payments[selectedItemId].length === 0 ? (
+                            <p>No payments found for this item</p>
+                        ) : (
+                            <ul>
+                                {payments[selectedItemId].map(payment => (
+                                    <li key={payment.id}>
+                                        <p>Amount: {payment.amount}</p>
+                                        <p>Phone Number: {payment.phone_number}</p>
+                                        <p>Transaction ID: {payment.transaction_id}</p>
+                                        <p>Status: {payment.status}</p>
+                                        <p>Timestamp: {payment.timestamp}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                )}
+            </div>
 
             <button onClick={toggleItemsVisibility} className="seller-toggle-items-button">
                 {showItems ? 'Hide Items' : 'Show Items'}

@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/Phase-5-Group-project--Frontend/', // This should match your repository name
+  base: '/Phase-5-Group-project--Frontend/', 
   build: {
     outDir: 'dist',
     rollupOptions: {
