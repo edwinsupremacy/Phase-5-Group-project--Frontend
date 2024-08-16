@@ -12,7 +12,7 @@ const RecentBids = () => {
     useEffect(() => {
         const fetchBids = async () => {
             try {
-                const response = await axios.get(' https://phase-5-group-project-backend-1.onrender.com/user-bids', {
+                const response = await axios.get('https://phase-5-group-project-backend-1.onrender.com/user-bids', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
