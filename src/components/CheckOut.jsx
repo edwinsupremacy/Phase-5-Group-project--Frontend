@@ -37,12 +37,11 @@ function Checkout() {
         }
 
         try {
-<<<<<<< HEAD
             // Send payment data to the backend
             const paymentResponse = await axios.post('https://phase-5-group-project-backend-1.onrender.com/pay', {
                 phone_number: phoneNumber,
                 amount: amount,
-                user_id: location.state?.userId // Assuming userId is passed in location.state
+                user_id: userId // Use the userId from local storage
             });
 
             // Check if payment was successfully initiated
@@ -50,36 +49,20 @@ function Checkout() {
                 alert(`Payment initiated successfully with CheckoutRequestID: ${paymentResponse.data.CheckoutRequestID}`);
 
                 // Update the bid status to 'Paid Successfully' if bidId is available
-=======
-            const paymentResponse = await axios.post('https://phase-5-group-project-backend-1.onrender.com/pay', {
-                phone_number: phoneNumber,
-                amount: amount,
-                user_id: userId 
-            });
-
-            
-            if (paymentResponse.status === 200 && paymentResponse.data.CheckoutRequestID) {
-                alert(`Payment initiated successfully with CheckoutRequestID: ${paymentResponse.data.CheckoutRequestID}`);
-
-               
->>>>>>> a2c444f6e9cc861a902c231e9303a54ab773e8e3
                 const bidId = location.state?.bidId;
                 if (bidId) {
                     await axios.patch(`https://phase-5-group-project-backend-1.onrender.com/bids/${bidId}`, { status: 'Paid Successfully' });
                 }
+
+                alert('Payment successful. Redirecting to the home page...');
+                navigate('/');
             } else {
                 throw new Error('Failed to initiate payment.');
             }
         } catch (error) {
-<<<<<<< HEAD
-            alert('check your phone to complete the payments');
-            alert('Payment successful. Redirecting to the home page...');
-                navigate('/');
-=======
-            alert('Payment failed. Please try again.');
+            alert('Payment failed. Please check your phone to complete the payment or try again.');
         } finally {
             navigate('/');
->>>>>>> a2c444f6e9cc861a902c231e9303a54ab773e8e3
         }
     };
 
