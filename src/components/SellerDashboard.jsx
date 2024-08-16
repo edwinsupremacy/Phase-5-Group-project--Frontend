@@ -59,7 +59,7 @@ const SellerDashboard = () => {
 
     const fetchBids = async (itemId) => {
         try {
-            const response = await axiosInstance.get(`http://127.0.0.1:5000/items/${itemId}/bids`);
+            const response = await axiosInstance.get(`https://phase-5-group-project-backend-1.onrender.com/items/${itemId}/bids`);
             setBids(prev => ({
                 ...prev,
                 [itemId]: response.data.bids
@@ -72,7 +72,7 @@ const SellerDashboard = () => {
 
     const fetchPayments = async (itemId) => {
         try {
-            const response = await axiosInstance.get(`http://127.0.0.1:5000/items/${itemId}/payments`);
+            const response = await axiosInstance.get(`https://phase-5-group-project-backend-1.onrender.com/items/${itemId}/payments`);
             setPayments(prev => ({
                 ...prev,
                 [itemId]: response.data
@@ -151,8 +151,8 @@ const SellerDashboard = () => {
 
         try {
             const url = editIndex !== null
-            ? `http://127.0.0.1:5000/items/${items[editIndex].id}`
-            : 'http://127.0.0.1:5000/items';
+            ? `https://phase-5-group-project-backend-1.onrender.com/items/${items[editIndex].id}`
+            : 'https://phase-5-group-project-backend-1.onrender.com/items';
 
             const method = editIndex !== null ? 'PUT' : 'POST';
             await axiosInstance.request({
@@ -172,7 +172,7 @@ const SellerDashboard = () => {
 
     const handleBidAction = async (bidId, action) => {
         try {
-            await axiosInstance.put(`http://127.0.0.1:5000/bids/${bidId}/action`, { status: action });
+            await axiosInstance.put(`https://phase-5-group-project-backend-1.onrender.com/bids/${bidId}/action`, { status: action });
             fetchItems();
         } catch (err) {
             console.error('Error updating bid status:', err.response ? err.response.data : err.message);
@@ -183,7 +183,7 @@ const SellerDashboard = () => {
     const handleDelete = async (index) => {
         const itemId = items[index].id;
         try {
-            await axiosInstance.delete(`http://127.0.0.1:5000/items/${itemId}`);
+            await axiosInstance.delete(`https://phase-5-group-project-backend-1.onrender.com/items/${itemId}`);
             fetchItems();
         } catch (err) {
             setError('Error deleting item');
