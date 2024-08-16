@@ -38,7 +38,7 @@ function Checkout() {
 
         try {
             // Send payment data to the backend
-            const paymentResponse = await axios.post('https://phase-5-group-project-backend-1.onrender.com/pay', {
+            const paymentResponse = await axios.post('pay', {
                 phone_number: phoneNumber,
                 amount: amount,
                 user_id: userId // Use the userId from local storage

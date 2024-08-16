@@ -54,7 +54,7 @@ const AuctionItems = () => {
 
     const fetchItems = async () => {
         try {
-            const response = await fetch('https://phase-5-group-project-backend-1.onrender.com/items');
+            const response = await fetch(' https://phase-5-group-project-backend-1.onrender.com/items');
             if (response.ok) {
                 const data = await response.json();
                 setItems(data);
@@ -70,7 +70,7 @@ const AuctionItems = () => {
     const fetchRecentBids = async () => {
         if (!userId) return;
         try {
-            const response = await fetch(`https://phase-5-group-project-backend-1.onrender.com/users/${userId}/recent-bids`);
+            const response = await fetch(` https://phase-5-group-project-backend-1.onrender.com/users/${userId}/recent-bids`);
             if (response.ok) {
                 const data = await response.json();
                 setRecentBids(data);
@@ -102,7 +102,7 @@ const AuctionItems = () => {
         }
 
         try {
-            const response = await fetch('https://phase-5-group-project-backend-1.onrender.com/bids', {
+            const response = await fetch(' https://phase-5-group-project-backend-1.onrender.com/bids', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -137,7 +137,7 @@ const AuctionItems = () => {
         }
 
         try {
-            const response = await fetch(`https://phase-5-group-project-backend-1.onrender.com/bids/${bidId}`, {
+            const response = await fetch(` https://phase-5-group-project-backend-1.onrender.com/bids/${bidId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

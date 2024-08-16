@@ -59,7 +59,7 @@ const SellerDashboard = () => {
 
     const fetchBids = async (itemId) => {
         try {
-            const response = await axiosInstance.get(`https://phase-5-group-project-backend-1.onrender.com/items/${itemId}/bids`);
+            const response = await axiosInstance.get(`http://127.0.0.1:5000/items/${itemId}/bids`);
             setBids(prev => ({
                 ...prev,
                 [itemId]: response.data.bids
@@ -72,7 +72,7 @@ const SellerDashboard = () => {
 
     const fetchPayments = async (itemId) => {
         try {
-            const response = await axiosInstance.get(`http://phase-5-group-project-backend-1.onrender.com/items/${itemId}/payments`);
+            const response = await axiosInstance.get(`http://127.0.0.1:5000/items/${itemId}/payments`);
             setPayments(prev => ({
                 ...prev,
                 [itemId]: response.data
@@ -151,8 +151,8 @@ const SellerDashboard = () => {
 
         try {
             const url = editIndex !== null
-            ? `https://phase-5-group-project-backend-1.onrender.com/items/${items[editIndex].id}`
-            : 'https://phase-5-group-project-backend-1.onrender.com/items';
+            ? `http://127.0.0.1:5000/items/${items[editIndex].id}`
+            : 'http://127.0.0.1:5000/items';
 
             const method = editIndex !== null ? 'PUT' : 'POST';
             await axiosInstance.request({
@@ -172,7 +172,7 @@ const SellerDashboard = () => {
 
     const handleBidAction = async (bidId, action) => {
         try {
-            await axiosInstance.put(`https://phase-5-group-project-backend-1.onrender.com/bids/${bidId}/action`, { status: action });
+            await axiosInstance.put(`http://127.0.0.1:5000/bids/${bidId}/action`, { status: action });
             fetchItems();
         } catch (err) {
             console.error('Error updating bid status:', err.response ? err.response.data : err.message);
@@ -183,7 +183,7 @@ const SellerDashboard = () => {
     const handleDelete = async (index) => {
         const itemId = items[index].id;
         try {
-            await axiosInstance.delete(`https://phase-5-group-project-backend-1.onrender.com/items/${itemId}`);
+            await axiosInstance.delete(`http://127.0.0.1:5000/items/${itemId}`);
             fetchItems();
         } catch (err) {
             setError('Error deleting item');
@@ -345,30 +345,33 @@ const SellerDashboard = () => {
                                     {biddersVisibility[index] && (
                                         <div className="seller-bidders-list">
                                             {bids[item.id]?.length > 0 ? (
-                                                bids[item.id].map(bid => (
-                                                    <div key={bid.id} className="seller-bidder">
-                                                        <p className="seller-bidder-info">Bidder: {bid.user.name}</p>
-                                                        <p className="seller-bidder-amount">Bid Amount: ${bid.amount.toFixed(2)}</p>
-                                                        <p className="seller-bidder-status">Status: {bid.status}</p>
-                                                        <div className="seller-bid-actions">
-                                                            <button
-                                                                onClick={() => handleBidAction(bid.id, 'accept')}
-                                                                className="seller-accept-bid-button"
-                                                            >
-                                                                Accept
-                                                            </button>
-                                                            <button
-                                                                onClick={() => handleBidAction(bid.id, 'reject')}
-                                                                className="seller-reject-bid-button"
-                                                            >
-                                                                Reject
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                ))
-                                            ) : (
-                                                <p>No bids available.</p>
-                                            )}
+    bids[item.id].map(bid => (
+        <div key={bid.id} className="seller-bidder">
+            <p className="seller-bidder-info">
+                Bidder: {bid.user ? bid.user.name : 'collo'}
+            </p>
+            <p className="seller-bidder-amount">Bid Amount: ksh :{bid.amount.toFixed(2)}</p>
+            <p className="seller-bidder-status">Status: {bid.status}</p>
+            <div className="seller-bid-actions">
+                <button
+                    onClick={() => handleBidAction(bid.id, 'Accepted')}
+                    className="seller-accept-bid-button"
+                >
+                    Accept
+                </button>
+                <button
+                    onClick={() => handleBidAction(bid.id, 'Rejected')}
+                    className="seller-reject-bid-button"
+                >
+                    Reject
+                </button>
+            </div>
+        </div>
+    ))
+) : (
+    <p>No bids available.</p>
+)}
+
                                         </div>
                                     )}
                                 </div>
