@@ -1,4 +1,4 @@
-/* Container for auction items */
+
 .auction-items-container {
   padding: 2rem;
   background: linear-gradient(135deg, #f7f9f9, #e3e8e9);
@@ -132,4 +132,32 @@
 
 .bid-status.pending {
   color: orange;
+}
+
+.place-bid-button {
+  background-color: #FFA07A; /* orange color */
+  color: #FFFFFF; /* white text color */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.place-bid-button:hover {
+  background-color: #FFC107; 
+}
+
+.cancel-bid-button {
+  background-color: #FFA07A;  
+  color: #FFFFFF;   
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.cancel-bid-button:hover {
+  background-color: #FFC107;  
 }
